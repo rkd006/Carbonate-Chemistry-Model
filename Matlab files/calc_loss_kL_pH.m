@@ -1,0 +1,48 @@
+% author: Riley Doyle
+% date: 06-17-2020
+% file name: calc_loss_kL_pH.m
+% dependencies: none%Calculate loss with different kL values and pHs
+
+function r_kL_pH = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLin, kLend, delkL)
+m_steps = (kLend-kLin)/delkL;
+kL = kLin;
+
+
+n_steps = (pHend - pHin)/delpH;
+
+r_kL_pH = zeros(n_steps+1, m_steps + 2);
+
+for p = 1:m_steps+2
+    
+    pH = pHin;
+    
+    for c = 1:n_steps+1
+    
+        %calculate alphas
+        alpha0 = calc_alpha0(pH, pK1, pK2);
+        alpha1 = calc_alpha1(pH, pK1, pK2);
+        alpha2 = calc_alpha2(pH, pK1, pK2);
+        
+        %calculate H+ and OH and CT
+        H = 10^(-pH);
+        OH = 10^(-(14-pH));
+        CT= (alk - OH + H)/(alpha0 + alpha1 + alpha2);
+        
+        %calculate dissolved CO2 concentration
+        H2CO3 = alpha0*CT;
+        HCO3 = alpha1*CT;
+        CO3 = alpha2*CT;
+        
+        %calculate loss of CO2 per hour
+        loss = kL*(H2CO3 - CO2sat)*44; %g CO2 per day
+        pH = pH + delpH;  %increase pH 
+
+        
+        r_kL_pH(c,1)= pH; %record pH
+        r_kL_pH(c,p)= loss; %record loss
+        
+    end
+   %r(c,p)= loss; %record loss and pH 
+   kL = kL + delkL;
+end
+

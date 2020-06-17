@@ -24,7 +24,7 @@ A = 10000; %m2 area of pond
 d = 0.15; %m depth of pond
 
 %mass transfer coefficient for CO2 out of pond
-kL = 0.96; %m/day (Weismann et al., 1987)
+kL = 0.96; %m/day (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
 y_2 = 0.008849558; %moles bicarbonate per g algae from stoicheometry

@@ -21,9 +21,9 @@ pHin = 6.5;
 pHend = 8.5;
 delpH = 0.1; %
 
-alkin=2; %eq/m3)
+alkin=2; %eq/m3
 alkend=32;
-delalk = 5; %
+delalk = 5; 
 
 %define r
 r = calc_CO2_loss(pK1, pK2, kL, A, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);

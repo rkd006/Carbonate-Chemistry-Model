@@ -30,7 +30,7 @@ H = 10^(-pH);
 OH = 10^(-(14-pH));
 
 %define variable CT
-CT= (alk - OH + H)/(alpha0 + alpha1 + alpha2)
+CT = (alk - OH + H)/(alpha0 + alpha1 + alpha2);
 
 %define variables H2CO3, HCO3 and CO3
 H2CO3 = alpha0*CT;
