@@ -88,7 +88,9 @@ time = linspace(0, 4);  %4 days
 %Set initial conditions
 x0 = [Caq0; Cin0; Closs0];
 
-%Solve ODEs
+%Solve ODEs with the ode15s solver
+%returns output arrays of tout and x
+%rates is the ODE system, time is the x values, x0 is the initial conditions
 [tout, x] = ode15s(@rates, time, x0);
 
 % convert from moles to mass
