@@ -28,7 +28,7 @@ kL = 0.96; %m/day (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
 y_2 = 0.008849558; %moles bicarbonate per g algae from stoicheometry
-y_1 = 0.0375;  %moles CO2 per g algae from stoicheometry
+y_1 = 0.0354;  %moles CO2 per g algae from stoicheometry
 %Csat = 0.01272; %moles/m3 from somewhere; to do: make temperature dependent
 
 
