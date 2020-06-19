@@ -1,5 +1,5 @@
 % author: Riley Doyle
-% date: 06-09-2020
+% date: 06-17-2020
 % file name: CO2_loss_kL.m
 % dependencies: calc_loss_kL
 

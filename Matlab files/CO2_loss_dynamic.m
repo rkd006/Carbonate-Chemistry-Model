@@ -20,7 +20,7 @@ S = 35; %(salinity in g/kg)
 PCO2 = 0.00040; %atm (need to correct for temp, very crude approx)
 
 %Pond characteristics
-A = 10000; %m2 area of pond
+A = 1;
 d = 0.15; %m depth of pond
 
 %mass transfer coefficient for CO2 out of pond
