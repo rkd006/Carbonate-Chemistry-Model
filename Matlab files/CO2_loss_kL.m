@@ -1,7 +1,7 @@
 % author: Riley Doyle
 % date: 06-17-2020
 % file name: CO2_loss_kL.m
-% dependencies: calc_loss_kL
+% dependencies: calc_loss_kL_pH, calc_loss_kL_alk
 
 %delete all figures and variables in the workspace
 clear all
@@ -27,7 +27,7 @@ delkL = 2;
 
 r_kL_pH = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLin, kLend, delkL);
 
-x_axis1 = r_kL_pH(:,1);
+x = r_kL_pH(:,1);
 r_kL_pH(:,1) = [];
 
 pH = 8;
@@ -35,20 +35,21 @@ alkin=2; %eq/m3)
 alkend=32;
 delalk = 2;
 r_kL_alk = calc_loss_kL_alk (pK1, pK2,CO2sat, alkin, alkend, delalk, kLin, kLend, delkL, pH);
-x_axis2 = r_kL_alk(:,1);
+x2 = r_kL_alk(:,1);
 r_kL_alk(:,1) = [];
 
 %without alkalinity 
 figure(1);
-plot(x_axis1, r_kL_pH);
+plot(x, r_kL_pH);
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^-2 day^-1)')
 legend('kL = 0.5 m/day', 'kL = 2.5 m/day', 'kL = 4.5 m/day', 'kL = 6.5 m/day', 'kL = 8.5 m/day')
 
 %without pH
 figure(2)
-plot(x_axis2, r_kL_alk);
+plot(x2, r_kL_alk);
 xlabel('alkalinity') 
 ylabel('CO_2 loss to the atmosphere (g m^-2 day^-1)')
 legend('kL = 0.5 m/day', 'kL = 2.5 m/day', 'kL = 4.5 m/day', 'kL = 6.5 m/day', 'kL = 8.5 m/day')
+
 

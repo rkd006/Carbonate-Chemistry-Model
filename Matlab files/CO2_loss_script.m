@@ -13,8 +13,7 @@ pK1 = -log10(K_1);
 K_2 = calc_K2(T, S); 
 pK2 = -log10(K_2);
 CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
-%kL = 5.6; %(m/day) from Hérron et al. (2012)
-A = 10000; %(m2) area of the pond
+a = 1000;
 kL = 0.96; %m/day
 %alk = 2.5; %(eq/m3) from Weissman et al. (1987)
 pHin = 6.5;
@@ -26,7 +25,7 @@ alkend=32;
 delalk = 5; 
 
 %define r
-r = calc_CO2_loss(pK1, pK2, kL, A, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
+r = calc_CO2_loss(pK1, pK2, kL, a, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
 %r = calc_CO2_loss(pk1, pk2, kLa, CO2sat, pHin, pHend,delpH, alkin, alkend, delalk);
 
 %modify r for plotting

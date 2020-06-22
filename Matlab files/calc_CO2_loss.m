@@ -3,7 +3,7 @@
 % file name: calc_CO2_loss.m
 % dependencies: calc_alpha0, calc_alpha1,calc_alpha2,
 
-function r = calc_CO2_loss(pK1, pK2, kL, A, CO2sat, pHin,pHend, delpH, alkin, alkend, delalk)
+function r = calc_CO2_loss(pK1, pK2, kL, a, CO2sat, pHin,pHend, delpH, alkin, alkend, delalk)
 %function r = calc_CO2_loss(pk1, pk2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
 
 %initialize
@@ -45,7 +45,6 @@ for p = 1:m_steps+2
         r(c,p)= loss; %record loss
         
     end
-   %r(c,p)= loss; %record loss and pH 
    alk = alk + delalk;
 end
 
