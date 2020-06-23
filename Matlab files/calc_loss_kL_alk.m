@@ -4,9 +4,9 @@
 % dependencies: none%Calculate loss with different kL values and
 % alkalinities
 
-function r_kL_alk = calc_loss_kL_alk (pK1, pK2,CO2sat, alkin, alkend, delalk, kLin, kLend, delkL, pH)
-m_steps = (kLend-kLin)/delkL;
-kL = kLin;
+function r_kL_alk = calc_loss_kL_alk (pK1, pK2,CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa, pH)
+m_steps = (kLaend-kLain)/delkLa;
+kLa = kLain;
 
 n_steps = (alkend - alkin)/delalk;
 
@@ -34,7 +34,7 @@ for p = 1:m_steps+2
         CO3 = alpha2*CT;
         
         %calculate loss of CO2 per hour
-        loss = kL*(H2CO3 - CO2sat)*44; %g CO2 per day
+        loss = kLa*(H2CO3 - CO2sat)*44; %g CO2 per day
         alk = alk + delalk;  %increase pH 
 
         
@@ -43,6 +43,6 @@ for p = 1:m_steps+2
         
     end
    %r(c,p)= loss; %record loss and alk 
-   kL = kL + delkL;
+   kLa = kLa + delkLa;
 end
 

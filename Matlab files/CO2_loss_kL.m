@@ -21,11 +21,11 @@ pHin = 6.5;
 pHend = 8.5;
 delpH = 0.1; 
 
-kLin= 0.5; %m/day
-kLend= 8.5;
-delkL = 2; 
+kLain= 0.5; %m/day
+kLaend= 8.5;
+delkLa = 2; 
 
-r_kL_pH = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLin, kLend, delkL);
+r_kL_pH = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLain, kLaend, delkLa);
 
 x = r_kL_pH(:,1);
 r_kL_pH(:,1) = [];
@@ -34,7 +34,7 @@ pH = 8;
 alkin=2; %eq/m3)
 alkend=32;
 delalk = 2;
-r_kL_alk = calc_loss_kL_alk (pK1, pK2,CO2sat, alkin, alkend, delalk, kLin, kLend, delkL, pH);
+r_kL_alk = calc_loss_kL_alk (pK1, pK2,CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa, pH);
 x2 = r_kL_alk(:,1);
 r_kL_alk(:,1) = [];
 
@@ -43,13 +43,13 @@ figure(1);
 plot(x, r_kL_pH);
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^-2 day^-1)')
-legend('kL = 0.5 m/day', 'kL = 2.5 m/day', 'kL = 4.5 m/day', 'kL = 6.5 m/day', 'kL = 8.5 m/day')
+legend('kLa = 0.5 1/day', 'kLa = 2.5 1/day', 'kLa = 4.5 1/day', 'kLa = 6.5 1/day', 'kLa = 8.5 1/day')
 
 %without pH
 figure(2)
 plot(x2, r_kL_alk);
 xlabel('alkalinity') 
 ylabel('CO_2 loss to the atmosphere (g m^-2 day^-1)')
-legend('kL = 0.5 m/day', 'kL = 2.5 m/day', 'kL = 4.5 m/day', 'kL = 6.5 m/day', 'kL = 8.5 m/day')
+legend('kLa = 0.5 1/day', 'kLa = 2.5 1/day', 'kLa = 4.5 1/day', 'kLa = 6.5 1/day', 'kLa = 8.5 1/day')
 
 

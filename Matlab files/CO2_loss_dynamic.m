@@ -20,11 +20,10 @@ S = 35; %(salinity in g/kg)
 PCO2 = 0.00040; %atm (need to correct for temp, very crude approx)
 
 %Pond characteristics
-A = 1;
 d = 0.15; %m depth of pond
 
 %mass transfer coefficient for CO2 out of pond
-kL = 0.96; %m/day (Weismann et al., 1987 pg. 6 at bottom)
+kLa = 0.96; %1/day (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
 y_2 = 0.008849558; %moles bicarbonate per g algae from stoicheometry
@@ -72,8 +71,8 @@ Closs0 = 0;
 %rate of Caq removed due to alkalinity consumption by algae Eq(15)
 k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
 % k2-k3 = C needed to be delivered to satisfy diffusion out of pond Eq(19)
-k2 = kL;  
-k3 = kL*Csat;
+k2 = kLa;  
+k3 = kLa*Csat;
 % rate of C loss due to 
 k4 = (y_1 + y_2*(1 - alpha1 - 2*alpha2))*r_algae; 
 

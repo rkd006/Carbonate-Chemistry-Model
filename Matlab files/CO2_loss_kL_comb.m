@@ -21,34 +21,38 @@ pHend = 8.5;
 delpH = 0.1;  
 
 alkin=2; %(eq/m3)
-alkend=32;
-delalk = 10; 
+alkend=22;
+delalk = 5; 
 
-kL = .5;
-r_kL_1 = calc_CO2_loss(pK1, pK2, kL, a, CO2sat, pHin,pHend, delpH, alkin, alkend, delalk);
+kLa = .5;
+r_kL_1 = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin,pHend, delpH, alkin, alkend, delalk);
 
-kL = 4.5;
-r_kL_2 = calc_CO2_loss(pK1, pK2, kL, a, CO2sat, pHin,pHend, delpH, alkin, alkend, delalk);
+kLa = 4.5;
+r_kL_2 = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin,pHend, delpH, alkin, alkend, delalk);
 
-kL = 8.5;
-r_kL_3 = calc_CO2_loss(pK1, pK2, kL, a, CO2sat, pHin,pHend, delpH, alkin, alkend, delalk);
+kLa = 8.5;
+r_kL_3 = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin,pHend, delpH, alkin, alkend, delalk);
 
 x_axis = r_kL_1(:,1);
 r_kL_1(:,1) = [];
 
-%combine figure 1 and 2 
+x_axis2 = r_kL_2(:,1);
+r_kL_2(:,1) = [];
+
+x_axis3 = r_kL_3(:,1);
+r_kL_3(:,1) = [];
+
 figure(1);
 plot(x_axis, r_kL_1)
 hold on 
-plot(x_axis, r_kL_2)
+plot(x_axis2, r_kL_2, '--')
 hold on
-plot(x_axis, r_kL_3)
+plot(x_axis3, r_kL_3, 'O-')
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^-2 day^-1)')
-legend('kL = .5 m/day, Alk = 2 meq/L','kL = .5 m/day, Alk = 7 meq/L','kL = .5 m/day, Alk = 12 meq/L',...
-    'kL = .5 m/day, Alk = 17 meq/L','kL = .5 m/day, Alk = 22 meq/L','kL = .5 m/day, Alk = 27 meq/L'...
-    , 'kL = .5 m/day, Alk = 32 meq/L', 'kL = 4.5 m/day, Alk = 2 meq/L','kL = 4.5 m/day, Alk = 7 meq/L','kL = 4.5 m/day, Alk = 12 meq/L',...
-    'kL = 4.5 m/day, Alk = 17 meq/L','kL = 4.5 m/day, Alk = 22 meq/L','kL = 4.5 m/day, Alk = 27 meq/L'...
-    , 'kL = 4.5 m/day, Alk = 32 meq/L', 'kL = 8.5 m/day, Alk = 2 meq/L','kL = 8.5 m/day, Alk = 7 meq/L','kL = 8.5 m/day, Alk = 12 meq/L',...
-    'kL = 8.5 m/day, Alk = 17 meq/L','kL = 8.5 m/day, Alk = 22 meq/L','kL = 8.5 m/day, Alk = 27 meq/L'...
-    , 'kL = 8.5 m/day, Alk = 32 meq/L')
+legend('kLa = .5 day^{-1}, Alk = 2 meq/L','kLa = .5 day^{-1}, Alk = 7 meq/L','kLa = .5 day^{-1}, Alk = 12 meq/L',...
+    'kLa = .5 day^{-1}, Alk = 17 meq/L','kLa = .5 day^{-1}, Alk = 22 meq/L',...
+    'kLa = 4.5 day^{-1}, Alk = 2 meq/L','kLa = 4.5 day^{-1}, Alk = 7 meq/L','kLa = 4.5 day^{-1}, Alk = 12 meq/L',...
+    'kLa = 4.5 day^{-1}, Alk = 17 meq/L', 'kLa = 4.5 day^{-1}, Alk = 22 meq/L', 'kLa = 8.5 day^{-1}, Alk = 2 meq/L',...
+    'kLa = 8.5 day^{-1}, Alk = 7 meq/L', 'kLa = 8.5 day^{-1}, Alk = 12 meq/L', 'kLa = 8.5 day^{-1}, Alk = 17 meq/L',...
+    'kLa = 8.5 day^{-1} Alk = 22 meq/L')
