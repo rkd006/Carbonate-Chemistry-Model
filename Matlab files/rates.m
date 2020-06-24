@@ -7,10 +7,10 @@ function rhs = rates(t, x)
   nb = x(2);
   nc = x(3);
   
-  %equations 15 and 18 in the report
+  %equations 15, 18 and 19 in the report
   r1 = k1;       %rate of Caq removed due to alkalinity consumption by algae Eq(15) in report
   r2 = k2*na - k3 + k4; % C needed to be delivered to satisfy growth (CO2 and HCO3-), diffusion out of pond
-  r3 = k2*na - k3;      % 
+  r3 = k2*na - k3;      % loss of CO2 to the atmosphere
   
   rhs = [-r1; r2; r3];
   

@@ -23,11 +23,11 @@ PCO2 = 0.00040; %atm (need to correct for temp, very crude approx)
 d = 0.15; %m depth of pond
 
 %mass transfer coefficient for CO2 out of pond
-kLa = 0.96; %1/day (Weismann et al., 1987 pg. 6 at bottom)
+kLa = 10; %1/day (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
-y_2 = 0.008849558; %moles bicarbonate per g algae from stoicheometry
-y_1 = 0.0354;  %moles CO2 per g algae from stoicheometry
+y_2 = 0.004547; %moles bicarbonate per g algae from stoicheometry
+y_1 = 0.02558;  %moles CO2 per g algae from stoicheometry
 %Csat = 0.01272; %moles/m3 from somewhere; to do: make temperature dependent
 
 
@@ -109,7 +109,7 @@ xmass(:,1) = [];
 figure(1);
 plot(tout, xmass)
 xlabel('Time (day)')
-ylabel('CO_2 (g m^{-2})')
+ylabel('CO_2 (g m^{-3})')
 legend('CO_2 supply required', 'CO_2 loss to atmosphere')
 
 figure(2);
