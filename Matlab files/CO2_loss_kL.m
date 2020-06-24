@@ -2,14 +2,15 @@
 % date: 06-17-2020
 % file name: CO2_loss_kL.m
 % dependencies: calc_loss_kL_pH, calc_loss_kL_alk
+%plot CO2 losses without algae growth with different pH and alk separately
 
 %delete all figures and variables in the workspace
-clear all
+clear 
 close all
 
 %define variables
-T = 20 + 273.15;
-S = 35;
+T = 20 + 273.15; %temp in Kelvin
+S = 35; %(salinity in g/kg)
 K_1 = calc_K1(T, S); 
 pK1 = -log10(K_1);
 K_2 = calc_K2(T, S); 

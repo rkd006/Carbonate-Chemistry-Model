@@ -2,11 +2,11 @@
 % Author:Deborah Sills
 % Date January 27 2013
 %Dependent function: rates
-%Inputs: pH, kL, y_2, y_1, Csat, pk1, pk2, A, d, alk0, r_algae
+%Inputs: pH, kLa, y_2, y_1, Csat, pk1, pk2, d, alk0, r_algae
 %Outputs: CO2 losses to the atmospher vs. time, CO2 requirements vs. time
 
 %delete all figures and variables in the workspace
-clear all
+clear 
 close all
 clc
 

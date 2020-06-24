@@ -10,7 +10,7 @@ kLa = kLain;
 
 n_steps = (pHend - pHin)/delpH;
 
-r_kL_pH = zeros(n_steps+1, m_steps + 2);
+r_kL_pH = zeros(n_steps +1, m_steps+2);
 
 for p = 1:m_steps+2
     
