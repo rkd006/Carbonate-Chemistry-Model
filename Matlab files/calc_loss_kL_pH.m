@@ -1,7 +1,7 @@
 % author: Riley Doyle
 % date: 06-17-2020
 % file name: calc_loss_kL_pH.m
-% dependencies: none%Calculate loss with different kL values and pHs
+% output: Calculate loss with different kL values and pHs
 
 function r_kL_pH = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLain, kLaend, delkLa)
 m_steps = (kLaend-kLain)/delkLa;

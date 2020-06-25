@@ -1,7 +1,12 @@
-%Calculate alpha0, alpha1, alpha2
+%Author:Deborah Sills
+%Date January 27 2013
+%Dependent functions: calc_K1, calc_K2, calc_alpha0, calc_alpha1,
+    %calc_alpha2
+%Inputs: T, S, pK1, pK2, kL, A, CO2sat, alk, pH
+%Outputs: CO2 losses to the atmosphere in mol/h
 
 %delete figures and variables in workspace
-clear all
+clear 
 close all
 
 % define variables pH, pk1, pk2, CO2sat, kL, A and Alk
@@ -14,10 +19,9 @@ K_2 = calc_K2(T, S);
 pK2 = -log10(K_2);
 CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
 kL = 0.23245276; %(m/h) from Hérron et al. (2012)
-A = 10000; %(m2) area of the pond
+A = 1000;
 alk = 2.5; %(eq/m3) from Weissman et al. (1987)
 
-%alpha0=alpha0(ph, pk1, pk2)
 %define variables alpha0, alpha1, alpha2
 alpha0 = calc_alpha0(pH, pK1, pK2);
 

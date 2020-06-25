@@ -1,9 +1,8 @@
 % author: Deborah Sills
 % date: 01-26-2013
-% file name: alpha1.m
-% dependencies: none%Calculate alpha0
+% file name: calc_alpha1.m
+% output: Calculate alpha 1
 
-%create a function to calculate alpha 1
 function alpha1 = calc_alpha1(pH, pK1, pK2)
 
 

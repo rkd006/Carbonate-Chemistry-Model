@@ -1,4 +1,8 @@
-%script to calculate CO2 loss to atmosphere without algae growth
+%Author:Deborah Sills
+%Date January 27 2013
+%Dependent functions: calc_K1, calc_K2, calc_CO2_loss
+%Inputs: T, S, pK1, pK2, CO2sat, kLa, pH, alk
+%Outputs:CO2 loss to atmosphere without algae growth
 
 %delete all figures and variables in the workspace
 clear 
@@ -13,7 +17,6 @@ pK1 = -log10(K_1);
 K_2 = calc_K2(T, S); 
 pK2 = -log10(K_2);
 CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
-a = 1000;
 kLa = 0.96; %(1/day)
 pHin = 6.5;
 pHend = 8.5;

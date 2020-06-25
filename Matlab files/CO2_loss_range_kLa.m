@@ -1,8 +1,9 @@
 % author: Riley Doyle
 % date: 06-22-2020
 % file name: CO2_loss_range_kLa
-% dependencies: calc_CO2_loss, calc_K1, calc_K2
-%plot CO2 losses without algae growth with range of kLa
+% dependencies: calc_loss_kL_pH, calc_K1, calc_K2
+% input: T, S, pK1, pK2, CO2sat, kLa, pH, alk
+% output:CO2 losses without algae growth with range of kLa
 
 %delete all figures and variables in the workspace
 clear 
@@ -16,7 +17,6 @@ pK1 = -log10(K_1);
 K_2 = calc_K2(T, S); 
 pK2 = -log10(K_2);
 CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
-a = 1000;
 pHin = 8;
 pHend = 8.5;
 delpH = 0.1;  
@@ -36,7 +36,7 @@ r_range_kL(:,1) = [];
 figure(1)
 plot(x, r_range_kL)
 xlabel('pH')
-ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
+ylabel('CO_2 loss to the atmosphere (g m^{-3} day^{-1})')
 legend('kLa = 0 hr^{-1}','kLa = 50 hr^{-1}','kLa = 100 hr^{-1}','kLa = 150 hr^{-1}',...
     'kLa = 200 hr^{-1}','kLa = 250 hr^{-1}','kLa = 300 hr^{-1}','kLa = 350 hr^{-1}',...
     'kLa = 400 hr^{-1}','kLa = 450 hr^{-1}','kLa = 500 hr^{-1}','kLa = 550 hr^{-1}','kLa = 600 hr^{-1}')

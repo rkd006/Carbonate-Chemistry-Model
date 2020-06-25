@@ -1,9 +1,10 @@
-% Author:Deborah Sills
-% Date January 27 2013
-%Dependent functions: rates, calc_K1, calc_K2, calc_Kh, calc_alpha0,
+% Author: Riley Doyle
+% Date: June 25 2020
+%Dependent function: rates, calc_K1, calc_K2, calc_Kh, calc_alpha0,
     %calc_alpha1, calc_alpha2
-%Inputs: T, S, pCO2, pH, kLa, y_2, y_1, k1, k2, k3, k4, Csat, pk1, pk2, d, alk0, r_algae
+%Inputs: pH, kLa, y_2, y_1, k1, k2, k3, k4, Csat, pk1, pk2, d, alk0, r_algae
 %Outputs: CO2 losses to the atmospher vs. time, CO2 requirements vs. time
+    %with different kLa values 
 
 %delete all figures and variables in the workspace
 clear
@@ -20,9 +21,6 @@ PCO2 = 0.00040; %atm (need to correct for temp, very crude approx)
 
 %Pond characteristics
 d = 0.15; %m depth of pond
-
-%mass transfer coefficient for CO2 out of pond
-kLa = 10; %1/day (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
 y_2 = 0.004547; %moles bicarbonate per g algae from stoicheometry
@@ -48,7 +46,7 @@ Csat = PCO2*Kh;  %moles/kg
 %Assumptions & initial conditions in moles per sample volume
 alk0 = 2.5;  %eq/m3
 r_algae = 10;  % growth rate g/m2/day; assume
-pH=9; 
+pH= 9; 
 
 %Calculate alphas 
 alpha0 = calc_alpha0(pH,pK1, pK2);
@@ -64,15 +62,6 @@ Caq0=(alk0 - OH + H)*alpha0/(alpha1+2*alpha2); %mole/m3
 Cin0 = 0;
 Closs0 = 0;
 
- % rate constants for odes
-%delivery requirements for the algal pond
-%rate of Caq removed due to alkalinity consumption by algae Eq(15)
-k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
-% k2-k3 = C needed to be delivered to satisfy diffusion out of pond Eq(19)
-k2 = kLa;  
-k3 = kLa*Csat; %k2*x-k3 = rate of C loss due to the atmosphere
-k4 = (y_1 + y_2*(1 - alpha1 - 2*alpha2))*r_algae; 
-
 % molecular weights  g/mol
 MA = 1; %didn't have to scale
 MB = 44;  %CO2 
@@ -87,34 +76,48 @@ time = linspace(0, 4);  %4 days
 %Closs = CO2 losses
 x0 = [Caq0; Cin0; Closs0];
 
+kLain = 0;
+kLaend = 100;
+delkLa = 20;
+s_steps = (kLaend - kLain)/delkLa;
+kLa = kLain;
 
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
+for b = 1:s_steps+1
+    % rate constants for odes
+%delivery requirements for the algal pond
+%rate of Caq removed due to alkalinity consumption by algae Eq(15)
+k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
+% k2-k3 = C needed to be delivered to satisfy diffusion out of pond Eq(19)
+k2 = kLa;  
+k3 = kLa*Csat; %k2*x-k3 = rate of C loss due to the atmosphere
+k4 = (y_1 + y_2*(1 - alpha1 - 2*alpha2))*r_algae; 
 [tout, x] = ode15s(@rates, time, x0);
 
 % convert from moles to mass
 %scale each column of x (species) by its mol wt
 xmass = x*diag([MA, MB, MC]);
 
-%eff= xmass(end,3)/xmass(end,2)
 CO2aq = xmass(:,1);
 xmass(:,1) = [];
-%create array 100x1 
-CO2sat = Csat*ones(length(CO2aq),1);
 
-
-%table = [tout, x];%modify plot and plot only CO2 loss and delivery requirements
-figure(1);
+%modify plot and plot only CO2 loss and delivery requirements
+figure(1)
 plot(tout, xmass)
+hold on
+kLa = kLa + delkLa;
+end
+
+figure(1)
 xlabel('Time (day)')
 ylabel('CO_2 (g m^{-3})')
-legend('CO_2 supply required', 'CO_2 loss to atmosphere')
+legend('CO_2 supply for kLa = 0 hr^{-1}', 'CO_2 loss for kLa = 0 hr^{-1}',...
+    'CO_2 supply for kLa = 20 hr^{-1}', 'CO_2 loss for kLa = 20 hr^{-1}',...
+    'CO_2 supply for kLa = 40 hr^{-1}', 'CO_2 loss for kLa = 40 hr^{-1}',...
+    'CO_2 supply for kLa = 60 hr^{-1}', 'CO_2 loss for kLa = 60 hr^{-1}',...
+    'CO_2 supply for kLa = 80 hr^{-1}', 'CO_2 loss for kLa = 80 hr^{-1}',...
+    'CO_2 supply for kLa = 100 hr^{-1}', 'CO_2 loss for kLa = 100 hr^{-1}')
 
-figure(2);
-plot(tout, CO2aq)
-xlabel('Time (day)')
-ylabel('CO_2 (mole m^{-3})')
-hold on
-plot(tout, CO2sat, 'r--')
-legend('dissolved CO_2 concentration', 'saturation concentration of CO_2')
+

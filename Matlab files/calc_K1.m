@@ -1,9 +1,8 @@
 % author: Riley Doyle
 % date: 06-09-2020
 % file name: calc_K1.m
-% dependencies: none%Calculate K1
+% output: Calculate K1
 
-%create a function to calculate K1
 function K1 = calc_K1(T, S)
 
 

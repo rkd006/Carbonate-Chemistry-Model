@@ -1,8 +1,7 @@
 %author: Riley Doyle
 % date: 06-09-2020
 % file name: calc_loss_kL_alk.m
-% dependencies: none%Calculate loss with different kL values and
-% alkalinities
+% output: Calculate loss with different kL values and alkalinities
 
 function r_kL_alk = calc_loss_kL_alk (pK1, pK2,CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa, pH)
 m_steps = (kLaend-kLain)/delkLa;

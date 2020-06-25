@@ -1,7 +1,8 @@
 % author: Deborah Sills
 % date: 1-26-13
 % file name: calc_CO2_loss.m
-% dependencies: calc_alpha0, calc_alpha1,calc_alpha2,
+% dependencies: calc_alpha0, calc_alpha1,calc_alpha2
+% output: CO2 losses to the atmosphere
 
 function r = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
 

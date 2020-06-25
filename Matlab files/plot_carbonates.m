@@ -1,7 +1,12 @@
-%script to plot relative amounts of H2CO3, HCO3-, CO3-2
+%Author:Deborah Sills
+%Date January 27 2013
+%Dependent functions: calc_K1, calc_K2, calc_alpha0, calc_alpha1,
+%calc_alpha2
+%Inputs: T, S, pH_start, pH_end, pK1, pK2
+%Outputs: plot relative amounts of H2CO3, HCO3-, CO3-2
 
 %delete all variables in the workspace 
-clear all
+clear 
 
 %delete all figures
 close all

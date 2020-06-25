@@ -1,8 +1,9 @@
 % author: Riley Doyle
 % date: 06-17-2020
 % file name: CO2_loss_kL.m
-% dependencies: calc_loss_kL_pH, calc_loss_kL_alk
-%plot CO2 losses without algae growth with different pH and alk separately
+% dependencies: calc_loss_kL_pH, calc_loss_kL_alk, calc_K1, calc_K2
+% input: T, S, pK1, pK2, CO2sat, kLa, pH, alk
+% output: CO2 losses without algae growth with different pH and alk separately
 
 %delete all figures and variables in the workspace
 clear 
@@ -16,13 +17,12 @@ pK1 = -log10(K_1);
 K_2 = calc_K2(T, S); 
 pK2 = -log10(K_2);
 CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
-A = 10000; %(m2) area of the pond
 alk = 2.5; %(eq/m3) from Weissman et al. (1987)
 pHin = 6.5;
 pHend = 8.5;
 delpH = 0.1; 
 
-kLain= 0.5; %m/day
+kLain= 0.5; % (1/hour)
 kLaend= 8.5;
 delkLa = 2; 
 
@@ -32,10 +32,10 @@ x = r_kL_pH(:,1);
 r_kL_pH(:,1) = [];
 
 pH = 8;
-alkin=2; %eq/m3)
+alkin=2; % (eq/m3)
 alkend=32;
 delalk = 2;
-r_kL_alk = calc_loss_kL_alk (pK1, pK2,CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa, pH);
+r_kL_alk = calc_loss_kL_alk (pK1, pK2, CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa, pH);
 x2 = r_kL_alk(:,1);
 r_kL_alk(:,1) = [];
 

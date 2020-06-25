@@ -1,9 +1,8 @@
 % author: Riley Doyle
 % date: 06-09-2020
 % file name: calc_K2.m
-% dependencies: none%Calculate K2
+% output: Calculate K2
 
-%create a function to calculate K2
 function K2 = calc_K2(T, S)
 
 K2 = exp(-9.226508 - 3351.6106/T - 0.2005743*log(T) - ...
