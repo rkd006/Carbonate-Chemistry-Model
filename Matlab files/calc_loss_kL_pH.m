@@ -4,16 +4,17 @@
 % output: Calculate loss with different kL values and pHs
 
 function r_kL_pH = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLain, kLaend, delkLa)
+
 m_steps = (kLaend-kLain)/delkLa;
-kLa = kLain;
+
 
 
 n_steps = (pHend - pHin)/delpH;
 
-r_kL_pH = zeros(n_steps +1, m_steps+2);
-
+r_kL_pH = zeros(n_steps+1, m_steps+2);
+kLa = kLain;
 for p = 1:m_steps+2
-    
+   
     pH = pHin;
     
     for c = 1:n_steps+1
@@ -34,15 +35,14 @@ for p = 1:m_steps+2
         CO3 = alpha2*CT;
         
         %calculate loss of CO2 per hour
-        loss = kLa*(H2CO3 - CO2sat)*44; %g CO2 per day
+        loss = kLa*(H2CO3 - CO2sat)*44; %g CO2 
         pH = pH + delpH;  %increase pH 
 
         
         r_kL_pH(c,1)= pH; %record pH
         r_kL_pH(c,p)= loss; %record loss
-        
-    end
-   %r(c,p)= loss; %record loss and pH 
+    
+    end 
    kLa = kLa + delkLa;
 end
 

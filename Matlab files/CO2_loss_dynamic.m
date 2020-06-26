@@ -25,8 +25,9 @@ d = 0.15; %m depth of pond
 kLa = 10; %1/day (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
-y_2 = 0.004547; %moles bicarbonate per g algae from stoicheometry
-y_1 = 0.02558;  %moles CO2 per g algae from stoicheometry
+y_2 = 0.003978; %moles bicarbonate per g algae from stoicheometry
+y_1 = 0.02614;  %moles CO2 per g algae from stoicheometry
+
 
 
 Kh = calc_Kh(T, S);

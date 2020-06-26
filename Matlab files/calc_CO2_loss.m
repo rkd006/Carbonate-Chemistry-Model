@@ -13,7 +13,7 @@ alk = alkin;
 
 n_steps = (pHend - pHin)/delpH;
 
-r = zeros(n_steps+1, m_steps + 2);
+r = zeros(n_steps+1, m_steps+2);
 
 for p = 1:m_steps+2
     

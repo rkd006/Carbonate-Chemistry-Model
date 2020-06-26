@@ -76,8 +76,8 @@ time = linspace(0, 4);  %4 days
 %Closs = CO2 losses
 x0 = [Caq0; Cin0; Closs0];
 
-kLain = 0;
-kLaend = 100;
+kLain = .5;
+kLaend = 100.5;
 delkLa = 20;
 s_steps = (kLaend - kLain)/delkLa;
 kLa = kLain;
@@ -102,22 +102,27 @@ xmass = x*diag([MA, MB, MC]);
 
 CO2aq = xmass(:,1);
 xmass(:,1) = [];
-
+CO2req = xmass(:,1);
+xmass(:,1) = [];
+CO2loss = xmass(:,1);
+xmass(:,1) = [];
 %modify plot and plot only CO2 loss and delivery requirements
 figure(1)
-plot(tout, xmass)
+plot(tout, CO2req)
 hold on
+plot(tout, CO2loss, '--') 
+hold on 
 kLa = kLa + delkLa;
 end
 
 figure(1)
 xlabel('Time (day)')
 ylabel('CO_2 (g m^{-3})')
-legend('CO_2 supply for kLa = 0 hr^{-1}', 'CO_2 loss for kLa = 0 hr^{-1}',...
-    'CO_2 supply for kLa = 20 hr^{-1}', 'CO_2 loss for kLa = 20 hr^{-1}',...
-    'CO_2 supply for kLa = 40 hr^{-1}', 'CO_2 loss for kLa = 40 hr^{-1}',...
-    'CO_2 supply for kLa = 60 hr^{-1}', 'CO_2 loss for kLa = 60 hr^{-1}',...
-    'CO_2 supply for kLa = 80 hr^{-1}', 'CO_2 loss for kLa = 80 hr^{-1}',...
-    'CO_2 supply for kLa = 100 hr^{-1}', 'CO_2 loss for kLa = 100 hr^{-1}')
+legend('CO_2 supply for kLa = 0.5 hr^{-1}', 'CO_2 loss for kLa = 0.5 hr^{-1}',...
+    'CO_2 supply for kLa = 20.5 hr^{-1}', 'CO_2 loss for kLa = 20.5 hr^{-1}',...
+    'CO_2 supply for kLa = 40.5 hr^{-1}', 'CO_2 loss for kLa = 40.5 hr^{-1}',...
+    'CO_2 supply for kLa = 60.5 hr^{-1}', 'CO_2 loss for kLa = 60.5 hr^{-1}',...
+    'CO_2 supply for kLa = 80.5 hr^{-1}', 'CO_2 loss for kLa = 80.5 hr^{-1}',...
+    'CO_2 supply for kLa = 100.5 hr^{-1}', 'CO_2 loss for kLa = 100.5 hr^{-1}')
 
 

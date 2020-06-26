@@ -22,12 +22,12 @@ pHend = 8.5;
 delpH = 0.1;  
 
 alkin=2; %(eq/m3)
-alkend=22;
+alkend=32;
 delalk = 5; 
 
-kLain = .5;
-kLaend = 8.5;
-delkLa = 4;
+kLain = .5; %(hr-1)
+kLaend = 200.5;
+delkLa = 100;
 s_steps = (kLaend - kLain)/delkLa;
 kLa = kLain;
 hold on
@@ -36,15 +36,29 @@ for b = 1:s_steps+1
 r_kL_1 = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
 x_axis = r_kL_1(:,1);
 r_kL_1(:,1) = [];
-plot(x_axis, r_kL_1)
+CO2_loss = r_kL_1(:,(1:7));
+r_kL_1(:,(1:7)) = [];
+%convert CO2_loss from hr-1 to day-1
+CO2_loss = CO2_loss*24;
+figure (b)
+plot(x_axis, CO2_loss)
 kLa = kLa + delkLa;
 end
 
+figure (1)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-3} day^{-1})')
-legend('kLa = .5 day^{-1}, Alk = 2 meq/L','kLa = .5 day^{-1}, Alk = 7 meq/L','kLa = .5 day^{-1}, Alk = 12 meq/L',...
-    'kLa = .5 day^{-1}, Alk = 17 meq/L','kLa = .5 day^{-1}, Alk = 22 meq/L',...
-    'kLa = 4.5 day^{-1}, Alk = 2 meq/L','kLa = 4.5 day^{-1}, Alk = 7 meq/L','kLa = 4.5 day^{-1}, Alk = 12 meq/L',...
-    'kLa = 4.5 day^{-1}, Alk = 17 meq/L', 'kLa = 4.5 day^{-1}, Alk = 22 meq/L', 'kLa = 8.5 day^{-1}, Alk = 2 meq/L',...
-    'kLa = 8.5 day^{-1}, Alk = 7 meq/L', 'kLa = 8.5 day^{-1}, Alk = 12 meq/L', 'kLa = 8.5 day^{-1}, Alk = 17 meq/L',...
-    'kLa = 8.5 day^{-1} Alk = 22 meq/L')
+legend('kLa = .5 hr^{-1}, Alk = 2 meq/L','kLa = .5 hr^{-1}, Alk = 7 meq/L','kLa = .5 hr^{-1}, Alk = 12 meq/L',...
+    'kLa = .5 hr^{-1}, Alk = 17 meq/L','kLa = .5 hr^{-1}, Alk = 22 meq/L','kLa = .5 hr^{-1}, Alk = 27 meq/L','kLa = .5 hr^{-1}, Alk = 32 meq/L')
+
+figure (2)
+xlabel('pH')
+ylabel('CO_2 loss to the atmosphere (g m^{-3} day^{-1})')
+legend('kLa = 100.5 hr^{-1}, Alk = 2 meq/L','kLa = 100.5 hr^{-1}, Alk = 7 meq/L','kLa = 100.5 hr^{-1}, Alk = 12 meq/L',...
+    'kLa = 100.5 hr^{-1}, Alk = 17 meq/L', 'kLa = 100.5 hr^{-1}, Alk = 22 meq/L', 'kLa = 100.5 hr^{-1}, Alk = 27 meq/L', 'kLa = 100.5 hr^{-1}, Alk = 32 meq/L')
+
+figure (3)
+xlabel('pH')
+ylabel('CO_2 loss to the atmosphere (g m^{-3} day^{-1})')
+legend('kLa = 200.5 hr^{-1}, Alk = 2 meq/L','kLa = 200.5 hr^{-1}, Alk = 7 meq/L', 'kLa = 200.5 hr^{-1}, Alk = 12 meq/L',...
+    'kLa = 200.5 hr^{-1}, Alk = 17 meq/L','kLa = 200.5 hr^{-1}, Alk = 22 meq/L','kLa = 200.5 hr^{-1}, Alk = 27 meq/L','kLa = 200.5 hr^{-1}, Alk = 32 meq/L')
