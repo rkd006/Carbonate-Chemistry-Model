@@ -38,13 +38,12 @@ for p = 1:m_steps+2
         
         %calculate loss of CO2 per hour
         loss = kLa*(H2CO3 - CO2sat)*44; %g CO2 per day
-        pH = pH + delpH;  %increase pH 
-
-        
+              
         r(c,1)= pH; %record pH
         r(c,p)= loss; %record loss
-        
+        pH = pH + delpH;  %increase pH 
     end
    alk = alk + delalk;
+end
 end
 

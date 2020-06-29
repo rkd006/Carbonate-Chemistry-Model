@@ -33,15 +33,13 @@ for p = 1:m_steps+2
         CO3 = alpha2*CT;
         
         %calculate loss of CO2 per hour
-        loss = kLa*(H2CO3 - CO2sat)*44; %g CO2 per day
-        alk = alk + delalk;  %increase pH 
+        loss = kLa*(H2CO3 - CO2sat)*44; %g CO2 per day 
 
         
         r_kL_alk(c,1)= alk; %record alk
         r_kL_alk(c,p)= loss; %record loss
-        
-    end
-   %r(c,p)= loss; %record loss and alk 
+        alk = alk + delalk;  %increase alk
+    end 
    kLa = kLa + delkLa;
 end
 

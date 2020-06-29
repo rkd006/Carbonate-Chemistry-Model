@@ -23,8 +23,8 @@ PCO2 = 0.00040; %atm (need to correct for temp, very crude approx)
 d = 0.15; %m depth of pond
 
 %Stoicheometric constants for algal growth
-y_2 = 0.004547; %moles bicarbonate per g algae from stoicheometry
-y_1 = 0.02558;  %moles CO2 per g algae from stoicheometry
+y_2 = 0.2427; %g bicarbonate per g algae from stoicheometry
+y_1 = 1.1503;  %g CO2 per g algae from stoicheometry
 
 
 Kh = calc_Kh(T, S);
@@ -40,7 +40,7 @@ K_2 = calc_K2(T, S);
 
 pK2= -log10(K_2); 
 
-Csat = PCO2*Kh;  %moles/kg
+Csat = PCO2*Kh*44;  %g/kg
 
 %%%%%Inputs%%%%%%
 %Assumptions & initial conditions in moles per sample volume
@@ -58,14 +58,9 @@ OH=10^-(14-pH)*10^3; %moles/m3
 H=(10^(-pH))*10^3;  %moles/m3
         
 %Initial Conditions       
-Caq0=(alk0 - OH + H)*alpha0/(alpha1+2*alpha2); %mole/m3
+Caq0=((alk0 - OH + H)*alpha0/(alpha1+2*alpha2))*44; %g/m3
 Cin0 = 0;
 Closs0 = 0;
-
-% molecular weights  g/mol
-MA = 1; %didn't have to scale
-MB = 44;  %CO2 
-MC = 44;  %CO2 
 
 % create array of times for output
 time = linspace(0, 4);  %4 days
@@ -81,7 +76,7 @@ kLaend = 100.5;
 delkLa = 20;
 s_steps = (kLaend - kLain)/delkLa;
 kLa = kLain;
-
+C = {'k','m','b','r','g','y'};
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
@@ -95,10 +90,7 @@ k2 = kLa;
 k3 = kLa*Csat; %k2*x-k3 = rate of C loss due to the atmosphere
 k4 = (y_1 + y_2*(1 - alpha1 - 2*alpha2))*r_algae; 
 [tout, x] = ode15s(@rates, time, x0);
-
-% convert from moles to mass
-%scale each column of x (species) by its mol wt
-xmass = x*diag([MA, MB, MC]);
+xmass = x;
 
 CO2aq = xmass(:,1);
 xmass(:,1) = [];
@@ -108,16 +100,16 @@ CO2loss = xmass(:,1);
 xmass(:,1) = [];
 %modify plot and plot only CO2 loss and delivery requirements
 figure(1)
-plot(tout, CO2req)
+plot(tout, CO2req, 'color', C{b})
 hold on
-plot(tout, CO2loss, '--') 
+plot(tout, CO2loss,'color', C{b}, 'LineStyle', '--') 
 hold on 
 kLa = kLa + delkLa;
 end
 
 figure(1)
 xlabel('Time (day)')
-ylabel('CO_2 (g m^{-3})')
+ylabel('CO_2 (g m^{-2})')
 legend('CO_2 supply for kLa = 0.5 hr^{-1}', 'CO_2 loss for kLa = 0.5 hr^{-1}',...
     'CO_2 supply for kLa = 20.5 hr^{-1}', 'CO_2 loss for kLa = 20.5 hr^{-1}',...
     'CO_2 supply for kLa = 40.5 hr^{-1}', 'CO_2 loss for kLa = 40.5 hr^{-1}',...

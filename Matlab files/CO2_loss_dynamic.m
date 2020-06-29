@@ -25,8 +25,8 @@ d = 0.15; %m depth of pond
 kLa = 10; %1/day (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
-y_2 = 0.003978; %moles bicarbonate per g algae from stoicheometry
-y_1 = 0.02614;  %moles CO2 per g algae from stoicheometry
+y_2 = 0.2427; %g bicarbonate per g algae from stoicheometry
+y_1 = 1.1503;  %g CO2 per g algae from stoicheometry
 
 
 
@@ -43,7 +43,7 @@ K_2 = calc_K2(T, S);
 
 pK2= -log10(K_2); 
 
-Csat = PCO2*Kh;  %moles/kg
+Csat = PCO2*Kh*44;  %g/kg
 
 %%%%%Inputs%%%%%%
 %Assumptions & initial conditions in moles per sample volume
@@ -61,7 +61,7 @@ OH=10^-(14-pH)*10^3; %moles/m3
 H=(10^(-pH))*10^3;  %moles/m3
         
 %Initial Conditions       
-Caq0=(alk0 - OH + H)*alpha0/(alpha1+2*alpha2); %mole/m3
+Caq0=((alk0 - OH + H)*alpha0/(alpha1+2*alpha2))*44; %g/m3
 Cin0 = 0;
 Closs0 = 0;
 
@@ -73,11 +73,6 @@ k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
 k2 = kLa;  
 k3 = kLa*Csat; %k2*x-k3 = rate of C loss due to the atmosphere
 k4 = (y_1 + y_2*(1 - alpha1 - 2*alpha2))*r_algae; 
-
-% molecular weights  g/mol
-MA = 1; %didn't have to scale
-MB = 44;  %CO2 
-MC = 44;  %CO2 
 
 % create array of times for output
 time = linspace(0, 4);  %4 days
@@ -93,10 +88,7 @@ x0 = [Caq0; Cin0; Closs0];
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
 [tout, x] = ode15s(@rates, time, x0);
-
-% convert from moles to mass
-%scale each column of x (species) by its mol wt
-xmass = x*diag([MA, MB, MC]);
+xmass = x;
 
 %eff= xmass(end,3)/xmass(end,2)
 CO2aq = xmass(:,1);
@@ -109,13 +101,13 @@ CO2sat = Csat*ones(length(CO2aq),1);
 figure(1);
 plot(tout, xmass)
 xlabel('Time (day)')
-ylabel('CO_2 (g m^{-3})')
+ylabel('CO_2 (g m^{-2})')
 legend('CO_2 supply required', 'CO_2 loss to atmosphere')
 
 figure(2);
 plot(tout, CO2aq)
 xlabel('Time (day)')
-ylabel('CO_2 (mole m^{-3})')
+ylabel('CO_2 (g m^{-2})')
 hold on
 plot(tout, CO2sat, 'r--')
 legend('dissolved CO_2 concentration', 'saturation concentration of CO_2')

@@ -28,17 +28,21 @@ kLain= 0.5; % units of 1/hour
 kLaend= 200.5;
 delkLa = 20; 
 
-r_range_kL = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLain, kLaend, delkLa);
+
+r_range_kL = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
+
 
 x = r_range_kL(:,1);
 r_range_kL(:,1) = [];
 CO2_loss = r_range_kL(:,(1:11));
 r_range_kL(:,(1:11)) = [];
 CO2_loss = CO2_loss*24;
+
 figure(1)
 plot(x, CO2_loss)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-3} day^{-1})')
+ylim([0 10000])
 legend('kLa = 0.5 hr^{-1}','kLa = 20.5 hr^{-1}','kLa = 40.5 hr^{-1}','kLa = 60.5 hr^{-1}',...
     'kLa = 80.5 hr^{-1}','kLa = 100.5 hr^{-1}','kLa = 120.5 hr^{-1}','kLa = 140.5 hr^{-1}',...
     'kLa = 160.5 hr^{-1}','kLa = 180.5 hr^{-1}','kLa = 200.5 hr^{-1}')
