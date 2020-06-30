@@ -17,13 +17,13 @@ pK1 = -log10(K_1);
 K_2 = calc_K2(T, S); 
 pK2 = -log10(K_2);
 CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
-kLa = 12; %(1/day)
+kLa = 0.5; %(1/hr)
 pHin = 6.5;
 pHend = 8.5;
 delpH = 0.1; 
 
 alkin=2; % (eq/m3 or meq/L)
-alkend=32;
+alkend=32; 
 delalk = 5; 
 
 %define r

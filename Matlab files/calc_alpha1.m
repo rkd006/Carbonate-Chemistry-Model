@@ -5,5 +5,4 @@
 
 function alpha1 = calc_alpha1(pH, pK1, pK2)
 
-
 alpha1 = 1/(10^(-pH)/10^(-pK1) + 1 + 10^(-pK2)/10^(-pH));

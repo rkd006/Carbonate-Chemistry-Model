@@ -13,9 +13,9 @@ alk = alkin;
 
 n_steps = (pHend - pHin)/delpH;
 
-r = zeros(n_steps+1, m_steps+2);
+r = zeros(n_steps+1, 1+m_steps);
 
-for p = 1:m_steps+2
+for p = 1:1+m_steps
     
     pH = pHin;
     
@@ -29,18 +29,19 @@ for p = 1:m_steps+2
         %calculate H+ and OH and CT
         H = 10^(-pH);
         OH = 10^(-(14-pH));
-        CT= (alk - OH + H)/(alpha0 + alpha1 + alpha2);
+        bt = (1/(alpha1 + (2.*alpha2)));
+        tp = (alk - OH + H);
+        CT = tp * bt;
         
         %calculate dissolved CO2 concentration
         H2CO3 = alpha0*CT;
-        HCO3 = alpha1*CT;
-        CO3 = alpha2*CT;
+
         
         %calculate loss of CO2 per hour
-        loss = kLa*(H2CO3 - CO2sat)*44; %g CO2 per day
+        loss = kLa*(H2CO3 - CO2sat)*44*24; %g CO2 per day
               
         r(c,1)= pH; %record pH
-        r(c,p)= loss; %record loss
+        r(c,1+p)= loss; %record loss
         pH = pH + delpH;  %increase pH 
     end
    alk = alk + delalk;

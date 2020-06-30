@@ -9,9 +9,9 @@ kLa = kLain;
 
 n_steps = (alkend - alkin)/delalk;
 
-r_kL_alk = zeros(n_steps+1, m_steps + 2);
+r_kL_alk = zeros(n_steps+1, m_steps + 1);
 
-for p = 1:m_steps+2
+for p = 1:m_steps+1
     
     alk = alkin;
     
@@ -25,7 +25,9 @@ for p = 1:m_steps+2
         %calculate H+ and OH and CT
         H = 10^(-pH);
         OH = 10^(-(14-pH));
-        CT= (alk - OH + H)/(alpha0 + alpha1 + alpha2);
+        bt = (1/(alpha1 + (2.*alpha2)));
+        tp = (alk - OH + H);
+        CT = tp * bt;
         
         %calculate dissolved CO2 concentration
         H2CO3 = alpha0*CT;
@@ -37,7 +39,7 @@ for p = 1:m_steps+2
 
         
         r_kL_alk(c,1)= alk; %record alk
-        r_kL_alk(c,p)= loss; %record loss
+        r_kL_alk(c,1+p)= loss; %record loss
         alk = alk + delalk;  %increase alk
     end 
    kLa = kLa + delkLa;

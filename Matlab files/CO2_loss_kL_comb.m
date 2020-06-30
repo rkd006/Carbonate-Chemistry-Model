@@ -38,8 +38,6 @@ x_axis = r_kL_1(:,1);
 r_kL_1(:,1) = [];
 CO2_loss = r_kL_1(:,(1:7));
 r_kL_1(:,(1:7)) = [];
-%convert CO2_loss from hr-1 to day-1
-CO2_loss = CO2_loss*24;
 figure (b)
 plot(x_axis, CO2_loss)
 kLa = kLa + delkLa;
