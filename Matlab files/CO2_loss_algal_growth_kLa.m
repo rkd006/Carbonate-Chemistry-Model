@@ -46,7 +46,7 @@ Csat = PCO2*Kh*44;  %g/kg
 %Assumptions & initial conditions in moles per sample volume
 alk0 = 2.5;  %eq/m3
 r_algae = 10;  % growth rate g/m2/day; assume
-pH= 9; 
+pH= 8; 
 
 %Calculate alphas 
 alpha0 = calc_alpha0(pH,pK1, pK2);
