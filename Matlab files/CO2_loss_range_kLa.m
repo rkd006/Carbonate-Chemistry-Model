@@ -25,9 +25,9 @@ alkin = alk;
 alkend = alk;
 delalk = alk;
 %kL = 0.04 m/hr from Weissman et. al. 1987
-kLain= 0.5; % units of 1/hour
-kLaend= 200.5;
-delkLa = 20; 
+kLain= 0.1; % units of 1/hour
+kLaend= 0.5;
+delkLa = 0.4; 
 
 s_steps = (kLaend - kLain)/delkLa;
 kLa = kLain;
@@ -44,9 +44,24 @@ kLa = kLa + delkLa;
 end
 
 
+kLain= 1.5; % units of 1/hour
+kLaend= 35.5;
+delkLa = 17;
+s_steps = (kLaend - kLain)/delkLa;
+kLa = kLain;
+
+for b = 1:s_steps+1
+r_range_kLa = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
+x_axis = r_range_kLa(:,1);
+r_range_kLa(:,1) = [];
+CO2_loss = r_range_kLa(:,1);
+r_range_kLa(:,1) = [];
+plot(x_axis, CO2_loss);
+kLa = kLa + delkLa;
+end
+
 figure(1)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-3} day^{-1})')
-legend('kLa = 0.5 hr^{-1}','kLa = 20.5 hr^{-1}','kLa = 40.5 hr^{-1}','kLa = 60.5 hr^{-1}',...
-    'kLa = 80.5 hr^{-1}','kLa = 100.5 hr^{-1}','kLa = 120.5 hr^{-1}','kLa = 140.5 hr^{-1}',...
-    'kLa = 160.5 hr^{-1}','kLa = 180.5 hr^{-1}','kLa = 200.5 hr^{-1}')
+legend('kLa = 0.1 hr^{-1}','kLa = 0.5 hr^{-1}','kLa = 1.5 hr^{-1}','kLa = 18.5 hr^{-1}',...
+    'kLa = 30.5 hr^{-1}')
