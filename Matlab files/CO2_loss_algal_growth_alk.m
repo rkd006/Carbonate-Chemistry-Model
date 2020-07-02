@@ -1,10 +1,10 @@
 % Author: Riley Doyle
-% Date: June 25 2020
+% Date: July 2 2020
 %Dependent function: rates, calc_K1, calc_K2, calc_Kh, calc_alpha0,
     %calc_alpha1, calc_alpha2
 %Inputs: pH, kLa, y_2, y_1, k1, k2, k3, k4, Csat, pk1, pk2, d, alk0, r_algae
 %Outputs: CO2 losses to the atmospher vs. time, CO2 requirements vs. time
-    %with different kLa values 
+    %with different alkalinities 
 
 %delete all figures and variables in the workspace
 clear
@@ -43,10 +43,20 @@ pK2= -log10(K_2);
 Csat = PCO2*Kh*44;  %g/kg
 
 %Assumptions & initial conditions in moles per sample volume
-alk0 = 2.5;  %eq/m3
 r_algae = 10;  % growth rate g/m2/day; 
-pH= 8; 
+pH = 8;
+kLa= .5; 
 
+alkin = 2;
+alkend = 22;
+delalk = 5;
+s_steps = (alkend - alkin)/delalk;
+alk0 = alkin; 
+C = {'k','m','b','r','g'};
+%Solve ODEs with the ode15s solver
+%returns output arrays of tout and x
+%rates is the ODE system, time is the x values, x0 is the initial conditions
+for b = 1:s_steps+1
 %Calculate alphas 
 alpha0 = calc_alpha0(pH,pK1, pK2);
 alpha1 = calc_alpha1(pH,pK1, pK2);
@@ -70,18 +80,6 @@ time = linspace(0, 4);  %4 days
 %Closs = CO2 losses
 x0 = [Caq0; Cin0; Closs0];
 
-kLain = .5;
-kLaend = 35.5;
-delkLa = 7;
-s_steps = (kLaend - kLain)/delkLa;
-kLa = kLain; %(1/hr)
-%kLa*d = (m/day)
-
-C = {'k','m','b','r','g','y'};
-%Solve ODEs with the ode15s solver
-%returns output arrays of tout and x
-%rates is the ODE system, time is the x values, x0 is the initial conditions
-for b = 1:s_steps+1
     % rate constants for odes
 %delivery requirements for the algal pond
 %rate of Caq removed due to alkalinity consumption by algae Eq(15)
@@ -105,17 +103,14 @@ plot(tout, CO2req, 'color', C{b})
 hold on
 plot(tout, CO2loss,'color', C{b}, 'LineStyle', '--') 
 hold on 
-kLa = kLa + delkLa;
+alk0 = alk0 + delalk;
 end
 
 figure(1)
 xlabel('Time (day)')
 ylabel('CO_2 (g m^{-2})')
-legend('CO_2 supply for kLa = 0.5 hr^{-1}', 'CO_2 loss for kLa = 0.5 hr^{-1}',...
-    'CO_2 supply for kLa = 7.5 hr^{-1}', 'CO_2 loss for kLa = 7.5 hr^{-1}',...
-    'CO_2 supply for kLa = 14.5 hr^{-1}', 'CO_2 loss for kLa = 14.5 hr^{-1}',...
-    'CO_2 supply for kLa = 21.5 hr^{-1}', 'CO_2 loss for kLa = 21.5 hr^{-1}',...
-    'CO_2 supply for kLa = 28.5 hr^{-1}', 'CO_2 loss for kLa = 28.5 hr^{-1}',...
-    'CO_2 supply for kLa = 35.5 hr^{-1}', 'CO_2 loss for kLa = 35.5 hr^{-1}')
-
-
+legend('CO_2 supply for alk = 2 eq/m^{3}', 'CO_2 loss for alk = 2 eq/m^{3}',...
+    'CO_2 supply for alk = 7 eq/m^{3}', 'CO_2 loss for alk = 7 eq/m^{3}',...
+    'CO_2 supply for alk = 12 eq/m^{3}', 'CO_2 loss for alk = 12 eq/m^{3}',...
+    'CO_2 supply for alk = 17 eq/m^{3}', 'CO_2 loss for alk = 17 eq/m^{3}',...
+    'CO_2 supply for alk = 22 eq/m^{3}', 'CO_2 loss for alk = 22 eq/m^{3}')
