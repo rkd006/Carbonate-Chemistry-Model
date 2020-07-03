@@ -12,9 +12,9 @@ kLa = kLain;
 
 n_steps = (pHend - pHin)/delpH;
 
-r_kL_pH = zeros(n_steps+1, m_steps+1);
+r_kL_pH = zeros(n_steps+1, 1+m_steps);
 
-for p = 1:m_steps+1
+for p = 1:1+m_steps
     
     pH = pHin;
     
