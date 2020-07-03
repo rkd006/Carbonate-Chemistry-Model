@@ -19,10 +19,11 @@ S = 35; %(salinity in g/kg)
 PCO2 = 0.00040; %atm (need to correct for temp, very crude approx)
 
 %Pond characteristics
-d = 0.15; %m depth of pond
+d = 0.2; %m depth of pond
 
 %mass transfer coefficient for CO2 out of pond
-kLa = 10; %1/day (Weismann et al., 1987 pg. 6 at bottom)
+kLa = 0.1; %Weissmann et al., 1988 (m/hr)
+%kL = 0.04 m/hr (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
 y_2 = 0.2427; %g bicarbonate per g algae from stoicheometry

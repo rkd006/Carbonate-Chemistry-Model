@@ -20,7 +20,7 @@ S = 35; %(salinity in g/kg)
 PCO2 = 0.00040; %atm (need to correct for temp, very crude approx)
 
 %Pond characteristics
-d = 0.15; %m depth of pond
+d = 0.2; %m depth of pond
 
 %Stoicheometric constants for algal growth
 y_2 = 0.2427; %g bicarbonate per g algae from stoicheometry
@@ -70,14 +70,14 @@ time = linspace(0, 4);  %4 days
 %Closs = CO2 losses
 x0 = [Caq0; Cin0; Closs0];
 
-kLain = .5;
-kLaend = 35.5;
-delkLa = 7;
+kLain = .1;
+kLaend = 1.5;
+delkLa = .7;
 s_steps = (kLaend - kLain)/delkLa;
 kLa = kLain; %(1/hr)
 %kLa*d = (m/day)
 
-C = {'k','m','b','r','g','y'};
+C = {'k','b','r'};
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
@@ -97,8 +97,10 @@ CO2aq = xmass(:,1);
 xmass(:,1) = [];
 CO2req = xmass(:,1);
 xmass(:,1) = [];
+CO2req = CO2req*d;
 CO2loss = xmass(:,1);
 xmass(:,1) = [];
+CO2loss = CO2loss*d;
 %modify plot and plot only CO2 loss and delivery requirements
 figure(1)
 plot(tout, CO2req, 'color', C{b})
@@ -111,11 +113,8 @@ end
 figure(1)
 xlabel('Time (day)')
 ylabel('CO_2 (g m^{-2})')
-legend('CO_2 supply for kLa = 0.5 hr^{-1}', 'CO_2 loss for kLa = 0.5 hr^{-1}',...
-    'CO_2 supply for kLa = 7.5 hr^{-1}', 'CO_2 loss for kLa = 7.5 hr^{-1}',...
-    'CO_2 supply for kLa = 14.5 hr^{-1}', 'CO_2 loss for kLa = 14.5 hr^{-1}',...
-    'CO_2 supply for kLa = 21.5 hr^{-1}', 'CO_2 loss for kLa = 21.5 hr^{-1}',...
-    'CO_2 supply for kLa = 28.5 hr^{-1}', 'CO_2 loss for kLa = 28.5 hr^{-1}',...
-    'CO_2 supply for kLa = 35.5 hr^{-1}', 'CO_2 loss for kLa = 35.5 hr^{-1}')
+legend('CO_2 supply for kLa = 0.1 hr^{-1}', 'CO_2 loss for kLa = 0.1 hr^{-1}',...
+    'CO_2 supply for kLa = 0.8 hr^{-1}', 'CO_2 loss for kLa = 0.8 hr^{-1}',...
+    'CO_2 supply for kLa = 1.5 hr^{-1}', 'CO_2 loss for kLa = 1.5 hr^{-1}')
 
 

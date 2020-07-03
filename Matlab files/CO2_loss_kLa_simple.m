@@ -18,6 +18,7 @@ K_2 = calc_K2(T, S);
 pK2 = -log10(K_2);
 CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
 alk = 2.5; %(eq/m3) from Weissman et al. (1987)
+d = .2; 
 pHin = 6.5;
 pHend = 8.5;
 delpH = 0.1; 
@@ -28,10 +29,9 @@ delkLa = 2;
 
 r_kL_pH = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
 
-
 x = r_kL_pH(:,1);
 r_kL_pH(:,1) = [];
-
+r_kL_pH = r_kL_pH*d;
 
 pH = 8;
 alkin=2; % (eq/m3)
@@ -40,19 +40,20 @@ delalk = 2;
 r_kL_alk = calc_loss_kL_alk (pK1, pK2, CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa, pH);
 x2 = r_kL_alk(:,1);
 r_kL_alk(:,1) = [];
+r_kL_alk = r_kL_alk*d;
 
 %without alkalinity 
 figure(1);
 plot(x, r_kL_pH);
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^-2 day^-1)')
-legend('kLa = 0.5 1/day', 'kLa = 2.5 1/day', 'kLa = 4.5 1/day', 'kLa = 6.5 1/day', 'kLa = 8.5 1/day')
+legend('kLa = 0.5 1/hr', 'kLa = 2.5 1/hr', 'kLa = 4.5 1/hr', 'kLa = 6.5 1/hr', 'kLa = 8.5 1/hr')
 
 %without pH
 figure(2)
 plot(x2, r_kL_alk);
 xlabel('alkalinity') 
 ylabel('CO_2 loss to the atmosphere (g m^-2 day^-1)')
-legend('kLa = 0.5 1/day', 'kLa = 2.5 1/day', 'kLa = 4.5 1/day', 'kLa = 6.5 1/day', 'kLa = 8.5 1/day')
+legend('kLa = 0.5 1/hr', 'kLa = 2.5 1/hr', 'kLa = 4.5 1/hr', 'kLa = 6.5 1/hr', 'kLa = 8.5 1/hr')
 
 

@@ -21,6 +21,7 @@ kLa = 0.5; %(1/hr)
 pHin = 6.5;
 pHend = 8.5;
 delpH = 0.1; 
+d = .2;
 
 alkin=2; % (eq/m3 or meq/L)
 alkend=32; 
@@ -33,11 +34,12 @@ r = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, dela
 %x axis is the first column of r
 x_axis = r(:,1);
 r(:,1) = [];
+r = r*d;
 
 %plot CO2 loss vs pH for multiple alkalinities
 plot(x_axis, r)
 
 xlabel('pH')
-ylabel('CO_2 loss to the atmosphere (g m^{-3} day^{-1})')
+ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
 legend('Alk = 2 meq/L','Alk = 7 meq/L','Alk = 12 meq/L','Alk = 17 meq/L','Alk = 22 meq/L','Alk = 27 meq/L', 'Alk = 32 meq/L')
 
