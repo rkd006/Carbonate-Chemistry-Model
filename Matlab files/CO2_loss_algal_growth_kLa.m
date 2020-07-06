@@ -75,7 +75,7 @@ kLaend = 1.5;
 delkLa = .7;
 s_steps = (kLaend - kLain)/delkLa;
 kLa = kLain; %(1/hr)
-%kLa*d = (m/day)
+%kLa*d = (m/hr)
 
 C = {'k','b','r'};
 %Solve ODEs with the ode15s solver
