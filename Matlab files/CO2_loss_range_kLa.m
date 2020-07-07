@@ -38,14 +38,14 @@ plot(x_axis, CO2_loss);
 hold on 
 
 kLain= 1.5; %(1/hr)
-kLaend= 4.5; %(1/hr)
-delkLa = 1.5; %(1/hr)
+kLaend= 5; %(1/hr)
+delkLa = 3.5; %(1/hr)
 
 r_range_kLa = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
 x_axis = r_range_kLa(:,1);
 r_range_kLa(:,1) = [];
-CO2_loss = r_range_kLa(:,(1:3));
-r_range_kLa(:,(1:3)) = [];
+CO2_loss = r_range_kLa(:,(1:2));
+r_range_kLa(:,(1:2)) = [];
 CO2_loss = CO2_loss*d; %y must be in g/m2*day
 plot(x_axis, CO2_loss);
 
@@ -53,7 +53,6 @@ plot(x_axis, CO2_loss);
 figure(1)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
-ylim([0 350])
+ylim([0 400])
 xlim([6.6 8.1])
-legend('kLa = 0.1 hr^{-1}','kLa = 0.5 hr^{-1}','kLa = 1.5 hr^{-1}','kLa = 3.0 hr^{-1}',...
-    'kLa = 4.5 hr^{-1}')
+legend('kLa = 0.1 hr^{-1}','kLa = 0.5 hr^{-1}','kLa = 1.5 hr^{-1}','kLa = 5.0 hr^{-1}')
