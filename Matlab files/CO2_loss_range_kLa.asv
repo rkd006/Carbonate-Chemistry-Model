@@ -18,8 +18,8 @@ K_2 = calc_K2(T, S);
 pK2 = -log10(K_2);
 CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
 d = .15; %depth of the pond from Weissman
-pHin = 6.5;
-pHend = 8.5;
+pHin = ;
+pHend = 8;
 delpH = 0.1; 
 kLain= 0.1; % units of 1/hour
 kLaend= 0.5;
@@ -53,7 +53,7 @@ plot(x_axis, CO2_loss);
 figure(1)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
-ylim([0 350])
-xlim([6.6 8.1])
+ylim([0 140])
+xlim([7 8])
 legend('kLa = 0.1 hr^{-1}','kLa = 0.5 hr^{-1}','kLa = 1.5 hr^{-1}','kLa = 3.0 hr^{-1}',...
     'kLa = 4.5 hr^{-1}')

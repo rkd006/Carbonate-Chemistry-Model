@@ -20,7 +20,7 @@ CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
 pHin = 6.5;
 pHend = 8.5;
 delpH = 0.1;  
-d = .2; %depth of the pond from Weissman
+d = .15; %depth of the pond from Weissman
 
 alkin=2; %(eq/m3)
 alkend=32;
@@ -71,7 +71,7 @@ hold on
 figure (1)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
-ylim([0 180])
+ylim([0 140])
 xlim([6.5 8.5])
 legend('Alk = 2 meq/L','Alk = 7 meq/L','Alk = 12 meq/L',...
     'Alk = 17 meq/L','Alk = 22 meq/L','Alk = 27 meq/L','Alk = 32 meq/L')
@@ -80,7 +80,7 @@ legend('Alk = 2 meq/L','Alk = 7 meq/L','Alk = 12 meq/L',...
 figure (2)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
-ylim([0 900])
+ylim([0 700])
 xlim([6.5 8.5])
 legend('Alk = 2 meq/L','Alk = 7 meq/L','Alk = 12 meq/L',...
     'Alk = 17 meq/L', 'Alk = 22 meq/L', 'Alk = 27 meq/L', 'Alk = 32 meq/L')
@@ -89,7 +89,7 @@ legend('Alk = 2 meq/L','Alk = 7 meq/L','Alk = 12 meq/L',...
 figure (3)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
-ylim([0 2600])
+ylim([0 2000])
 xlim([6.5 8.5])
 legend('Alk = 2 meq/L','Alk = 7 meq/L', 'Alk = 12 meq/L',...
     'Alk = 17 meq/L','Alk = 22 meq/L','Alk = 27 meq/L','Alk = 32 meq/L')
@@ -98,7 +98,7 @@ legend('Alk = 2 meq/L','Alk = 7 meq/L', 'Alk = 12 meq/L',...
 figure (4)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
-ylim([0 8000])
+ylim([0 6000])
 xlim([6.5 8.5])
 legend('Alk = 2 meq/L','Alk = 7 meq/L', 'Alk = 12 meq/L',...
     'Alk = 17 meq/L','Alk = 22 meq/L','Alk = 27 meq/L','Alk = 32 meq/L')

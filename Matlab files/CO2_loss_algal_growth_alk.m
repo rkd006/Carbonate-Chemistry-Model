@@ -20,7 +20,7 @@ S = 35; %(salinity in g/kg)
 PCO2 = 0.00040; %atm (need to correct for temp, very crude approx)
 
 %Pond characteristics
-d = 0.2; %m depth of pond
+d = 0.15; %m depth of pond
 
 %Stoicheometric constants for algal growth
 y_2 = 0.2427; %g bicarbonate per g algae from stoicheometry
