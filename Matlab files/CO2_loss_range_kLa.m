@@ -12,18 +12,18 @@ close all
 %define variables
 T = 20 + 273.15; %temp in Kelvin
 S = 35; %(salinity in g/kg)
-K_1 = calc_K1(T, S); 
-pK1 = -log10(K_1);
-K_2 = calc_K2(T, S); 
-pK2 = -log10(K_2);
+K_1 = calc_K1(T, S); %no units
+pK1 = -log10(K_1); %no units
+K_2 = calc_K2(T, S); %no units
+pK2 = -log10(K_2); %no units
 CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
-d = .15; %depth of the pond from Weissman
-pHin = 6.5;
-pHend = 8.5;
-delpH = 0.1; 
-kLain= 0.1; % units of 1/hour
-kLaend= 0.5;
-delkLa = 0.4;  
+d = .15; % (m) depth of the pond from Weissman
+pHin = 6.5; %no units
+pHend = 8.5; %no units
+delpH = 0.1; %no units
+kLain= 0.1; %(1/hr)
+kLaend= 0.5; %(1/hr)
+delkLa = 0.4; %(1/hr)
 alk = 2.5; %(eq/m3) from Weissman et al. (1987)
 %kL = 0.04 m/hr from Weissman et. al. 1987
 
@@ -37,9 +37,9 @@ plot(x_axis, CO2_loss);
 
 hold on 
 
-kLain= 1.5; % units of 1/hour
-kLaend= 4.5;
-delkLa = 1.5;
+kLain= 1.5; %(1/hr)
+kLaend= 4.5; %(1/hr)
+delkLa = 1.5; %(1/hr)
 
 r_range_kLa = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
 x_axis = r_range_kLa(:,1);

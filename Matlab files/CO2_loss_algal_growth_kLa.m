@@ -17,49 +17,48 @@ global k1 k2 k3 k4
 %Environmental conditions
 T = 20 + 273.15; %temp in Kelvins
 S = 35; %(salinity in g/kg)
-PCO2 = 0.00040; %atm (need to correct for temp, very crude approx)
+PCO2 = 0.00040; % (atm) (need to correct for temp, very crude approx)
 
 %Pond characteristics
-d = 0.15; %m depth of pond
+d = 0.15; %(m) depth of pond
 
 %Stoicheometric constants for algal growth
-y_2 = 0.2427; %g bicarbonate per g algae from stoicheometry
-y_1 = 1.1503;  %g CO2 per g algae from stoicheometry
+y_2 = 0.2427; % (g bicarbonate per g algae) from stoicheometry
+y_1 = 1.1503;  %(g CO2 per g algae) from stoicheometry
 
 
-Kh = calc_Kh(T, S);
-%units of Kh mole/kg sol/atm
+Kh = calc_Kh(T, S); %(mole/kg sol/atm)
 
 %carbonic acid/bicarbonate equilibrium
-K_1 = calc_K1(T, S); 
+K_1 = calc_K1(T, S); %no units
 
-pK1=-log10(K_1);  
+pK1=-log10(K_1); %no units
 
 %bicarbonate/carbonate equlibrium
-K_2 = calc_K2(T, S);
+K_2 = calc_K2(T, S); %no units
 
-pK2= -log10(K_2); 
+pK2= -log10(K_2); %no units
 
-Csat = PCO2*Kh*44;  %g/kg
+Csat = PCO2*Kh*44;  %(g/kg)
 
 %Assumptions & initial conditions in moles per sample volume
-alk0 = 2.5;  %eq/m3
-r_algae = 10;  % growth rate g/m2/day; 
+alk0 = 2.5;  %(eq/m3 or meq/L)
+r_algae = 10;  % growth rate (g/m2/day); 
 pH= 8; 
 
 %Calculate alphas 
-alpha0 = calc_alpha0(pH,pK1, pK2);
-alpha1 = calc_alpha1(pH,pK1, pK2);
-alpha2 = calc_alpha2(pH,pK1, pK2);
+alpha0 = calc_alpha0(pH,pK1, pK2); %no units
+alpha1 = calc_alpha1(pH,pK1, pK2); %no units
+alpha2 = calc_alpha2(pH,pK1, pK2); %no units
 
 %Calculate [H+] and [OH-]
-OH=10^-(14-pH)*10^3; %moles/m3
-H=(10^(-pH))*10^3;  %moles/m3
+OH=10^-(14-pH)*10^3; %(moles/m3)
+H=(10^(-pH))*10^3;  %(moles/m3)
         
 %Initial Conditions       
-Caq0=((alk0 - OH + H)*alpha0/(alpha1+2*alpha2))*44; %g/m3
-Cin0 = 0;
-Closs0 = 0;
+Caq0=((alk0 - OH + H)*alpha0/(alpha1+2*alpha2))*44; %(g/m3)
+Cin0 = 0; %(g/m2)
+Closs0 = 0; %(g/m2)
 
 % create array of times for output
 time = linspace(0, 4);  %4 days
@@ -70,12 +69,12 @@ time = linspace(0, 4);  %4 days
 %Closs = CO2 losses
 x0 = [Caq0; Cin0; Closs0];
 
-kLain = .1;
-kLaend = 1.5;
-delkLa = .7;
-s_steps = (kLaend - kLain)/delkLa;
+kLain = .1; %(1/hr)
+kLaend = 1.5; %(1/hr)
+delkLa = .7; %(1/hr)
+s_steps = (kLaend - kLain)/delkLa; %(1/hr)
 kLa = kLain; %(1/hr)
-%kLa*d = (m/hr)
+
 
 C = {'k','b','r'};
 %Solve ODEs with the ode15s solver

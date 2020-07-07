@@ -12,20 +12,20 @@ close all
 %define variables
 T = 20 + 273.15; %temp in Kelvins
 S = 35; %(salinity in g/kg)
-K_1 = calc_K1(T, S); 
-pK1 = -log10(K_1);
-K_2 = calc_K2(T, S); 
-pK2 = -log10(K_2);
+K_1 = calc_K1(T, S); %no units
+pK1 = -log10(K_1); %no units
+K_2 = calc_K2(T, S); %no units
+pK2 = -log10(K_2); %no units
 CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
 kLa = 0.5; %(1/hr)
-pHin = 6.5;
-pHend = 8.5;
-delpH = 0.1; 
-d = .15;
+pHin = 6.5; %no units
+pHend = 8.5; %no units
+delpH = 0.1; %no units
+d = .15; %(m) depth of pond
 
-alkin=2; % (eq/m3 or meq/L)
-alkend=32; 
-delalk = 5; 
+alkin=2; %(eq/m3 or meq/L)
+alkend=32; %(eq/m3 or meq/L)
+delalk = 5; %(eq/m3 or meq/L)
 
 %define r
 r = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
@@ -34,7 +34,7 @@ r = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, dela
 %x axis is the first column of r
 x_axis = r(:,1);
 r(:,1) = [];
-r = r*d;
+r = r*d; %(g/m2*day)
 
 %plot CO2 loss vs pH for multiple alkalinities
 plot(x_axis, r)
