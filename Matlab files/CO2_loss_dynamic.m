@@ -26,8 +26,8 @@ kLa = 0.96; %Weissmann et al., 1988 (m/day)
 %kL = 0.04 m/hr (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
-y_2 = 0.2427; %(g bicarbonate per g algae) from stoicheometry
-y_1 = 1.1503;  %(g CO2 per g algae) from stoicheometry
+y_2 = 0.2406; % (g bicarbonate per g algae) from stoicheometry
+y_1 = 1.1403;  %(g CO2 per g algae) from stoicheometry
 
 
 

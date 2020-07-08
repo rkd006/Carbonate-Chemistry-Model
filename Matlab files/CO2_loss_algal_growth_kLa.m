@@ -23,8 +23,8 @@ PCO2 = 0.00040; % (atm) (need to correct for temp, very crude approx)
 d = 0.15; %(m) depth of pond
 
 %Stoicheometric constants for algal growth
-y_2 = 0.2427; % (g bicarbonate per g algae) from stoicheometry
-y_1 = 1.1503;  %(g CO2 per g algae) from stoicheometry
+y_2 = 0.2406; % (g bicarbonate per g algae) from stoicheometry
+y_1 = 1.1403;  %(g CO2 per g algae) from stoicheometry
 
 
 Kh = calc_Kh(T, S); %(mole/kg sol/atm)
