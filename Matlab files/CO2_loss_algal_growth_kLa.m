@@ -76,7 +76,7 @@ s_steps = (kLaend - kLain)/delkLa; %(1/hr)
 kLa = kLain; %(1/hr)
 
 
-C = {'k','b','r', 'g'};
+C = {'k','b'};
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
