@@ -26,8 +26,6 @@ d = 0.15; %(m) depth of pond
 y_2 = 0.2406; % (g bicarbonate per g algae) from stoicheometry
 y_1 = 1.1403;  %(g CO2 per g algae) from stoicheometry
 
-
-
 Kh = calc_Kh(T, S); %(mole/kg sol/atm)
 
 %carbonic acid/bicarbonate equilibrium
@@ -47,16 +45,16 @@ r_algae = 10;  % growth rate (g/m2/day);
 pH = 8; %no units
 kLa= .1; %(m/day)
 
-alkin = 2; %(eq/m3 or meq/L)
-alkend = 22; %(eq/m3 or meq/L)
+alk0 = 2; %(eq/m3 or meq/L)
 delalk = 5; %(eq/m3 or meq/L)
-s_steps = (alkend - alkin)/delalk; %(eq/m3 or meq/L)
-alk0 = alkin; %(eq/m3 or meq/L)
+iterCount = 0;
 C = {'k','m','b','r','g'};
+
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
-for b = 1:s_steps+1
+while alk0 <= 22
+iterCount = iterCount + 1;
 %Calculate alphas 
 alpha0 = calc_alpha0(pH,pK1, pK2); %no units
 alpha1 = calc_alpha1(pH,pK1, pK2); %no units
@@ -99,9 +97,9 @@ CO2loss = xmass(:,1);
 xmass(:,1) = [];
 %modify plot and plot only CO2 loss and delivery requirements
 figure(1)
-plot(tout, CO2req, 'color', C{b})
+plot(tout, CO2req, 'color', C{iterCount})
 hold on
-plot(tout, CO2loss,'color', C{b}, 'LineStyle', '--') 
+plot(tout, CO2loss,'color', C{iterCount}, 'LineStyle', '--') 
 hold on 
 alk0 = alk0 + delalk;
 end

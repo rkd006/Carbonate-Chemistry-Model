@@ -46,16 +46,16 @@ alk0 = 2.5;  %(eq/m3 or meq/L)
 r_algae = 10;  % growth rate (g/m2/day); 
 kLa= .1; %(m/day)
 
-pHin = 6.5; %no units
-pHend = 8.5; %no units
+pH = 6.5; %no units
 delpH = 0.5; %no units
-s_steps = (pHend - pHin)/delpH; %no units
-pH = pHin; %no units
+iterCount = 0;
 C = {'k','m','b','r','g'};
+
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
-for b = 1:s_steps+1
+while pH <= 8.5
+iterCount = iterCount + 1;
 %Calculate alphas 
 alpha0 = calc_alpha0(pH,pK1, pK2);
 alpha1 = calc_alpha1(pH,pK1, pK2);
@@ -79,7 +79,7 @@ time = linspace(0, 4);  %4 days
 %Closs = CO2 losses
 x0 = [Caq0; Cin0; Closs0];
 
-    % rate constants for odes
+% rate constants for odes
 %delivery requirements for the algal pond
 %rate of Caq removed due to alkalinity consumption by algae Eq(15)
 k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
@@ -98,9 +98,9 @@ CO2loss = xmass(:,1);
 xmass(:,1) = [];
 %modify plot and plot only CO2 loss and delivery requirements
 figure(1)
-plot(tout, CO2req, 'color', C{b})
+plot(tout, CO2req, 'color', C{iterCount})
 hold on
-plot(tout, CO2loss,'color', C{b}, 'LineStyle', '--') 
+plot(tout, CO2loss,'color', C{iterCount}, 'LineStyle', '--') 
 hold on 
 pH = pH + delpH;
 end

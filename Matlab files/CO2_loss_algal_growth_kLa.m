@@ -69,25 +69,23 @@ time = linspace(0, 4);  %4 days
 %Closs = CO2 losses
 x0 = [Caq0; Cin0; Closs0];
 
-kLain = .1; %(1/hr)
-kLaend = 0.5; %(1/hr)
 delkLa = .4; %(1/hr)
-s_steps = (kLaend - kLain)/delkLa; %(1/hr)
-kLa = kLain; %(1/hr)
-
-
+kLa = .1; %(1/hr)
 C = {'k','b'};
+iterCount = 0;
+
+while kLa <= .5
+iterCount = iterCount + 1;
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
-for b = 1:s_steps+1
-    % rate constants for odes
+% rate constants for odes
 %delivery requirements for the algal pond
 %rate of Caq removed due to alkalinity consumption by algae Eq(15)
 k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
 % k2-k3 = C needed to be delivered to satisfy diffusion out of pond Eq(19)
-k2 = kLa*24; %(1/day) 
-k3 = kLa*Csat*24; %k2*x-k3 = rate of C loss due to the atmosphere, (g/m2*day)
+k2 = kLa*24*d; %(m/day) 
+k3 = kLa*Csat*24*d; %k2*x-k3 = rate of C loss due to the atmosphere, (g/m2*day)
 k4 = (y_1 + y_2*(1 - alpha1 - 2*alpha2))*r_algae; 
 [tout, x] = ode15s(@rates, time, x0);
 xmass = x;
@@ -96,38 +94,36 @@ CO2aq = xmass(:,1);
 xmass(:,1) = [];
 CO2req = xmass(:,1);
 xmass(:,1) = [];
-CO2req = CO2req*d;
 CO2loss = xmass(:,1);
 xmass(:,1) = [];
-CO2loss = CO2loss*d;
 %modify plot and plot only CO2 loss and delivery requirements
 figure(1)
-plot(tout, CO2req, 'color', C{b})
+plot(tout, CO2req, 'color', C{iterCount}) 
 hold on
-plot(tout, CO2loss,'color', C{b}, 'LineStyle', '--') 
+plot(tout, CO2loss,'color', C{iterCount}, 'LineStyle', '--') 
 hold on 
 kLa = kLa + delkLa;
 end
 hold on
-kLain = 1.5; %(1/hr)
-kLaend = 5; %(1/hr)
+
 delkLa = 3.5; %(1/hr)
-s_steps = (kLaend - kLain)/delkLa; %(1/hr)
-kLa = kLain; %(1/hr)
+kLa = 1.5; %(1/hr)
 
 C = {'r', 'g'};
+iterCount = 0;
 
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
-for b = 1:s_steps+1
-    % rate constants for odes
+while kLa <= 5
+iterCount = iterCount + 1;
+% rate constants for odes
 %delivery requirements for the algal pond
 %rate of Caq removed due to alkalinity consumption by algae Eq(15)
 k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
 % k2-k3 = C needed to be delivered to satisfy diffusion out of pond Eq(19)
-k2 = kLa*24; %(1/day) 
-k3 = kLa*Csat*24; %k2*x-k3 = rate of C loss due to the atmosphere, (g/m2*day)
+k2 = kLa*24*d; %(m/day) 
+k3 = kLa*Csat*24*d; %k2*x-k3 = rate of C loss due to the atmosphere, (g/m2*day)
 k4 = (y_1 + y_2*(1 - alpha1 - 2*alpha2))*r_algae; 
 [tout, x] = ode15s(@rates, time, x0);
 xmass = x;
@@ -136,15 +132,13 @@ CO2aq = xmass(:,1);
 xmass(:,1) = [];
 CO2req = xmass(:,1);
 xmass(:,1) = [];
-CO2req = CO2req*d;
 CO2loss = xmass(:,1);
 xmass(:,1) = [];
-CO2loss = CO2loss*d;
 %modify plot and plot only CO2 loss and delivery requirements
 figure(1)
-plot(tout, CO2req, 'color', C{b})
+plot(tout, CO2req, 'color', C{iterCount})
 hold on
-plot(tout, CO2loss,'color', C{b}, 'LineStyle', '--') 
+plot(tout, CO2loss, 'color', C{iterCount}, 'LineStyle', '--') 
 hold on 
 kLa = kLa + delkLa;
 end

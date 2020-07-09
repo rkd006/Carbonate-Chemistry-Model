@@ -22,7 +22,7 @@ PCO2 = 0.00040; %(atm) (need to correct for temp, very crude approx)
 d = 0.15; %(m) depth of pond
 
 %mass transfer coefficient for CO2 out of pond
-kLa = 0.96; %Weissmann et al., 1988 (m/day)
+kLa = .96; %Weissmann et al., 1988 (m/day)
 %kL = 0.04 m/hr (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
@@ -49,7 +49,7 @@ Csat = PCO2*Kh*44;  %(g/kg)
 %Assumptions & initial conditions 
 alk0 = 2.5;  %(eq/m3)
 r_algae = 10;  % growth rate (g/m2/day); 
-pH=8.5; %no units
+pH=8; %no units
 
 %Calculate alphas 
 alpha0 = calc_alpha0(pH,pK1, pK2); %no units
@@ -87,7 +87,7 @@ x0 = [Caq0; Cin0; Closs0];
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
-[tout, x] = ode15s(@rates, time, x0);
+[tout, x] = ode15s(@rates, time, x0)
 xmass = x;
 
 %eff= xmass(end,3)/xmass(end,2)
