@@ -44,17 +44,17 @@ Csat = PCO2*Kh*44; %(g/kg)
 %Assumptions & initial conditions in moles per sample volume
 alk0 = 2.5;  %(eq/m3 or meq/L)
 r_algae = 10;  % growth rate (g/m2/day); 
-kLa= .1; %(m/day)
+kLa= .5; %(1/hr)
 
-pH = 6.5; %no units
-delpH = 0.5; %no units
+pH = 6; %no units
+delpH = 1; %no units
 iterCount = 0;
-C = {'k','m','b','r','g'};
+C = {'k','m','b'};
 
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
-while pH <= 8.5
+while pH <= 8
 iterCount = iterCount + 1;
 %Calculate alphas 
 alpha0 = calc_alpha0(pH,pK1, pK2);
@@ -84,8 +84,8 @@ x0 = [Caq0; Cin0; Closs0];
 %rate of Caq removed due to alkalinity consumption by algae Eq(15)
 k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
 % k2-k3 = C needed to be delivered to satisfy diffusion out of pond Eq(19)
-k2 = kLa*24; %(1/day) 
-k3 = kLa*Csat*24; %k2*x-k3 = rate of C loss due to the atmosphere, (g/m2*day)
+k2 = kLa*24*d; % (m/day) 
+k3 = kLa*Csat*24*d; %k2*x-k3 = rate of C loss due to the atmosphere, (g/m2*day)
 k4 = (y_1 + y_2*(1 - alpha1 - 2*alpha2))*r_algae; 
 [tout, x] = ode15s(@rates, time, x0);
 xmass = x;
@@ -108,8 +108,6 @@ end
 figure(1)
 xlabel('Time (day)')
 ylabel('CO_2 (g m^{-2})')
-legend('CO_2 supply for pH = 6.5', 'CO_2 loss for pH = 6.5',...
+legend('CO_2 supply for pH = 6', 'CO_2 loss for pH = 6',...
     'CO_2 supply for pH = 7', 'CO_2 loss for pH = 7',...
-    'CO_2 supply for pH = 7.5', 'CO_2 loss for pH = 7.5',...
-    'CO_2 supply for pH = 8', 'CO_2 loss for pH = 8',...
-    'CO_2 supply for pH = 8.5', 'CO_2 loss for pH = 8.5')
+    'CO_2 supply for pH = 8', 'CO_2 loss for pH = 8')

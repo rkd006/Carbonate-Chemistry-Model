@@ -1,10 +1,10 @@
 % Author: Riley Doyle
-% Date: July 2 2020
+% Date: July 12 2020
 %Dependent function: rates, calc_K1, calc_K2, calc_Kh, calc_alpha0,
     %calc_alpha1, calc_alpha2
 %Inputs: pH, kLa, y_2, y_1, k1, k2, k3, k4, Csat, pk1, pk2, d, alk0, r_algae
 %Outputs: CO2 losses to the atmospher vs. time, CO2 requirements vs. time
-    %with different alkalinities 
+    %with different algae growth rates
 
 %delete all figures and variables in the workspace
 clear
@@ -17,7 +17,7 @@ global k1 k2 k3 k4
 %Environmental conditions
 T = 20 + 273.15; %temp in Kelvins
 S = 35; %(salinity in g/kg)
-PCO2 = 0.00040; %(atm) (need to correct for temp, very crude approx)
+PCO2 = 0.00040; % (atm) (need to correct for temp, very crude approx)
 
 %Pond characteristics
 d = 0.15; %(m) depth of pond
@@ -25,6 +25,7 @@ d = 0.15; %(m) depth of pond
 %Stoicheometric constants for algal growth
 y_2 = 0.2406; % (g bicarbonate per g algae) from stoicheometry
 y_1 = 1.1403;  %(g CO2 per g algae) from stoicheometry
+
 
 Kh = calc_Kh(T, S); %(mole/kg sol/atm)
 
@@ -41,20 +42,10 @@ pK2= -log10(K_2); %no units
 Csat = PCO2*Kh*44;  %(g/kg)
 
 %Assumptions & initial conditions in moles per sample volume
-r_algae = 10;  % growth rate (g/m2/day); 
-pH = 8; %no units
-kLa= .5; %(1/day)
+alk0 = 2.5;  %(eq/m3 or meq/L)
+kLa = .5; %(1/hr)
+pH= 8; 
 
-alk0 = 2; %(eq/m3 or meq/L)
-delalk = 5; %(eq/m3 or meq/L)
-iterCount = 0;
-C = {'k','m','b','r','g'};
-
-%Solve ODEs with the ode15s solver
-%returns output arrays of tout and x
-%rates is the ODE system, time is the x values, x0 is the initial conditions
-while alk0 <= 22
-iterCount = iterCount + 1;
 %Calculate alphas 
 alpha0 = calc_alpha0(pH,pK1, pK2); %no units
 alpha1 = calc_alpha1(pH,pK1, pK2); %no units
@@ -78,7 +69,17 @@ time = linspace(0, 4);  %4 days
 %Closs = CO2 losses
 x0 = [Caq0; Cin0; Closs0];
 
-    % rate constants for odes
+delr_algae = 5; 
+r_algae = 10;  % growth rate (g/m2/day); 
+C = {'k','b', 'm'};
+iterCount = 0;
+
+while r_algae <= 20
+iterCount = iterCount + 1;
+%Solve ODEs with the ode15s solver
+%returns output arrays of tout and x
+%rates is the ODE system, time is the x values, x0 is the initial conditions
+% rate constants for odes
 %delivery requirements for the algal pond
 %rate of Caq removed due to alkalinity consumption by algae Eq(15)
 k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
@@ -95,20 +96,20 @@ CO2req = xmass(:,1);
 xmass(:,1) = [];
 CO2loss = xmass(:,1);
 xmass(:,1) = [];
+%small difference not noticable in figure
 %modify plot and plot only CO2 loss and delivery requirements
 figure(1)
-plot(tout, CO2req, 'color', C{iterCount})
+plot(tout, CO2req, 'color', C{iterCount}) 
 hold on
 plot(tout, CO2loss,'color', C{iterCount}, 'LineStyle', '--') 
 hold on 
-alk0 = alk0 + delalk;
+r_algae = r_algae + delr_algae;
 end
+hold on
 
 figure(1)
 xlabel('Time (day)')
 ylabel('CO_2 (g m^{-2})')
-legend('CO_2 supply for alk = 2 eq/m^{3}', 'CO_2 loss for alk = 2 eq/m^{3}',...
-    'CO_2 supply for alk = 7 eq/m^{3}', 'CO_2 loss for alk = 7 eq/m^{3}',...
-    'CO_2 supply for alk = 12 eq/m^{3}', 'CO_2 loss for alk = 12 eq/m^{3}',...
-    'CO_2 supply for alk = 17 eq/m^{3}', 'CO_2 loss for alk = 17 eq/m^{3}',...
-    'CO_2 supply for alk = 22 eq/m^{3}', 'CO_2 loss for alk = 22 eq/m^{3}')
+legend('CO_2 supply for r_{algae} = 10 g/m^{2}/day', 'CO_2 loss for r_{algae} = 10 g/m^{2}/day',...
+    'CO_2 supply for r_{algae} = 15 g/m^{2}/day', 'CO_2 loss for r_{algae} = 15 g/m^{2}/day',...
+    'CO_2 supply for r_{algae} = 20 g/m^{2}/day', 'CO_2 loss for r_{algae} = 20 g/m^{2}/day')
