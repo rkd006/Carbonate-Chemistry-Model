@@ -96,7 +96,6 @@ CO2req = xmass(:,1);
 xmass(:,1) = [];
 CO2loss = xmass(:,1);
 xmass(:,1) = [];
-%small difference not noticable in figure
 %modify plot and plot only CO2 loss and delivery requirements
 figure(1)
 plot(tout, CO2req, 'color', C{iterCount}) 

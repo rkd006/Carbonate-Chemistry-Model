@@ -22,8 +22,8 @@ PCO2 = 0.00040; %(atm) (need to correct for temp, very crude approx)
 d = 0.15; %(m) depth of pond
 
 %mass transfer coefficient for CO2 out of pond
-kLa = .96; %Weissmann et al., 1988 (m/day)
-%kL = 0.04 m/hr (Weismann et al., 1987 pg. 6 at bottom)
+kLa = .26667; %Weissmann et al., 1988 (1/hr)
+%kL = 0.04 m/hr or 0.96 m/day (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
 y_2 = 0.2406; % (g bicarbonate per g algae) from stoicheometry
@@ -70,8 +70,8 @@ Closs0 = 0; %(g/m2)
 %rate of Caq removed due to alkalinity consumption by algae Eq(15)
 k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
 % k2-k3 = C needed to be delivered to satisfy diffusion out of pond Eq(19)
-k2 = kLa;  
-k3 = kLa*Csat; %k2*x-k3 = rate of C loss due to the atmosphere
+k2 = kLa*d*24; %(m/day)  
+k3 = (kLa*d*24)*Csat; %k2*x-k3 = rate of C loss due to the atmosphere (g/m2/day)
 k4 = (y_1 + y_2*(1 - alpha1 - 2*alpha2))*r_algae; 
 
 % create array of times for output
@@ -87,7 +87,7 @@ x0 = [Caq0; Cin0; Closs0];
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
-[tout, x] = ode15s(@rates, time, x0)
+[tout, x] = ode15s(@rates, time, x0);
 xmass = x;
 
 %eff= xmass(end,3)/xmass(end,2)

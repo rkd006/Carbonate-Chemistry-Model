@@ -17,8 +17,8 @@ K2 = calc_K2(T,S)
 pK2 = -np.log10(K2)
 CO2sat = 0.012716352
 kLa = 0.5
-pHin = 6.5
-pHend = 8.5
+pHin = 6
+pHend = 8
 delpH = 0.1
 d = 0.15
 
