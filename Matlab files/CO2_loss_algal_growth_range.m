@@ -82,7 +82,7 @@ iterCount = iterCount + 1;
 % rate constants for odes
 %delivery requirements for the algal pond
 %rate of Caq removed due to alkalinity consumption by algae Eq(15)
-k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
+k1 = (y_2*r_algae*alpha0)/(alpha1+2*alpha2);
 % k2-k3 = C needed to be delivered to satisfy diffusion out of pond Eq(19)
 k2 = kLa*24*d; %(m/day) 
 k3 = kLa*Csat*24*d; %k2*x-k3 = rate of C loss due to the atmosphere, (g/m2*day)

@@ -43,13 +43,15 @@ Csat = PCO2*Kh*44;  %(g/kg)
 %Assumptions & initial conditions in moles per sample volume
 r_algae = 10;  % growth rate (g/m2/day); 
 pH = 8; %no units
-kLa= .5; %(1/day)
-
+kLain= .1; %(1/hr)
+delkLa = .4;
+kLa = kLain;
+m = 1;
+while kLa <= .5
 alk0 = 2; %(eq/m3 or meq/L)
 delalk = 5; %(eq/m3 or meq/L)
 iterCount = 0;
 C = {'k','m','b','r','g'};
-
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
@@ -96,12 +98,15 @@ xmass(:,1) = [];
 CO2loss = xmass(:,1);
 xmass(:,1) = [];
 %modify plot and plot only CO2 loss and delivery requirements
-figure(1)
+figure(m)
 plot(tout, CO2req, 'color', C{iterCount})
 hold on
 plot(tout, CO2loss,'color', C{iterCount}, 'LineStyle', '--') 
 hold on 
 alk0 = alk0 + delalk;
+end
+m = m + 1;
+kLa = kLa + delkLa;
 end
 
 figure(1)
@@ -112,3 +117,12 @@ legend('CO_2 supply for alk = 2 eq/m^{3}', 'CO_2 loss for alk = 2 eq/m^{3}',...
     'CO_2 supply for alk = 12 eq/m^{3}', 'CO_2 loss for alk = 12 eq/m^{3}',...
     'CO_2 supply for alk = 17 eq/m^{3}', 'CO_2 loss for alk = 17 eq/m^{3}',...
     'CO_2 supply for alk = 22 eq/m^{3}', 'CO_2 loss for alk = 22 eq/m^{3}')
+figure(2)
+xlabel('Time (day)')
+ylabel('CO_2 (g m^{-2})')
+legend('CO_2 supply for alk = 2 eq/m^{3}', 'CO_2 loss for alk = 2 eq/m^{3}',...
+    'CO_2 supply for alk = 7 eq/m^{3}', 'CO_2 loss for alk = 7 eq/m^{3}',...
+    'CO_2 supply for alk = 12 eq/m^{3}', 'CO_2 loss for alk = 12 eq/m^{3}',...
+    'CO_2 supply for alk = 17 eq/m^{3}', 'CO_2 loss for alk = 17 eq/m^{3}',...
+    'CO_2 supply for alk = 22 eq/m^{3}', 'CO_2 loss for alk = 22 eq/m^{3}')
+

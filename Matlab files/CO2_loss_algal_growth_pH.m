@@ -44,7 +44,7 @@ Csat = PCO2*Kh*44; %(g/kg)
 %Assumptions & initial conditions in moles per sample volume
 alk0 = 2.5;  %(eq/m3 or meq/L)
 r_algae = 10;  % growth rate (g/m2/day); 
-kLa= .5; %(1/hr)
+kLa= .1; %(1/hr)
 
 pH = 6; %no units
 delpH = 1; %no units
@@ -106,6 +106,77 @@ pH = pH + delpH;
 end
 
 figure(1)
+xlabel('Time (day)')
+ylabel('CO_2 (g m^{-2})')
+legend('CO_2 supply for pH = 6', 'CO_2 loss for pH = 6',...
+    'CO_2 supply for pH = 7', 'CO_2 loss for pH = 7',...
+    'CO_2 supply for pH = 8', 'CO_2 loss for pH = 8')
+
+
+alk0 = 2.5;  %(eq/m3 or meq/L)
+r_algae = 10;  % growth rate (g/m2/day); 
+kLa= .5; %(1/hr)
+
+pH = 6; %no units
+delpH = 1; %no units
+iterCount = 0;
+C = {'k','m','b'};
+
+%Solve ODEs with the ode15s solver
+%returns output arrays of tout and x
+%rates is the ODE system, time is the x values, x0 is the initial conditions
+while pH <= 8
+iterCount = iterCount + 1;
+%Calculate alphas 
+alpha0 = calc_alpha0(pH,pK1, pK2);
+alpha1 = calc_alpha1(pH,pK1, pK2);
+alpha2 = calc_alpha2(pH,pK1, pK2);
+
+%Calculate [H+] and [OH-]
+OH=10^-(14-pH)*10^3; %(moles/m3)
+H=(10^(-pH))*10^3;  %(moles/m3)
+        
+%Initial Conditions       
+Caq0=((alk0 - OH + H)*alpha0/(alpha1+2*alpha2))*44; %(g/m3)
+Cin0 = 0; %(g/m2)
+Closs0 = 0; %(g/m2)
+
+% create array of times for output
+time = linspace(0, 4);  %4 days
+
+%Set initial conditions
+%Caq = dissolved concentation
+%Cin = CO2 supply
+%Closs = CO2 losses
+x0 = [Caq0; Cin0; Closs0];
+
+% rate constants for odes
+%delivery requirements for the algal pond
+%rate of Caq removed due to alkalinity consumption by algae Eq(15)
+k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);
+% k2-k3 = C needed to be delivered to satisfy diffusion out of pond Eq(19)
+k2 = kLa*24*d; % (m/day) 
+k3 = kLa*Csat*24*d; %k2*x-k3 = rate of C loss due to the atmosphere, (g/m2*day)
+k4 = (y_1 + y_2*(1 - alpha1 - 2*alpha2))*r_algae; 
+[tout, x] = ode15s(@rates, time, x0);
+xmass = x;
+
+CO2aq = xmass(:,1);
+xmass(:,1) = [];
+CO2req = xmass(:,1);
+xmass(:,1) = [];
+CO2loss = xmass(:,1);
+xmass(:,1) = [];
+%modify plot and plot only CO2 loss and delivery requirements
+figure(2)
+plot(tout, CO2req, 'color', C{iterCount})
+hold on
+plot(tout, CO2loss,'color', C{iterCount}, 'LineStyle', '--') 
+hold on 
+pH = pH + delpH;
+end
+
+figure(2)
 xlabel('Time (day)')
 ylabel('CO_2 (g m^{-2})')
 legend('CO_2 supply for pH = 6', 'CO_2 loss for pH = 6',...
