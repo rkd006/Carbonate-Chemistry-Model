@@ -39,9 +39,9 @@ x_axis = vpH
 
 fig = plt.figure()
 ax = plt.subplot(111)
-ax.plot(x_axis, H2CO3, label='H2CO3')
-ax.plot(x_axis, HCO3, label='HCO3')
-ax.plot(x_axis, CO3, label='CO3')
+ax.plot(x_axis, H2CO3, label='$H_{2}CO_{3}$')
+ax.plot(x_axis, HCO3, label='$HCO_3$')
+ax.plot(x_axis, CO3, label='$CO_3$')
 ax.set_xticks([2,4,6,8,10,12,14])
 ax.legend()
 plt.xlabel('pH')
