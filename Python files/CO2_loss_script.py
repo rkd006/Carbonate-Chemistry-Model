@@ -1,7 +1,7 @@
 #author: Riley Doyle
 #date: 7/10/20
 #file: CO2_loss_script
-#status: NOT WORKING YET
+#status: working
 
 import numpy as np
 from calc_Ks import *

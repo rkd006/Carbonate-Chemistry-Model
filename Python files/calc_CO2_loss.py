@@ -1,7 +1,7 @@
 #author: Riley Doyle
 #date: 7/10/20
 #file: calc_CO2_loss
-#status: NOT WORKING YETa
+#status: working
 
 import numpy as np
 import matplotlib.pyplot as plt
