@@ -9,19 +9,19 @@ from calc_alphas import *
 from calc_CO2_loss import *
 import matplotlib.pyplot as plt
 
-T = 20 + 273.15
-S = 35
+T = 20 + 273.15 #kelvins
+S = 35 #g/kg
 K1 = calc_K1(T,S)
 pK1 = -np.log10(K1)
 K2 = calc_K2(T,S)
 pK2 = -np.log10(K2)
-CO2sat = 0.012716352
-kLa = 0.5
+CO2sat = 0.012716352 #mole/m3
+kLa = 0.5 #1/hr
 pHin = 6.5
 pHend = 8.5
 delpH = 0.1
 d = 0.15
-alkin = 2
+alkin = 2 #meq/L or eq/m3
 alkend = 37
 delalk = 5
 

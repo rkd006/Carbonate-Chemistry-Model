@@ -11,14 +11,14 @@ import matplotlib.pyplot as plt
 
 global k1, k2, k3, k4
 
-T = 20 + 273.15
-S = 35
-PCO2 = 0.00040
-d = 0.15
+T = 20 + 273.15 #kelvins
+S = 35 #g/kg
+PCO2 = 0.00040 #atm
+d = 0.15 #m
 
-kLa = 0.26667
-y1 = 1.1403 
-y2 = 0.2406 
+kLa = 0.26667 #1/hr
+y1 = 1.1403 #g CO2 per g algae
+y2 = 0.2406 #g HCO3 per g algae
 
 Kh = calc_Kh(T,S)
 K1 = calc_K1(T, S)
@@ -26,7 +26,7 @@ pK1 = - np.log10(K1)
 K2 = calc_K2(T, S)
 pK2 = - np.log10(K2)
 
-Csat = PCO2*Kh*44
+Csat = PCO2*Kh*44 #g/m3
 
 alk0 = 2.5
 r_algae = 10
