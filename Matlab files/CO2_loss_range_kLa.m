@@ -27,7 +27,7 @@ delkLa = 0.4; %(1/hr)
 alk = 2.5; %(eq/m3) from Weissman et al. (1987)
 %kL = 0.04 m/hr from Weissman et. al. 1987
 
-r_range_kLa = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
+r_range_kLa = calc_CO2_loss_kLa (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
 x_axis = r_range_kLa(:,1);
 r_range_kLa(:,1) = [];
 CO2_loss = r_range_kLa(:,(1:2));
@@ -38,10 +38,10 @@ plot(x_axis, CO2_loss);
 hold on 
 
 kLain= 1.5; %(1/hr)
-kLaend= 5; %(1/hr)
-delkLa = 3.5; %(1/hr)
+kLaend= 3; %(1/hr)
+delkLa = 1.5; %(1/hr)
 
-r_range_kLa = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
+r_range_kLa = calc_CO2_loss_kLa (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
 x_axis = r_range_kLa(:,1);
 r_range_kLa(:,1) = [];
 CO2_loss = r_range_kLa(:,(1:2));
@@ -53,6 +53,6 @@ plot(x_axis, CO2_loss);
 figure(1)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
-ylim([0 400])
-xlim([6.6 8.1])
-legend('kLa = 0.1 hr^{-1}','kLa = 0.5 hr^{-1}','kLa = 1.5 hr^{-1}','kLa = 5.0 hr^{-1}')
+ylim([0 300])
+xlim([6.5 8.1])
+legend('kLa = 0.1 hr^{-1}','kLa = 0.5 hr^{-1}','kLa = 1.5 hr^{-1}','kLa = 3.0 hr^{-1}')

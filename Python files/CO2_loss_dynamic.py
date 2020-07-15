@@ -5,7 +5,6 @@
 
 from calc_Ks import *
 from calc_alphas import *
-from rates import *
 import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
@@ -79,6 +78,5 @@ plt.show()
 plt.xlabel('time (days)')
 plt.ylabel('$CO-2$ (g/$m^2$)')
 plt.plot(t,Caq)
-plt.plot(t, Csat)
 plt.show()
 

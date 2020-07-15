@@ -27,7 +27,7 @@ kLain= 0.5; %(1/hr)
 kLaend= 8.5; %(1/hr)
 delkLa = 2; %(1/hr)
 
-r_kL_pH = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
+r_kL_pH = calc_CO2_loss_kLa (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
 
 x = r_kL_pH(:,1);
 r_kL_pH(:,1) = [];

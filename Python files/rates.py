@@ -4,7 +4,6 @@
 #status:WORKING
 
 def rates(x,t):
-    global k1, k2, k3, k4
     Caq = x[0]
     Cdel = x[1]
     Closs = x[2]

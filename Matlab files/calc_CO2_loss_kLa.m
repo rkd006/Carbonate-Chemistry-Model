@@ -3,7 +3,7 @@
 % file name: calc_loss_kL_pH.m
 % output: Calculate loss with different kL values and pHs
 
-function r_kL_pH = calc_loss_kL_pH (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa)
+function r_kL_pH = calc_CO2_loss_kLa (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa)
 
 %initialize
 m_steps = (kLaend-kLain)/delkLa;
