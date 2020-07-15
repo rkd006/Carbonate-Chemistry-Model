@@ -49,8 +49,8 @@ end
 hold on 
 
 kLain = 1.5; %(1/hr) 
-kLaend = 5; %(1/hr)
-delkLa = 3.5; %(1/hr)
+kLaend = 3; %(1/hr)
+delkLa = 1.5; %(1/hr)
 s_steps = (kLaend - kLain)/delkLa; %(1/hr)
 kLa = kLain; %(1/hr)
 hold on
@@ -94,11 +94,11 @@ xlim([6.5 8.5])
 legend('Alk = 2 meq/L','Alk = 7 meq/L', 'Alk = 12 meq/L',...
     'Alk = 17 meq/L','Alk = 22 meq/L','Alk = 27 meq/L','Alk = 32 meq/L')
 
-%kLa = 4.5 hr -1
+%kLa = 3 hr -1
 figure (4)
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
-ylim([0 6500])
+ylim([0 4000])
 xlim([6.5 8.5])
 legend('Alk = 2 meq/L','Alk = 7 meq/L', 'Alk = 12 meq/L',...
     'Alk = 17 meq/L','Alk = 22 meq/L','Alk = 27 meq/L','Alk = 32 meq/L')
