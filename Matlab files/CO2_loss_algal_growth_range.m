@@ -102,6 +102,10 @@ plot(tout, CO2req, 'color', C{iterCount})
 hold on
 plot(tout, CO2loss,'color', C{iterCount}, 'LineStyle', '--') 
 hold on 
+
+figure(2)
+plot(tout, CO2loss)
+hold on 
 r_algae = r_algae + delr_algae;
 end
 hold on
@@ -112,3 +116,10 @@ ylabel('CO_2 (g m^{-2})')
 legend('CO_2 supply for r_{algae} = 10 g/m^{2}/day', 'CO_2 loss for r_{algae} = 10 g/m^{2}/day',...
     'CO_2 supply for r_{algae} = 15 g/m^{2}/day', 'CO_2 loss for r_{algae} = 15 g/m^{2}/day',...
     'CO_2 supply for r_{algae} = 20 g/m^{2}/day', 'CO_2 loss for r_{algae} = 20 g/m^{2}/day')
+figure(2)
+xlabel('Time (day)')
+ylabel('CO_2 (g m^{-2})')
+xlim([2 4])
+legend('CO_2 loss for r_{algae} = 10 g/m^{2}/day', 'CO_2 loss for r_{algae} = 15 g/m^{2}/day',...
+    'CO_2 loss for r_{algae} = 20 g/m^{2}/day')
+
