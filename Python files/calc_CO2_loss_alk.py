@@ -1,7 +1,7 @@
 #author: Riley Doyle
 #date: 7/16/20
-#file: calc_CO2_loss_kLa
-#status: working
+#file: calc_CO2_loss_alk
+#status:working
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,11 +9,11 @@ from calc_Ks import *
 from calc_alphas import *
 
 
-def calc_CO2_loss_kLa (pK1, pK2, alk, d, CO2sat, pHin, pHend, delpH, kLain, kLaend, delkLa):
-    pH = np.arange(pHin, pHend, delpH)
+def calc_CO2_loss_alk (pK1, pK2, pH, d, CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa):
+    alk = np.arange(alkin, alkend, delalk)
     kLasteps = np.arange(kLain, kLaend, delkLa)
     nkLasteps = len(kLasteps)
-    y = np.zeros((nkLasteps, len(pH)))
+    y = np.zeros((nkLasteps, len(alk)))
     i = 0
     for c in kLasteps:
         alpha0 = calc_alpha0(pH, pK1, pK2)
@@ -30,5 +30,4 @@ def calc_CO2_loss_kLa (pK1, pK2, alk, d, CO2sat, pHin, pHend, delpH, kLain, kLae
         y[i,:] = c*(H2CO3 - CO2sat)*24*44
         i += 1
     y = y*d
-    plt.plot(pH, y.T )
-
+    plt.plot(alk, y.T )
