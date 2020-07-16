@@ -1,7 +1,7 @@
 #author = Riley Doyle
-#date = 7/15/20
-#file = CO2_loss_algae_growth_pH
-#status = working
+#date = 7/16/20
+#file = CO2_loss_algae_growth_alk
+#status = not working
 
 from calc_Ks import *
 from calc_alphas import *
@@ -24,17 +24,18 @@ pK2 = - np.log10(K2)
 
 Csat = PCO2*Kh*44
 
-alk0 = 2.5
+pH = 8
 r_algae = 10
 kLa = 0.1
 delkLa = 0.4
 
 while kLa <= .5:
-    pH = 6
-    delpH = 1
+    alk0 = 2
+    delalk = 5
     C = ['k', 'b', 'r']
     b = 0
-    while pH <= 8:
+    while alk0 <= 12:
+
         alpha0 = calc_alpha0(pH, pK1, pK2)
         alpha1 = calc_alpha1(pH, pK1, pK2)
         alpha2 = calc_alpha2(pH, pK1, pK2)
@@ -70,10 +71,11 @@ while kLa <= .5:
         plt.ylabel('$CO_2$ (g/$m^2$)')
         plt.plot(t,Cdel, C[b])
         plt.plot(t,Closs, C[b], linestyle='--')
-        plt.legend(['$CO_2$ supply for pH = 6', '$CO_2$ loss for pH = 6',
-                    '$CO_2$ supply for pH = 7', '$CO_2$ loss for pH = 7',
-                    '$CO_2$ supply for pH = 8', '$CO_2$ loss for pH = 8' ])
+        plt.legend(['$CO_2$ supply for alk = 2 meq/L', '$CO_2$ loss for alk = 2 meq/L',
+                    '$CO_2$ supply for alk = 7 meq/L', '$CO_2$ loss for alk = 7 meq/L',
+                    '$CO_2$ supply for alk = 12 meq/L', '$CO_2$ loss for alk = 12 meq/L' ])
         b += 1
-        pH += delpH
+        alk0 += delalk
     plt.figure()
     kLa += delkLa
+

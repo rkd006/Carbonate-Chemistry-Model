@@ -55,7 +55,7 @@ C = {'k','m','b','r','g'};
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
-while alk0 <= 22
+while alk0 <= 12
 iterCount = iterCount + 1;
 %Calculate alphas 
 alpha0 = calc_alpha0(pH,pK1, pK2); %no units
@@ -114,15 +114,11 @@ xlabel('Time (day)')
 ylabel('CO_2 (g m^{-2})')
 legend('CO_2 supply for alk = 2 eq/m^{3}', 'CO_2 loss for alk = 2 eq/m^{3}',...
     'CO_2 supply for alk = 7 eq/m^{3}', 'CO_2 loss for alk = 7 eq/m^{3}',...
-    'CO_2 supply for alk = 12 eq/m^{3}', 'CO_2 loss for alk = 12 eq/m^{3}',...
-    'CO_2 supply for alk = 17 eq/m^{3}', 'CO_2 loss for alk = 17 eq/m^{3}',...
-    'CO_2 supply for alk = 22 eq/m^{3}', 'CO_2 loss for alk = 22 eq/m^{3}')
+    'CO_2 supply for alk = 12 eq/m^{3}', 'CO_2 loss for alk = 12 eq/m^{3}')
 figure(2)
 xlabel('Time (day)')
 ylabel('CO_2 (g m^{-2})')
 legend('CO_2 supply for alk = 2 eq/m^{3}', 'CO_2 loss for alk = 2 eq/m^{3}',...
     'CO_2 supply for alk = 7 eq/m^{3}', 'CO_2 loss for alk = 7 eq/m^{3}',...
-    'CO_2 supply for alk = 12 eq/m^{3}', 'CO_2 loss for alk = 12 eq/m^{3}',...
-    'CO_2 supply for alk = 17 eq/m^{3}', 'CO_2 loss for alk = 17 eq/m^{3}',...
-    'CO_2 supply for alk = 22 eq/m^{3}', 'CO_2 loss for alk = 22 eq/m^{3}')
+    'CO_2 supply for alk = 12 eq/m^{3}', 'CO_2 loss for alk = 12 eq/m^{3}')
 
