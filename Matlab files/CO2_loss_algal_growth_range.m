@@ -71,7 +71,7 @@ x0 = [Caq0; Cin0; Closs0];
 
 delr_algae = 5; 
 r_algae = 10;  % growth rate (g/m2/day); 
-C = {'k','b', 'm'};
+C = {'k','b', 'r'};
 iterCount = 0;
 
 while r_algae <= 20

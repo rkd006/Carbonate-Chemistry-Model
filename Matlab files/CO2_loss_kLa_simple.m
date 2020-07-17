@@ -44,7 +44,12 @@ r_kL_alk = r_kL_alk*d;
 
 %without alkalinity 
 figure(1);
-plot(x, r_kL_pH);
+hold on 
+plot(x, r_kL_pH(:, 1), '-', 'color', 'b');
+plot(x, r_kL_pH(:, 2), '--', 'color', 'm');
+plot(x, r_kL_pH(:, 3), '-.', 'color', 'g');
+plot(x, r_kL_pH(:, 4), '-', 'color', 'r');
+plot(x, r_kL_pH(:, 5), '--', 'color', 'k');
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^-2 day^-1)')
 legend('kLa = 0.5 1/hr', 'kLa = 2.5 1/hr', 'kLa = 4.5 1/hr', 'kLa = 6.5 1/hr', 'kLa = 8.5 1/hr')
@@ -53,7 +58,12 @@ ylim([0 1000])
 
 %without pH
 figure(2)
-plot(x2, r_kL_alk);
+hold on 
+plot(x2, r_kL_alk(:, 1), '-', 'color', 'b');
+plot(x2, r_kL_alk(:, 2), '--', 'color', 'm');
+plot(x2, r_kL_alk(:, 3), '-.', 'color', 'g');
+plot(x2, r_kL_alk(:, 4), '-', 'color', 'r');
+plot(x2, r_kL_alk(:, 5), '--', 'color', 'k');
 xlabel('alkalinity') 
 ylabel('CO_2 loss to the atmosphere (g m^-2 day^-1)')
 legend('kLa = 0.5 1/hr', 'kLa = 2.5 1/hr', 'kLa = 4.5 1/hr', 'kLa = 6.5 1/hr', 'kLa = 8.5 1/hr')

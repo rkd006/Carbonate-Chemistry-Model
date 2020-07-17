@@ -32,12 +32,20 @@ r = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, dela
 
 %modify r for plotting
 %x axis is the first column of r
-x_axis = r(:,1);
+x = r(:,1);
 r(:,1) = [];
 r = r*d; %(g/m2*day)
+M = {'o', 's', 'd', '^', '*', '.', '+'};
 
 %plot CO2 loss vs pH for multiple alkalinities
-plot(x_axis, r)
+hold on
+plot(x,r(:,1),'Marker', M{1})
+plot(x,r(:,2),'Marker', M{2})
+plot(x,r(:,3),'Marker', M{3})
+plot(x,r(:,4),'Marker', M{4})
+plot(x,r(:,5),'Marker', M{5})
+plot(x,r(:,6),'Marker', M{6})
+plot(x,r(:,7),'Marker', M{7})
 
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')

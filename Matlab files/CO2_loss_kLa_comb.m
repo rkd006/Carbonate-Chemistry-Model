@@ -36,14 +36,20 @@ kLa = kLain; %(hr-1)
 hold on
 
 for b = 1:s_steps+1
-r_kL_1 = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
-x_axis = r_kL_1(:,1);
-r_kL_1(:,1) = [];
-CO2_loss = r_kL_1(:,(1:7));
-r_kL_1(:,(1:7)) = [];
-CO2_loss = CO2_loss*d; %y must be in g/m2*day
+M = {'o', 's', 'd', '^', '*', '.', '+'};
+r1 = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
+x_axis = r1(:,1);
+r1(:,1) = [];
+r1 = r1*d; %y must be in g/m2*day
 figure (b)
-plot(x_axis, CO2_loss)
+hold on
+plot(x_axis, r1(:,1), 'Marker', M{1})
+plot(x_axis, r1(:,2),'Marker', M{2})
+plot(x_axis, r1(:,3),'Marker', M{3})
+plot(x_axis, r1(:,4),'Marker', M{4})
+plot(x_axis, r1(:,5),'Marker', M{5})
+plot(x_axis, r1(:,6),'Marker', M{6})
+plot(x_axis, r1(:,7),'Marker', M{7})
 kLa = kLa + delkLa;
 end
 hold on 
@@ -56,14 +62,19 @@ kLa = kLain; %(1/hr)
 hold on
 
 for b = 1:s_steps+1
-r_kL_1 = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
-x_axis = r_kL_1(:,1);
-r_kL_1(:,1) = [];
-CO2_loss = r_kL_1(:,(1:7));
-r_kL_1(:,(1:7)) = [];
-CO2_loss = CO2_loss*d; %y must be in g/m2*day
+r1 = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
+x_axis = r1(:,1);
+r1(:,1) = [];
+r1 = r1*d; %y must be in g/m2*day
 figure (b+2)
-plot(x_axis, CO2_loss)
+hold on
+plot(x_axis, r1(:,1), 'Marker', M{1})
+plot(x_axis, r1(:,2),'Marker', M{2})
+plot(x_axis, r1(:,3),'Marker', M{3})
+plot(x_axis, r1(:,4),'Marker', M{4})
+plot(x_axis, r1(:,5),'Marker', M{5})
+plot(x_axis, r1(:,6),'Marker', M{6})
+plot(x_axis, r1(:,7),'Marker', M{7})
 kLa = kLa + delkLa;
 end
 hold on

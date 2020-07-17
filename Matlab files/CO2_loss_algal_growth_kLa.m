@@ -71,7 +71,7 @@ x0 = [Caq0; Cin0; Closs0];
 
 delkLa = .4; %(1/hr)
 kLa = .1; %(1/hr)
-C = {'k','b'};
+C = {'r','b'};
 iterCount = 0;
 
 while kLa <= .5
