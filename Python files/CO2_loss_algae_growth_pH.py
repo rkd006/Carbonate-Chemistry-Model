@@ -31,7 +31,7 @@ delkLa = 0.4
 
 while kLa <= .5:
     pH = 6
-    delpH = 1
+    delpH = 2
     C = ['k', 'b', 'r']
     b = 0
     while pH <= 8:

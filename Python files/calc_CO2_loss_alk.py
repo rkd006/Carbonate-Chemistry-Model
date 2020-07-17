@@ -10,6 +10,7 @@ from calc_alphas import *
 
 
 def calc_CO2_loss_alk (pK1, pK2, pH, d, CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa):
+    L = np.array(['-', '--', '-.', ':', '--'])
     alk = np.arange(alkin, alkend, delalk)
     kLasteps = np.arange(kLain, kLaend, delkLa)
     nkLasteps = len(kLasteps)
@@ -28,6 +29,6 @@ def calc_CO2_loss_alk (pK1, pK2, pH, d, CO2sat, alkin, alkend, delalk, kLain, kL
             
         H2CO3 = alpha0*CT
         y[i,:] = c*(H2CO3 - CO2sat)*24*44
+        y = y*d
+        plt.plot(alk, y[i,:].T, linestyle=L[i])
         i += 1
-    y = y*d
-    plt.plot(alk, y.T )

@@ -34,7 +34,7 @@ while kLa <= .5:
     delalk = 5
     C = ['k', 'b', 'r']
     b = 0
-    while alk0 <= 12:
+    while alk0 <= 7:
 
         alpha0 = calc_alpha0(pH, pK1, pK2)
         alpha1 = calc_alpha1(pH, pK1, pK2)

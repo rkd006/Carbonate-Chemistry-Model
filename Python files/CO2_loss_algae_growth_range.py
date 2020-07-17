@@ -39,7 +39,7 @@ rin = 10
 rend = 25
 delr = 5
 rsteps = np.arange(rin, rend, delr)
-C = ['k', 'b', 'g']
+C = ['k', 'b', 'r']
 b = 0
 
 for p in rsteps:

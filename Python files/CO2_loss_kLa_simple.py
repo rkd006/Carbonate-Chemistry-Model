@@ -28,19 +28,17 @@ pHend = 8.5
 delpH = 0.1
 
 y = calc_CO2_loss_kLa(pK1, pK2, alk, d, CO2sat, pHin, pHend, delpH, kLain, kLaend, delkLa)
-
 plt.xlabel('pH')
 plt.ylabel('$CO_2$ loss to the atmosphere (g $m^{-2}$ $day^{-1})$')
 plt.legend(['kLa = 0.1 $hr^{-1}$', 'kLa = 0.5 $hr^{-1}$', 'kLa = 0.9 $hr^{-1}$', 
             'kLa = 1.3 $hr^{-1}$', 'kLa = 1.7 $hr^{-1}$'])
-plt.figure()
-
+plt.show()
 pH = 8
 alkin = 2
 alkend = 32
 delalk = 2
+
 y = calc_CO2_loss_alk (pK1, pK2, pH, d, CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa)
-    
 plt.legend(['kLa = 0.1 $hr^{-1}$', 'kLa = 0.5 $hr^{-1}$', 'kLa = 0.9 $hr^{-1}$', 
             'kLa = 1.3 $hr^{-1}$', 'kLa = 1.7 $hr^{-1}$'])
 plt.xlabel('alkalinity')
