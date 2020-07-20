@@ -24,13 +24,14 @@ d = 0.15
 kLain = 0.1
 kLaend = 0.9
 delkLa = 0.4
-
-y = calc_CO2_loss_kLa(pK1, pK2, alk, d, CO2sat, pHin, pHend, delpH, kLain, kLaend, delkLa)
+colormap = np.array(['b', 'r'])
+y = calc_CO2_loss_kLa(pK1, pK2, alk, d, colormap, CO2sat, pHin, pHend, delpH, kLain, kLaend, delkLa)
 
 kLain = 1.5
 kLaend = 4.5
 delkLa = 1.5
-y = calc_CO2_loss_kLa(pK1, pK2, alk, d, CO2sat, pHin, pHend, delpH, kLain, kLaend, delkLa)
+colormap = np.array(['c','y'])
+y = calc_CO2_loss_kLa(pK1, pK2, alk, d, colormap, CO2sat, pHin, pHend, delpH, kLain, kLaend, delkLa)
 
 plt.xlabel('pH')
 plt.ylabel('$CO_2$ loss to the atmosphere (g $m^{-2}$ $day^{-1})$')
