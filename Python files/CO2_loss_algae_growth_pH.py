@@ -70,6 +70,7 @@ while kLa <= .5:
         plt.ylabel('$CO_2$ (g/$m^2$)')
         plt.plot(t,Cdel, C[b])
         plt.plot(t,Closs, C[b], linestyle='--')
+        plt.axis([0, 4, 0, 700])
         plt.legend(['$CO_2$ supply for pH = 6', '$CO_2$ loss for pH = 6',
                     '$CO_2$ supply for pH = 7', '$CO_2$ loss for pH = 7',
                     '$CO_2$ supply for pH = 8', '$CO_2$ loss for pH = 8' ])

@@ -33,6 +33,7 @@ for p in kLasteps:
     plt.xlabel('pH')
     plt.ylabel('$CO_2$ loss to the atmosphere (g $m^{-2}$ $day^{-1})$')
     plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L', 'alk = 27 meq/L', 'alk = 32 meq/L'])
+    plt.axis([6.5, 8.2, 0, 4000])
     plt.figure()
     kLa = kLa + delkLa
     
@@ -47,5 +48,6 @@ for c in kLasteps:
     plt.xlabel('pH')
     plt.ylabel('$CO_2$ loss to the atmosphere (g $m^{-2}$ $day^{-1})$')
     plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L', 'alk = 27 meq/L', 'alk = 32 meq/L'])
+    plt.axis([6.5, 8.2, 0, 4000])
     plt.figure()
     kLa = kLa + delkLa

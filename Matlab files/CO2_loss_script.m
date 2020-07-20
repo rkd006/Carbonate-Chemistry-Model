@@ -35,17 +35,18 @@ r = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, dela
 x = r(:,1);
 r(:,1) = [];
 r = r*d; %(g/m2*day)
-M = {'o', 's', 'd', '^', '*', '.', '+'};
+C = {'b', 'g', 'r', 'y', 'c', 'k', 'm'};
+L = {'-', '--', '-.', '-.', '-', '--', '-.'};
 
 %plot CO2 loss vs pH for multiple alkalinities
 hold on
-plot(x,r(:,1),'Marker', M{1})
-plot(x,r(:,2),'Marker', M{2})
-plot(x,r(:,3),'Marker', M{3})
-plot(x,r(:,4),'Marker', M{4})
-plot(x,r(:,5),'Marker', M{5})
-plot(x,r(:,6),'Marker', M{6})
-plot(x,r(:,7),'Marker', M{7})
+plot(x,r(:,1),'Color', C{1}, 'Linestyle', L{1})
+plot(x,r(:,2),'Color', C{2}, 'Linestyle', L{2})
+plot(x,r(:,3),'Color', C{3}, 'Linestyle', L{3})
+plot(x,r(:,4),'Color', C{4}, 'Linestyle', L{4})
+plot(x,r(:,5),'Color', C{5}, 'Linestyle', L{5})
+plot(x,r(:,6),'Color', C{6}, 'Linestyle', L{6})
+plot(x,r(:,7),'Color', C{7}, 'Linestyle', L{7})
 
 xlabel('pH')
 ylabel('CO_2 loss to the atmosphere (g m^{-2} day^{-1})')
