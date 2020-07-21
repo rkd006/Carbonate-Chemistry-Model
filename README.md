@@ -1,5 +1,5 @@
 # Welcome to Carbonate-Chemistry-Model
-The objective of this rep is to create a carbonate chemistry model that predicts CO2 losses to the atmosphere from algae raceway ponds
+The objective of this repository is to create a carbonate chemistry model that predicts CO2 losses to the atmosphere from algae raceway ponds
 
 # Relevant Information and Equations:
 
@@ -17,13 +17,17 @@ MATLAB:
 - calc_CO2_loss_alk: creates a function to calculate the CO2 losses to the atmosphere with inputs of kLa and alk ranges
 - plot_carbonates: figure that plots the distribution of carbonate species (H2CO3*, HCO3, CO3)
 - rates: creates a function to calculate the system of ODEs
+
 *with algal growth*
+
 - CO2_loss_algal_growth_alk: multiple figures that plot CO2 requirements and losses over four days at several alkalinites for different kLa values
 - CO2_loss_algal_growth_kLa: figure that plots CO2 requirements and losses over four days for several kLa values
 - CO2_loss_algal_growth_pH: figure that plots CO2 requirements and losses over four days for several pHs
 - CO2_loss_algal_growth_range: figure that plots CO2 requirements and losses over four days for several algal growth rates
 - CO2_loss_dynamic: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days
+
 *without algal growth:*
+
 - CO2_loss_kLa_comb: multiple figures that plot CO2 losses to the atmosphere at different alkalinities and pHs for different kLa values
 - CO2_loss_kLa_simple: figure that plots CO2 losses to the atmopshere for different alkalinities and figure that plots CO2 losses to the atmosphere for different pHs
 - CO2_loss_range_kLa: figure that plots CO2 losses to the atmosphere at different kLa values and pHs
