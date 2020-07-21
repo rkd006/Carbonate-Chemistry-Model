@@ -4,57 +4,58 @@ The objective of this project is to create a carbonate chemistry model that pred
 ## Table of contents
 * [Revelant Information and Equations](#relevant-information-and-equations)
 * [Technologies](#technologies)
+* [Usage](#usages)
 * [Output of Each File](#output-of-each-file)
 * [Authors](#authors)
 
 ## Relevant Information and Equations
 In most natural systems, acid buffering capacity is predominately made up by the carbonate system, which consistes of four species - dissolved carbon dioxide, carbonic acid, bicarbonate and carbonate. Carbonic acid exists in only very small quantities and to simplify we define it as follows:
 
-![](images/eq1.PNG)
+<img src="images/eq1.PNG" width = 250> 
 
 CT is defined as the total concentration of carbonate species in solution:
 
-![](images/eq2.PNG)
+<img src="images/eq2.PNG" width = 250> 
 
 In addition, the carbonate species are related to each other through the following equilibrium relationships:
 
-![](images/screenshot1.PNG)
+<img src="images/screenshot1.PNG" width = 200>
 
-the molar concentration of each carbonate species is dependent on pH as shown by Eq.(3)-Eq(8):
+the molar concentration of each carbonate species is dependent on pH as shown below:
 
-![](images/eq3.PNG)
-
-where:
-
-![](images/eq4.PNG)
-
-![](images/eq5.PNG)
+<img src="images/eq3.PNG" width = 250> 
 
 where:
 
-![](images/eq6.PNG)
+<img src="images/eq4.PNG" width = 200> 
 
-![](images/eq7.PNG)
+<img src="images/eq5.PNG" width = 250> 
 
 where:
 
-![](images/eq8.PNG)
+<img src="images/eq6.PNG" width = 200> 
+
+<img src="images/eq7.PNG" width = 250> 
+
+where:
+
+<img src="images/eq8.PNG" width = 200> 
 
 Mass transfer of carbon dioxide is a function of alkalinity and pH, based on the following equation:
 
-![](images/eq9.PNG)
+<img src="images/eq9.PNG" width = 300> 
 
 Dissolved carbon dioxide concentration can be calculated as follows:
 
-![](images/eq10.PNG)
+<img src="images/eq10.PNG" width = 300> 
 
 The effect of pH, alkalinity, and algal growth rates on carbon dioxide requirements and losses to the atmosphere were modeled for a raceway pond and operated in batch mode for 4 days. A mass balance on alkalinity and the aqueous concentration of carbon dioxide results in the following equation:
 
-![](images/eq11.PNG)
+<img src="images/eq11.PNG" width = 200> 
 
 A mass balance on Ct and rearranging results in the following equation for carbon dioxide requirements:
 
-![](images/eq12.PNG)
+<img src="images/eq12.PNG" width = 400>
 
 *excerpted from Sills' 2013 report*
 ## Technologies
@@ -62,6 +63,18 @@ This project is created with:
 * MATLAB version: R2020a
 * Python version: 3.7 
 * Anaconda package with numpy and matplotlib
+
+## Usage
+To run this project, you can:
+1. To clone with HTTPS, click on:
+
+<img src="images/code.PNG" width = 100>
+ 
+2. clone using git:
+```
+git clone https://github.com/rkd006/Carbonate-Chemistry-Model
+
+```
 
 ## Output of Each File
 ### MATLAB:
