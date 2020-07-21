@@ -116,8 +116,11 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - CO2_loss_dynamic_y3: igure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days for a combined y3 
 
 ## Authors
-Deborah Sills
-
-Riley Doyle
+- Deborah Sills
+  - Assistant Professor at Bucknell University
+  - [her website](https://deborahsills.com/)
+- Riley Doyle
+  - Undergraduate Student majoring in environmental engineering at Bucknell University, graduating in 2022
+  - [contact email](rkd006@bucknell.edu)
 
 
