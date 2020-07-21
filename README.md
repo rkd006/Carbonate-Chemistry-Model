@@ -8,9 +8,9 @@ The objective of this project is to create a carbonate chemistry model that pred
 * [Authors](#authors)
 
 ## Relevant Information and Equations
-
+![](images/screenshot1.png)
 ## Technologies
-Project is created with:
+This project is created with:
 * MATLAB version: R2020a
 * Python version: 3.7 
 * Anaconda package with numpy and matplotlib
