@@ -4,9 +4,8 @@ The objective of this rep is to create a carbonate chemistry model that predicts
 # Relevant Information and Equations:
 
 # Output of Each File:
-[MATLAB:]
-calc_alpha0: creates a function to calculate alpha0
-calc_alpha1: creates a function to calculate alpha1
+_MATLAB:_
+calc_alpha0: creates a function to calculate alpha0  calc_alpha1: creates a function to calculate alpha1
 calc_alpha2: creates a function to calculate alpha2
 calc_alphas: 
 calc_CO2_loss: creates a function to calculate the CO2 losses to the atmosphere with inputs of pH and alkalinity ranges
@@ -27,9 +26,9 @@ CO2_loss_script:
 plot_carbonates:
 rates:
 
-[Python:]
+_Python:_
 *see MATLAB files outputs above for replicates if not stated below*
-calc_carbon_pond:
+calc_[carbon]_pond:
 calc_alphas: creates functions to calculate alpha0, alpha1, alpha2
 calc_Ks: creates functions to calculate K1, K2, Kh
 CO2_loss_dynamic_y3
