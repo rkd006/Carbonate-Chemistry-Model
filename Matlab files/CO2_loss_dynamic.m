@@ -26,8 +26,8 @@ kLa = .26667; %Weissmann et al., 1988 (1/hr)
 %kL = 0.04 m/hr or 0.96 m/day (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
-y_2 = 0.2406; % (g bicarbonate per g algae) from stoicheometry
-y_1 = 1.1403;  %(g CO2 per g algae) from stoicheometry
+y_2 = 0.1695; % (g bicarbonate as C02 per g algae) from stoicheometry
+y_1 = 1.714;  %(g CO2 per g algae) from stoicheometry
 
 
 
@@ -88,7 +88,7 @@ x0 = [Caq0; Cin0; Closs0];
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
 [tout, x] = ode15s(@rates, time, x0);
-xmass = x;
+xmass = x
 
 %eff= xmass(end,3)/xmass(end,2)
 CO2aq = xmass(:,1);

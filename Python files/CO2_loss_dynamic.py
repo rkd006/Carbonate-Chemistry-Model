@@ -17,8 +17,8 @@ PCO2 = 0.00040 #atm
 d = 0.15 #m
 
 kLa = 0.26667 #1/hr
-y1 = 1.1403 #g CO2 per g algae
-y2 = 0.2406 #g HCO3 per g algae
+y1 = 1.714 #g CO2 per g algae
+y2 = 0.1695 #g HCO3 as CO2 per g algae
 
 Kh = calc_Kh(T,S)
 K1 = calc_K1(T, S)
