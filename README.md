@@ -1,6 +1,5 @@
 # Carbonate Chemistry Model
 The objective of this project is to create a carbonate chemistry model that predicts CO2 losses to the atmosphere from algae raceway ponds. It is funded by the U.S. Department of Energy.
-[image of pond] (https://sites.nicholas.duke.edu/odar/files/2018/03/Algae-pond-johnson-1.jpg)
 
 ## Table of contents
 * [Revelant Information and Equations](#relevant-information-and-equations)
