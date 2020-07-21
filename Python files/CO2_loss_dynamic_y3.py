@@ -1,6 +1,6 @@
 #author: Riley Doyle
-#date: 7/15/20
-#file: CO2_loss_dynamic
+#date: 7/21/20
+#file: CO2_loss_dynamic_y3
 #status: WORKING
 
 from calc_Ks import *
@@ -17,8 +17,8 @@ PCO2 = 0.00040 #atm
 d = 0.15 #m
 
 kLa = 0.26667 #1/hr
-y1 = 1.1403 #g CO2 per g algae
-y2 = 0.2406 #g HCO3 per g algae
+y3 = 1.88 #g CO2 per g algae
+y2 = 0.1695
 
 Kh = calc_Kh(T,S)
 K1 = calc_K1(T, S)
@@ -42,7 +42,7 @@ H = (10**(-pH))*(10**3)
 k1 = alpha0/(alpha1 + 2*alpha2)*y2*r_algae
 k2 = (kLa*d*24)
 k3 = (kLa*d*24)*Csat
-k4 = (y1 + y2)*r_algae - y2*r_algae*(alpha1 + 2*alpha2)
+k4 = y3*r_algae - y2*r_algae*(alpha1 + 2*alpha2)
 
 def rates(x,t):
     global k1, k2, k3, k4
@@ -79,4 +79,5 @@ plt.xlabel('time (days)')
 plt.ylabel('$CO_2$ (g/$m^2$)')
 plt.plot(t,Caq)
 plt.show()
+
 
