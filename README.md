@@ -8,9 +8,17 @@ The objective of this project is to create a carbonate chemistry model that pred
 * [Authors](#authors)
 
 ## Relevant Information and Equations
+In most natural systems, acid buffering capacity is predominately made up by the carbonate system, which consistes of four species - dissolved carbon dioxide, carbonic acid, bicarbonate and carbonate. Carbonic acid exists in only very small quantities and to simplify we define it as follows:
 
+CT is defined as the total concentration of carbonate species in solution:
+
+In addition, the carbonate species are related to each other through the following equilibrium relationships:
+![](images/screenshot1.PNG)
+the molar concentration of each carbonate species is dependent on pH as shown by Eq.(3)-Eq(8):
+
+excerpted from Sills, 2013
 ## Technologies
-Project is created with:
+This project is created with:
 * MATLAB version: R2020a
 * Python version: 3.7 
 * Anaconda package with numpy and matplotlib
