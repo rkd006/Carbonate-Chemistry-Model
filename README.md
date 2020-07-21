@@ -1,9 +1,21 @@
-# Carbonate-Chemistry-Model
-The objective of this repository is to create a carbonate chemistry model that predicts CO2 losses to the atmosphere from algae raceway ponds
+# Carbonate Chemistry Model
+The objective of this project is to create a carbonate chemistry model that predicts CO2 losses to the atmosphere from algae raceway ponds. It is funded by the U.S. Department of Energy.
 
-## Relevant Information and Equations can be found below:
+## Table of contents
+* [Revelant Information and Equations](#relevant-information-and-equations)
+* [Technologies](#technologies)
+* [Output of Each File](#output-of-each-file)
+* [Authors](#authors)
 
-## Output of Each File:
+## Relevant Information and Equations
+
+## Technologies
+Project is created with:
+* MATLAB version: R2020a
+* Python version: 3.7 
+* Anaconda package with numpy and matplotlib
+
+## Output of Each File
 ### MATLAB:
 - calc_alpha0: creates a function to calculate alpha0  
 - calc_alpha1: creates a function to calculate alpha1
@@ -18,7 +30,7 @@ The objective of this repository is to create a carbonate chemistry model that p
 - plot_carbonates: figure that plots the distribution of carbonate species (H2CO3*, HCO3, CO3)
 - rates: creates a function to calculate the system of ODEs
 
-*with algal growth:*
+#### *with algal growth:*
 
 - CO2_loss_algal_growth_alk: multiple figures that plot CO2 requirements and losses over four days at several alkalinites for different kLa values
 - CO2_loss_algal_growth_kLa: figure that plots CO2 requirements and losses over four days for several kLa values
@@ -26,7 +38,7 @@ The objective of this repository is to create a carbonate chemistry model that p
 - CO2_loss_algal_growth_range: figure that plots CO2 requirements and losses over four days for several algal growth rates
 - CO2_loss_dynamic: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days
 
-*without algal growth:*
+#### *without algal growth:*
 
 - CO2_loss_kLa_comb: multiple figures that plot CO2 losses to the atmosphere at different alkalinities and pHs for different kLa values
 - CO2_loss_kLa_simple: figure that plots CO2 losses to the atmopshere for different alkalinities and figure that plots CO2 losses to the atmosphere for different pHs
@@ -42,5 +54,9 @@ The objective of this repository is to create a carbonate chemistry model that p
 - calc_Ks: creates functions to calculate K1, K2, Kh
 - CO2_loss_dynamic_y3: igure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days for a combined y3 
 
+## Authors
+Deborah Sills
+
+Riley Doyle
 
 
