@@ -10,13 +10,53 @@ The objective of this project is to create a carbonate chemistry model that pred
 ## Relevant Information and Equations
 In most natural systems, acid buffering capacity is predominately made up by the carbonate system, which consistes of four species - dissolved carbon dioxide, carbonic acid, bicarbonate and carbonate. Carbonic acid exists in only very small quantities and to simplify we define it as follows:
 
+![](images/eq1.PNG)
+
 CT is defined as the total concentration of carbonate species in solution:
 
+![](images/eq2.PNG)
+
 In addition, the carbonate species are related to each other through the following equilibrium relationships:
+
 ![](images/screenshot1.PNG)
+
 the molar concentration of each carbonate species is dependent on pH as shown by Eq.(3)-Eq(8):
 
-excerpted from Sills, 2013
+![](images/eq3.PNG)
+
+where:
+
+![](images/eq4.PNG)
+
+![](images/eq5.PNG)
+
+where:
+
+![](images/eq6.PNG)
+
+![](images/eq7.PNG)
+
+where:
+
+![](images/eq8.PNG)
+
+Mass transfer of carbon dioxide is a function of alkalinity and pH, based on the following equation:
+
+![](images/eq9.PNG)
+
+Dissolved carbon dioxide concentration can be calculated as follows:
+
+![](images/eq10.PNG)
+
+The effect of pH, alkalinity, and algal growth rates on carbon dioxide requirements and losses to the atmosphere were modeled for a raceway pond and operated in batch mode for 4 days. A mass balance on alkalinity and the aqueous concentration of carbon dioxide results in the following equation:
+
+![](images/eq11.PNG)
+
+A mass balance on Ct and rearranging results in the following equation for carbon dioxide requirements:
+
+![](images/eq12.PNG)
+
+*excerpted from Sills' 2013 report*
 ## Technologies
 This project is created with:
 * MATLAB version: R2020a
