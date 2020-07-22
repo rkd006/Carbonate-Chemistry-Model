@@ -17,15 +17,15 @@ PCO2 = 0.00040 #atm
 d = 0.15 #m
 
 kLa = 0.5 #1/hr
+y1 = 1.714
 y2 = .1695
+y3 = 1.88
 
 Kh = calc_Kh(T,S)
 K1 = calc_K1(T, S)
 pK1 = - np.log10(K1)
 K2 = calc_K2(T, S)
 pK2 = - np.log10(K2)
-
-Csat = PCO2*Kh*44 #g/m3
 
 alk0 = 2.5 #
 r_algae = 10
@@ -59,6 +59,6 @@ Ct1 = ((Ct/d)) #mM
 print (Ct1[99])
 plt.xlabel('time (days)')
 plt.ylabel('[inorganic carbon] (mM)')
-plt.plot(t,Ct1)
+plt.plot(t, Ct1)
+plt.axis([0, 4, 0, 16])
 plt.show()
-
