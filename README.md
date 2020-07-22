@@ -9,7 +9,7 @@ The objective of this project is to create a carbonate chemistry model that pred
 * [Authors](#authors)
 
 ## Relevant Information and Equations
-In most natural systems, acid buffering capacity is predominately made up by the carbonate system, which consistes of four species - dissolved carbon dioxide, carbonic acid, bicarbonate and carbonate. Carbonic acid exists in only very small quantities and to simplify we define it as follows:
+In most natural systems, acid buffering capacity is predominately made up by the carbonate system, which consists of four species - dissolved carbon dioxide, carbonic acid, bicarbonate and carbonate. Carbonic acid exists in only very small quantities and to simplify we define it as follows:
 
 <img src="images/eq1.PNG" width = 250> 
 
@@ -110,8 +110,8 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 
 *see MATLAB files outputs above for replicates if not stated below*
 
-- calc_[inorganiccarbon]_pond: calculate inorganic carbon concentration in the pond at four days numerically and figure that plots the inorganic carbon concentration over four days
-- calc_algaecarbon: calculate algae carbon concentration at four days numerically and figure that plots the algae carbon concentration over four days
+- calc_[inorganiccarbon]_pond: calculates inorganic carbon concentration in the pond at four days numerically and figure that plots the inorganic carbon concentration over four days
+- calc_algaecarbon: calculates the carbon concentration in algae at four days numerically 
 - calc_alphas: creates functions to calculate alpha0, alpha1, alpha2
 - calc_Ks: creates functions to calculate K1, K2, Kh
 - CO2_loss_dynamic_y3: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days for a combined y3 
