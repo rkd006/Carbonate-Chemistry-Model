@@ -4,42 +4,30 @@ The objective of this project is to create a carbonate chemistry model that pred
 ## Table of Contents
 * [Revelant Information and Equations](#relevant-information-and-equations)
 * [Technologies](#technologies)
-* [Usage](#usages)
+* [Usage](#usage)
 * [Output of Each File](#output-of-each-file)
 * [Authors](#authors)
 
 ## Relevant Information and Equations
 In most natural systems, acid buffering capacity is predominately made up by the carbonate system, which consists of four species - dissolved carbon dioxide, carbonic acid, bicarbonate and carbonate. Carbonic acid exists in only very small quantities and to simplify we define it as follows:
 
-<img src="images/eq1.PNG" width = 250> 
+<img src="images/eq1.PNG" width = 800> 
 
 CT is defined as the total concentration of carbonate species in solution:
 
-<img src="images/eq2.PNG" width = 250> 
+<img src="images/eq2.PNG" width = 800> 
 
 In addition, the carbonate species are related to each other through the following equilibrium relationships:
 
-<img src="images/screenshot1.PNG" width = 200>
+<img src="images/screenshot1.PNG" width = 800>
 
 the molar concentration of each carbonate species is dependent on pH as shown below:
 
-<img src="images/eq3.PNG" width = 250> 
+<img src="images/eq3.PNG" width = 825> 
 
-where:
 
-<img src="images/eq4.PNG" width = 200> 
+<img src="images/eq5.PNG" width = 825> 
 
-<img src="images/eq5.PNG" width = 250> 
-
-where:
-
-<img src="images/eq6.PNG" width = 200> 
-
-<img src="images/eq7.PNG" width = 250> 
-
-where:
-
-<img src="images/eq8.PNG" width = 200> 
 
 Mass transfer of carbon dioxide is a function of alkalinity and pH, based on the following equation:
 
