@@ -17,7 +17,7 @@ PCO2 = 0.00040 #atm
 d = 0.15 #m
 
 kLa = 0.5 #1/hr
-y3 = 1.88
+y2 = .1695
 
 Kh = calc_Kh(T,S)
 K1 = calc_K1(T, S)
@@ -27,7 +27,7 @@ pK2 = - np.log10(K2)
 
 Csat = PCO2*Kh*44 #g/m3
 
-alk0 = 2.5
+alk0 = 2.5 #
 r_algae = 10
 pH = 8
 
@@ -35,10 +35,10 @@ alpha0 = calc_alpha0(pH, pK1, pK2)
 alpha1 = calc_alpha1(pH, pK1, pK2)
 alpha2 = calc_alpha2(pH, pK1, pK2)
 
-OH = 10**-(14-pH)*(10**3)
-H = (10**(-pH))*(10**3)
+OH = 10**-(14-pH)*(10**3) #moles/m3
+H = (10**(-pH))*(10**3) #moles/m3
 
-k1 = y3*r_algae*(alpha1 + 2*alpha2)
+k1 = -(y2*r_algae*(alpha1 + 2*alpha2))/44 #mol/m2/day
 
 def rates(x,t):
     global k1, k2, k3, k4
@@ -55,10 +55,8 @@ x = odeint(rates, x0, t)
 
 Ct = x[:,0]
 
-Ct1 = ((Ct/d)/44) #mM
-Ct2 = ((Ct/d)) #g/m3 or mg/L
+Ct1 = ((Ct/d)) #mM
 print (Ct1[99])
-print (Ct2[99])
 plt.xlabel('time (days)')
 plt.ylabel('[inorganic carbon] (mM)')
 plt.plot(t,Ct1)
