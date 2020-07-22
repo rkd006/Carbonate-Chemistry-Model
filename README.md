@@ -1,5 +1,5 @@
 # Carbonate Chemistry Model
-The objective of this project is to create a carbonate chemistry model that predicts CO2 losses to the atmosphere from algae raceway ponds. It is funded by the U.S. Department of Energy.
+The objective of this project is to create a carbonate chemistry model that predicts CO2 losses to the atmosphere and CO2 requirements from algae raceway ponds. It is funded by the U.S. Department of Energy.
 
 ## Table of Contents
 * [Revelant Information and Equations](#relevant-information-and-equations)
@@ -11,22 +11,22 @@ The objective of this project is to create a carbonate chemistry model that pred
 ## Relevant Information and Equations
 In most natural systems, acid buffering capacity is predominately made up by the carbonate system, which consists of four species - dissolved carbon dioxide, carbonic acid, bicarbonate and carbonate. Carbonic acid exists in only very small quantities and to simplify we define it as follows:
 
-<img src="images/eq1.PNG" width = 800> 
+<img src="images/eq1.PNG" width = 700> 
 
 CT is defined as the total concentration of carbonate species in solution:
 
-<img src="images/eq2.PNG" width = 800> 
+<img src="images/eq2.PNG" width = 700> 
 
 In addition, the carbonate species are related to each other through the following equilibrium relationships:
 
-<img src="images/screenshot1.PNG" width = 800>
+<img src="images/screenshot1.PNG" width = 700>
 
 the molar concentration of each carbonate species is dependent on pH as shown below:
 
-<img src="images/eq3.PNG" width = 825> 
+<img src="images/eq3.PNG" width = 725> 
 
 
-<img src="images/eq5.PNG" width = 825> 
+<img src="images/eq5.PNG" width = 725> 
 
 
 Mass transfer of carbon dioxide is a function of alkalinity and pH, based on the following equation:
