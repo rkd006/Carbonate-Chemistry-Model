@@ -17,8 +17,8 @@ PCO2 = 0.00040 #atm
 d = 0.15 #m
 
 kLa = 0.26667 #1/hr
-y3 = 1.88 #g CO2 per g algae
-y2 = 0.1695
+y3 = 1.88 #g CO2 total per g algae
+y2 = 0.1695 #g HCO3 as CO2 per g algae
 
 Kh = calc_Kh(T,S)
 K1 = calc_K1(T, S)
@@ -67,6 +67,7 @@ x = odeint(rates, x0, t)
 Caq = x[:,0]
 Cdel = x[:,1]
 Closs = x[:,2]
+print(Closs)
 
 plt.xlabel('time (days)')
 plt.ylabel('$CO_2$ (g/$m^2$)')

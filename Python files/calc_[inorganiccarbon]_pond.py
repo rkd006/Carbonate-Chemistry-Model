@@ -1,6 +1,6 @@
 #author: Riley Doyle
 #date: 7/21/20
-#file: calc_[carbon]_pond
+#file: calc_[inorganiccarbon]_pond
 #status: WORKING
 
 from calc_Ks import *
@@ -46,10 +46,7 @@ def rates(x,t):
     dCtdt = k1
     return [dCtdt]
 
-bt = (1/(alpha1 + (2*alpha2)))
-tp = (alk0 - OH + H)
-Ct0 = tp * bt
-
+Ct0 = (alk0 - OH + H)/(alpha1 + (2*alpha2))
 
 x0 = [Ct0]
 t = np.linspace(0,4,100) 
@@ -58,11 +55,12 @@ x = odeint(rates, x0, t)
 
 Ct = x[:,0]
 
-Ct = ((Ct/d)/44)
-
-print (Ct)
+Ct1 = ((Ct/d)/44) #mM
+Ct2 = ((Ct/d)) #g/m3 or mg/L
+print (Ct1[99])
+print (Ct2[99])
 plt.xlabel('time (days)')
-plt.ylabel('$CO_2$ (mM)')
-plt.plot(t,Ct)
+plt.ylabel('[inorganic carbon] (mM)')
+plt.plot(t,Ct1)
 plt.show()
 
