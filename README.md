@@ -117,10 +117,11 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 
 ## Authors
 - Deborah Sills
-  - Assistant Professor at Bucknell University
+  - Assistant Professor in the Civil and Environmental Engineering Department at Bucknell University
   - [her website](https://deborahsills.com/)
 - Riley Doyle
-  - Undergraduate Student majoring in environmental engineering at Bucknell University, graduating in 2022
+  - Undergraduate Student at Bucknell University, majoring in environmental engineering and graduating in 2022
   - [contact email](rkd006@bucknell.edu)
+  - [LinkedIn](https://www.linkedin.com/in/riley-doyle-591565196/)
 
 
