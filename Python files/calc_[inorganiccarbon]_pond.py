@@ -38,6 +38,8 @@ alpha2 = calc_alpha2(pH, pK1, pK2)
 OH = 10**-(14-pH)*(10**3) #moles/m3
 H = (10**(-pH))*(10**3) #moles/m3
 
+#Batch Reactor
+
 k1 = -(y2*r_algae*(alpha1 + 2*alpha2))/44 #mol/m2/day
 
 def rates(x,t):
@@ -61,4 +63,36 @@ plt.xlabel('time (days)')
 plt.ylabel('[inorganic carbon] (mM)')
 plt.plot(t, Ct1)
 plt.axis([0, 4, 0, 16])
+plt.show()
+
+#CSTR:
+
+A = 3.4374 #small ponds are 37 sqft
+Q= 0.5184 #based on Caia et al, 2018
+V= A*d 
+
+k1 = ((y2*r_algae*(alpha1 + 2*alpha2))/44)*d #mol/m3/day
+k2 = (Q/V) #1/day
+
+def rates(x,t):
+    global k1, k2, k3, k4
+    Ct = x[0]
+    dCtdt = k2*(Ctin - Ct) - k1
+    return [dCtdt]
+
+#Ct0 = (alk0 - OH + H)/(alpha1 + (2*alpha2))
+#tin = 10.98 #mol/m3 based on CO2 requirements
+x0 = [Ctin]
+t = np.linspace(0,4,100) 
+
+x = odeint(rates, x0, t)
+
+Ct = x[:,0]
+
+Ct1 = ((Ct/d)) #mM
+print (Ct1[99])
+plt.xlabel('time (days)')
+plt.ylabel('[inorganic carbon] (mM)')
+plt.plot(t, Ct1)
+plt.axis([0, 4, 0, 80])
 plt.show()

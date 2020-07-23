@@ -16,7 +16,7 @@ S = 35 #g/kg
 PCO2 = 0.00040 #atm
 d = 0.15 #m
 
-kLa = 0.26667 #1/hr
+kLa = 0.5 #1/hr
 y1 = 1.714 #g CO2 per g algae
 y2 = 0.1695 #g HCO3 as CO2 per g algae
 
@@ -68,6 +68,7 @@ Caq = x[:,0]
 Cdel = x[:,1]
 Closs = x[:,2]
 print (Cdel[99])
+print (Cdel[49])
 plt.xlabel('time (days)')
 plt.ylabel('$CO_2$ (g/$m^2$)')
 plt.plot(t,Cdel)
