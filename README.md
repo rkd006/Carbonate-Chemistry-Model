@@ -31,19 +31,19 @@ the molar concentration of each carbonate species is dependent on pH as shown be
 
 Mass transfer of carbon dioxide is a function of alkalinity and pH, based on the following equation:
 
-<img src="images/eq9.PNG" width = 300> 
+<img src="images/eq9.PNG" width = 708>
 
 Dissolved carbon dioxide concentration can be calculated as follows:
 
-<img src="images/eq10.PNG" width = 300> 
+<img src="images/eq10.PNG" width = 708> 
 
 The effect of pH, alkalinity, and algal growth rates on carbon dioxide requirements and losses to the atmosphere were modeled for a raceway pond and operated in batch mode for 4 days. A mass balance on alkalinity and the aqueous concentration of carbon dioxide results in the following equation:
 
-<img src="images/eq11.PNG" width = 200> 
+<img src="images/eq11.PNG" width = 708> 
 
 A mass balance on Ct and rearranging results in the following equation for carbon dioxide requirements:
 
-<img src="images/eq12.PNG" width = 400>
+<img src="images/eq12.PNG" width = 708>
 
 *excerpted from Sills' 2013 report*
 ## Technologies
