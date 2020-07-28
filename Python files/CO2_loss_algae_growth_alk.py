@@ -71,7 +71,7 @@ while kLa <= .5:
         plt.ylabel('$CO_2$ (g/$m^2$)')
         plt.plot(t,Cdel, C[b])
         plt.plot(t,Closs, C[b], linestyle='--')
-        plt.axis([0, 4, 0, 60])
+        plt.axis([0, 4, 0, 90])
         plt.legend(['$CO_2$ supply for alk = 2 meq/L', '$CO_2$ loss for alk = 2 meq/L',
                     '$CO_2$ supply for alk = 7 meq/L', '$CO_2$ loss for alk = 7 meq/L',
                     '$CO_2$ supply for alk = 12 meq/L', '$CO_2$ loss for alk = 12 meq/L' ])

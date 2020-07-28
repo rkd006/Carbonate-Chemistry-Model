@@ -30,7 +30,7 @@ kLa = 0.5
 pH = 6
 delpH = 1
 c = 1
-plt.subplots(nrows = 1, ncols = 3, figsize=(9, 3),sharex= True, sharey= True)
+plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3),sharex= True, sharey= True)
 while pH <= 8:
     alpha0 = calc_alpha0(pH, pK1, pK2)
     alpha1 = calc_alpha1(pH, pK1, pK2)
@@ -72,14 +72,14 @@ while pH <= 8:
 plt.subplot(1,3,1)
 plt.ylabel('$CO_2$ (g/$m^2$)')
 plt.xlabel('time (days)')
-plt.text(2, 750, str('(a)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(2, 730, str('(a)'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 750, str('(b)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(2, 730, str('(b)'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
 plt.legend(['$CO_2$ supply', '$CO_2$ loss'])
-plt.text(2, 750, str('(c)'), fontsize=10, fontweight='bold', ha='center')
-    
+plt.text(2, 730, str('(c)'), fontsize=10, fontweight='bold', ha='center')
+plt.show()
