@@ -28,14 +28,15 @@ plt.subplot(1,2,2)
 kLa = 3
 y1 = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.xlabel('b)')
+plt.xlabel('pH')
 plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L', 'alk = 27 meq/L', 'alk = 32 meq/L'])
 plt.axis([6.5, 8.2, 0, 4000])
+plt.text(7.3, 4300, str('(b)'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,2,1)
 kLa = 0.5
 y2 = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
-plt.xlabel('a)')
+plt.xlabel('pH')
 plt.ylabel('$CO_2$ loss to the atmosphere (g $m^{-2}$ $day^{-1})$')
 plt.axis([6.5, 8.2, 0, 4000])
-#plt.text(8.5, -800, str('pH'), fontsize=10, ha='center')
+plt.text(7.3, 4300, str('(a)'), fontsize=10, fontweight='bold', ha='center')
