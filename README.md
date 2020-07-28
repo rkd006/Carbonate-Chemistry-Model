@@ -1,5 +1,5 @@
 # Carbonate Chemistry Model
-The objective of this project is to create a carbonate chemistry model that predicts CO2 losses to the atmosphere and CO2 requirements from algae raceway ponds. It is funded by the U.S. Department of Energy.
+The objective of this project is to create a carbonate chemistry model that predicts CO2 losses to the atmosphere and CO2 requirements as function of pH, alkalinity, kLa, temperature and salinity from algae raceway ponds. It is funded by the U.S. Department of Energy and part of the MAGIC (Marine Algae Industrialization Consortium) project headed by Duke University and Professor Zachary Johnson.
 
 ## Table of Contents
 * [Revelant Information and Equations](#relevant-information-and-equations)
@@ -107,6 +107,8 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - subplot_kLa_comb: creates multiple subplots side by side of the figures of kLa = 0.5 1/hr and kLa = 3 1/hr from CO2_loss_kLa_comb
 - subplot_algal_growth_pH: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_pH for kLa = 0.5 1/hr and alkalinity = 2.5 eq/m3
 - subplot_algal_growth_range: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_range for kLa = 0.5 1/hr, pH = 8, and alkalinity = 3.5 eq/m3
+- CO2_loss_script_temp:
+- CO2_loss_script_sal:
 
 ## Authors
 - Deborah Sills
