@@ -95,7 +95,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - CO2_loss_script: figure that plots CO2 losses to the atmosphere at different alkalinities and pHs
 
 ### Python:
-
+*updated recently*
 *see MATLAB files outputs above for replicates if not stated below*
 
 - calc_[inorganiccarbon]_pond: calculates inorganic carbon concentration in the pond at four days numerically and figure that plots the inorganic carbon concentration over four days
@@ -103,6 +103,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - calc_alphas: creates functions to calculate alpha0, alpha1, alpha2
 - calc_Ks: creates functions to calculate K1, K2, Kh
 - CO2_loss_dynamic_y3: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days for a combined y3 
+- subplot_kLa_comb: creates multiple subplots side by side of the figures of kLa = 0.5 1/hr and kLa = 3 1/hr from CO2_loss_kLa_comb
 
 ## Authors
 - Deborah Sills
