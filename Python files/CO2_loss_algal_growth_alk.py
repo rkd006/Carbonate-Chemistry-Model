@@ -1,7 +1,7 @@
 #author = Riley Doyle
 #date = 7/16/20
 #file = CO2_loss_algae_growth_alk
-#status = not working
+#status = Working
 
 from calc_Ks import *
 from calc_alphas import *

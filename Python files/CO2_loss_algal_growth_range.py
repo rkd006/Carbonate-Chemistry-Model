@@ -1,7 +1,7 @@
 #author: Riley Doyle
 #date: 7/15/20
 #file: CO2_loss_algae_growth_range
-#status: not WORKING
+#status: WORKING
 
 from calc_Ks import *
 from calc_alphas import *
