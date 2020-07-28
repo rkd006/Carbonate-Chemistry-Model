@@ -71,7 +71,7 @@ while kLa <= .5:
         plt.plot(t,Closs, C[b], linestyle='--')
         plt.xlabel('time (days)')
         plt.ylabel('$CO_2$ (g/$m^2$)')
-        plt.axis([0, 4, 0, 700])
+        #plt.axis([0, 4, 0, 700])
         plt.legend(['$CO_2$ supply', '$CO_2$ loss'])
 
         b += 1

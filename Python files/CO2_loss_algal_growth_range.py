@@ -68,7 +68,7 @@ for p in rsteps:
     Closs = x[:,2]
     
     plt.xlabel('time (days)')
-    plt.ylabel('$CO-2$ (g/$m^2$)')
+    plt.ylabel('$CO_2$ (g/$m^2$)')
     plt.plot(t,Cdel, C[b])
     plt.plot(t,Closs, C[b], linestyle='--')
     plt.legend(['$CO_2$ supply for  r = 10 g/m2/day', '$CO_2$ loss for  r = 10 g/m2/day',
