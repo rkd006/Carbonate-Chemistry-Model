@@ -67,8 +67,6 @@ x = odeint(rates, x0, t)
 Caq = x[:,0]
 Cdel = x[:,1]
 Closs = x[:,2]
-print (Cdel[99])
-print (Cdel[49])
 plt.xlabel('time (days)')
 plt.ylabel('$CO_2$ (g/$m^2$)')
 plt.plot(t,Cdel)

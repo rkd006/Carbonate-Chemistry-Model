@@ -42,7 +42,6 @@ kLaend = 4.5
 delkLa = 1.5
 kLasteps = np.arange(kLain, kLaend, delkLa)
 kLa = kLain
-
 for c in kLasteps:
     y = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
     plt.xlabel('pH')

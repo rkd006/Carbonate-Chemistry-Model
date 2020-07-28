@@ -31,7 +31,7 @@ delkLa = 0.4
 
 while kLa <= .5:
     pH = 6
-    delpH = 2
+    delpH = 1
     C = ['k', 'b', 'r']
     b = 0
     while pH <= 8:
@@ -65,15 +65,17 @@ while kLa <= .5:
         Caq = x[:,0]
         Cdel = x[:,1]
         Closs = x[:,2]
-    
-        plt.xlabel('time (days)')
-        plt.ylabel('$CO_2$ (g/$m^2$)')
+        
+        plt.figure()
         plt.plot(t,Cdel, C[b])
         plt.plot(t,Closs, C[b], linestyle='--')
+        plt.xlabel('time (days)')
+        plt.ylabel('$CO_2$ (g/$m^2$)')
         plt.axis([0, 4, 0, 700])
-        plt.legend(['$CO_2$ supply for pH = 6', '$CO_2$ loss for pH = 6',
-                    '$CO_2$ supply for pH = 7', '$CO_2$ loss for pH = 7',
-                    '$CO_2$ supply for pH = 8', '$CO_2$ loss for pH = 8' ])
+        plt.legend(['$CO_2$ supply', '$CO_2$ loss'])
+        plt.subplot(1, 2, 1)
+        plt.subplot(1, 2, 2)
+
         b += 1
         pH += delpH
     plt.figure()

@@ -58,7 +58,6 @@ x = odeint(rates, x0, t)
 Ct = x[:,0]
 
 Ct1 = ((Ct/d)) #mM
-print (Ct1[99])
 plt.xlabel('time (days)')
 plt.ylabel('[inorganic carbon] (mM)')
 plt.plot(t, Ct1)
@@ -80,19 +79,22 @@ def rates(x,t):
     dCtdt = k2*(Ctin - Ct) - k1
     return [dCtdt]
 
-#Ct0 = (alk0 - OH + H)/(alpha1 + (2*alpha2))
-#tin = 10.98 #mol/m3 based on CO2 requirements
+Ctin = 2.770383685 #mol/m3 based on CO2 requirements for a day
 x0 = [Ctin]
 t = np.linspace(0,4,100) 
 
 x = odeint(rates, x0, t)
 
 Ct = x[:,0]
-
-Ct1 = ((Ct/d)) #mM
-print (Ct1[99])
+print (Ct[99])
 plt.xlabel('time (days)')
 plt.ylabel('[inorganic carbon] (mM)')
-plt.plot(t, Ct1)
-plt.axis([0, 4, 0, 80])
+plt.plot(t, Ct)
+plt.axis([0, 4, 2.7, 2.8])
+plt.show()
+
+plt.xlabel('time (days)')
+plt.ylabel('[inorganic carbon] (mM)')
+plt.plot(t, Ct)
+plt.axis([0, 4, 0, 3])
 plt.show()
