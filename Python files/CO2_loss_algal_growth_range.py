@@ -71,9 +71,10 @@ for p in rsteps:
     plt.ylabel('$CO_2$ (g/$m^2$)')
     plt.plot(t,Cdel, C[b])
     plt.plot(t,Closs, C[b], linestyle='--')
-    plt.legend(['$CO_2$ supply for  r = 10 g/m2/day', '$CO_2$ loss for  r = 10 g/m2/day',
-                '$CO_2$ supply for  r = 15 g/m2/day', '$CO_2$ loss for  r = 15 g/m2/day', 
-                '$CO_2$ supply for  r = 20 g/m2/day', '$CO_2$ loss for r = 20 g/m2/day' ])
+    #plt.axis([2, 4, 2, 6])
+    plt.legend(['$CO_2$ supply for  r = 10 $g/m^2/day$', '$CO_2$ loss for  r = $g/m^2/day$',
+                '$CO_2$ supply for  r = 15 $g/m^2/day$', '$CO_2$ loss for  r = $g/m^2/day$', 
+                '$CO_2$ supply for  r = 20 $g/m^2/day$', '$CO_2$ loss for r = 20 $g/m^2/day$' ])
     b += 1
 
 
