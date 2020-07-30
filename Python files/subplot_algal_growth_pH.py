@@ -70,7 +70,7 @@ while pH <= 8:
     c += 1
     pH += delpH
 plt.subplot(1,3,1)
-plt.ylabel('$CO_2$ (g/$m^2$)')
+plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.text(2, 730, str('(a)'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,2)
@@ -79,6 +79,6 @@ plt.text(2, 730, str('(b)'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.legend(['$CO_2$ supply', '$CO_2$ loss'])
+plt.legend(['CO$_2$ supply', 'CO$_2$ loss'])
 plt.text(2, 730, str('(c)'), fontsize=10, fontweight='bold', ha='center')
 plt.show()

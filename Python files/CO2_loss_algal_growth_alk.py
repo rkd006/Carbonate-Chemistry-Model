@@ -1,6 +1,6 @@
 #author = Riley Doyle
 #date = 7/16/20
-#file = CO2_loss_algae_growth_alk
+#file = CO2_loss_algal_growth_alk
 #status = Working
 
 from calc_Ks import *
@@ -68,13 +68,13 @@ while kLa <= .5:
         Closs = x[:,2]
     
         plt.xlabel('time (days)')
-        plt.ylabel('$CO_2$ (g/$m^2$)')
+        plt.ylabel('CO$_2$ (g/m$^2$)')
         plt.plot(t,Cdel, C[b])
         plt.plot(t,Closs, C[b], linestyle='--')
         plt.axis([0, 4, 0, 90])
-        plt.legend(['$CO_2$ supply for alk = 2 meq/L', '$CO_2$ loss for alk = 2 meq/L',
-                    '$CO_2$ supply for alk = 7 meq/L', '$CO_2$ loss for alk = 7 meq/L',
-                    '$CO_2$ supply for alk = 12 meq/L', '$CO_2$ loss for alk = 12 meq/L' ])
+        plt.legend(['CO$_2$ supply for alk = 2 meq/L', 'CO$_2$ loss for alk = 2 meq/L',
+                    'CO$_2$ supply for alk = 7 meq/L', 'CO$_2$ loss for alk = 7 meq/L',
+                    'CO$_2$ supply for alk = 12 meq/L', 'CO$_2$ loss for alk = 12 meq/L' ])
         b += 1
         alk0 += delalk
     plt.figure()

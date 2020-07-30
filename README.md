@@ -104,11 +104,26 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - calc_alphas: creates functions to calculate alpha0, alpha1, alpha2
 - calc_Ks: creates functions to calculate K1, K2, Kh
 - CO2_loss_dynamic_y3: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days for a combined y3 
-- subplot_kLa_comb: creates multiple subplots side by side of the figures of kLa = 0.5 1/hr and kLa = 3 1/hr from CO2_loss_kLa_comb
+- calc_CO2_loss_sal: creates a function to calculate the CO2 losses to the atmosphere with inputs of pH and salinity ranges
+- calc_CO2_loss_temp: creates a function to calculate the CO2 losses to the atmosphere with inputs of pH and temperature ranges
+
+#### *with algal growth:*
+
 - subplot_algal_growth_pH: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_pH for kLa = 0.5 1/hr and alkalinity = 2.5 eq/m3
 - subplot_algal_growth_range: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_range for kLa = 0.5 1/hr, pH = 8, and alkalinity = 3.5 eq/m3
-- CO2_loss_script_temp:
-- CO2_loss_script_sal:
+- subplot_algal_growth_alk: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_alk for kLa = 0.5 1/hr and kLa = 3 1/hr
+- CO2_loss_algal_growth_temp: figure that plots CO2 requirements and losses over four days for several temperatures
+- CO2_loss_algal_growth_sal: figure that plots CO2 requirements and losses over four days for several salinities 
+
+
+
+#### *without algal growth:*
+
+- subplot_kLa_comb: creates multiple subplots side by side of the figures of kLa = 0.5 1/hr and kLa = 3 1/hr from CO2_loss_kLa_comb
+- subplot_sal: creates multiple subplots side by side of the figures from CO2_loss_script_sal
+- subplot_temp: creates multiple subplots side by side of the figures from CO2_loss_script_temp
+- CO2_loss_script_temp: multiple figures that plot CO2 losses to the atmosphere at different alkalinities and pHs for different temperatures
+- CO2_loss_script_sal: multiple figures that plot CO2 losses to the atmosphere at different alkalinities and pHs for different salinities
 
 ## Authors
 - Deborah Sills

@@ -1,6 +1,6 @@
 #author: Riley Doyle
-#date: 7/28/20
-#file: CO2_loss_script_temp
+#date: 7/29/20
+#file: subplot_temp
 #status: working 
 
 from calc_Ks import *
@@ -8,10 +8,9 @@ from calc_alphas import *
 from calc_CO2_loss import *
 import numpy as np
 import matplotlib.pyplot as plt
-from calc_CO2_loss_temp import *
-
-#figures with different alkalinities
 T = 10 + 273.15
+b = 1
+plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3),sharex= True, sharey= True)
 while T <= 30 + 273.15:
     S = 35
     K1 = calc_K1(T,S)
@@ -27,27 +26,21 @@ while T <= 30 + 273.15:
     delpH = 0.1
     d = 0.15
     kLa = 0.5
+    plt.subplot(1,3,b)
     y = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
     plt.xlabel('pH')
-    plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
-    plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L'])
-    plt.figure()
+    plt.axis([6, 8.2, 0, 1750])
     T += 10
+    b += 1
 
-#figure with different temperatures
-Tin = 10 + 273.15
-Tend = 40 + 273.15
-delT = 10
-S = 35
-CO2sat = 0.012716352
-alk = 2.5
-pHin = 6
-pHend = 8.2
-delpH = 0.1
-d = 0.15
-kLa = 0.5
-y = calc_CO2_loss_temp (pK1, pK2, alk, d, CO2sat, pHin, pHend, delpH, kLa, S, Tin, Tend, delT)
-plt.xlabel('pH')
+plt.subplot(1,3,1)
+plt.text(7.3, 1800, str('(a)'), fontsize=10, fontweight='bold', ha='center')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
-plt.legend(['T = 10 $^o$C', 'T = 20 $^o$C', 'T = 30 $^o$C'])
+
+plt.subplot(1,3,2)
+plt.text(7.3, 1800, str('(b)'), fontsize=10, fontweight='bold', ha='center')
+
+plt.subplot(1,3,3)
+plt.text(7.3, 1800, str('(c)'), fontsize=10, fontweight='bold', ha='center')
+plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L'])
 plt.show()

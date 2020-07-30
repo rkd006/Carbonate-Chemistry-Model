@@ -1,6 +1,6 @@
 #author: Riley Doyle
 #date: 7/15/20
-#file: CO2_loss_algae_growth_range
+#file: CO2_loss_algal_growth_range
 #status: WORKING
 
 from calc_Ks import *
@@ -68,13 +68,13 @@ for p in rsteps:
     Closs = x[:,2]
     
     plt.xlabel('time (days)')
-    plt.ylabel('$CO_2$ (g/$m^2$)')
+    plt.ylabel('CO$_2$ (g/m$^2$)')
     plt.plot(t,Cdel, C[b])
     plt.plot(t,Closs, C[b], linestyle='--')
     #plt.axis([2, 4, 2, 6])
-    plt.legend(['$CO_2$ supply for  r = 10 $g/m^2/day$', '$CO_2$ loss for  r = $g/m^2/day$',
-                '$CO_2$ supply for  r = 15 $g/m^2/day$', '$CO_2$ loss for  r = $g/m^2/day$', 
-                '$CO_2$ supply for  r = 20 $g/m^2/day$', '$CO_2$ loss for r = 20 $g/m^2/day$' ])
+    plt.legend(['CO$_2$ supply for  r = 10 g/m$^2$/day', 'CO$_2$ loss for  r = 10 g/m$^2$/day',
+                'CO$_2$ supply for  r = 15 g/m$^2$/day', 'CO$_2$ loss for  r = 15 g/m$^2$/day', 
+                'CO$_2$ supply for  r = 20 g/m$^2$/day', 'CO$_2$ loss for r = 20 g/m$^2$/day' ])
     b += 1
 
 

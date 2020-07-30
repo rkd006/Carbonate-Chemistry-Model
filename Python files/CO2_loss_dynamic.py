@@ -68,14 +68,14 @@ Caq = x[:,0]
 Cdel = x[:,1]
 Closs = x[:,2]
 plt.xlabel('time (days)')
-plt.ylabel('$CO_2$ (g/$m^2$)')
+plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
-plt.legend(['$CO_2$ supply required', '$CO_2$ loss to atmosphere'])
+plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'])
 plt.show()
 
 plt.xlabel('time (days)')
-plt.ylabel('$CO_2$ (g/$m^2$)')
+plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Caq)
 plt.show()
 

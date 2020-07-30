@@ -1,6 +1,6 @@
 #author = Riley Doyle
 #date = 7/15/20
-#file = CO2_loss_algae_growth_pH
+#file = CO2_loss_algal_growth_pH
 #status = working
 
 from calc_Ks import *
@@ -66,13 +66,14 @@ while kLa <= .5:
         Cdel = x[:,1]
         Closs = x[:,2]
         
-        plt.figure()
+        #plt.figure()
         plt.plot(t,Cdel, C[b])
         plt.plot(t,Closs, C[b], linestyle='--')
         plt.xlabel('time (days)')
-        plt.ylabel('$CO_2$ (g/$m^2$)')
-        #plt.axis([0, 4, 0, 700])
-        plt.legend(['$CO_2$ supply', '$CO_2$ loss'])
+        plt.ylabel('CO$_2$ (g/m$^2$)')
+        plt.legend(['CO$_2$ supply for pH = 6', 'CO$_2$ loss for pH = 6',
+                    'CO$_2$ supply for pH = 7', 'CO$_2$ loss for pH = 7',
+                    'CO$_2$ supply for pH = 8', 'CO$_2$ loss for pH = 8'])
 
         b += 1
         pH += delpH

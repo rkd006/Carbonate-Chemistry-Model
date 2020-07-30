@@ -1,6 +1,6 @@
 #author: Riley Doyle
 #date: 7/15/20
-#file: CO2_loss_algae_growth_kLa
+#file: CO2_loss_algal_growth_kLa
 #status: WORKING
 
 from calc_Ks import *
@@ -70,9 +70,9 @@ for p in kLasteps:
     Closs = x[:,2]
     
     plt.xlabel('time (days)')
-    plt.ylabel('$CO-2$ (g/$m^2$)')
+    plt.ylabel('CO$_2$ (g/m$^2$)')
     plt.plot(t,Cdel, C[b])
     plt.plot(t,Closs, C[b], linestyle='--')
-    plt.legend(['$CO_2$ supply for kLa = 0.1 1/hr', '$CO_2$ loss for kLa = 0.1 1/hr',
-                '$CO_2$ supply for kLa = 0.5 1/hr', '$CO_2$ loss for kLa = 0.5 1/hr' ])
+    plt.legend(['CO$_2$ supply for kLa = 0.1 1/hr', 'CO$_2$ loss for kLa = 0.1 1/hr',
+                'CO$_2$ supply for kLa = 0.5 1/hr', 'CO$_2$ loss for kLa = 0.5 1/hr' ])
     b += 1
