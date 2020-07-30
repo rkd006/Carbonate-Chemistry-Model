@@ -131,7 +131,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
   - [her website](https://deborahsills.com/)
 - Riley Doyle
   - Undergraduate Student at Bucknell University, majoring in environmental engineering and graduating in 2022
-  - [contact email](rkd006@bucknell.edu)
+  - email: rkd006@bucknell.edu
   - [LinkedIn](https://www.linkedin.com/in/riley-doyle-591565196/)
 
 
