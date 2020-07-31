@@ -2,7 +2,6 @@
 % date: 7/31/20
 %file: calc_inorganiccarbon_pond
 %status: working
-
 global k1
 
 T = 20 +273.15;

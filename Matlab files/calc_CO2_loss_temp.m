@@ -1,25 +1,26 @@
 % author: Riley Doyle
 % date: 06-17-2020
-% file name: calc_CO2_loss_kLa
-% output: Calculate loss with different kLa values and pHs
+% file name: calc_CO2_loss_temp
+% output: Calculate loss with different temp values and pHs
 
-function r_kL_pH = calc_CO2_loss_kLa (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa)
+function r_temp = calc_CO2_loss_temp (S, CO2sat, alk, kLa, pHin, pHend, delpH, Tend, Tin, delT)
 
 %initialize
-m_steps = (kLaend-kLain)/delkLa;
-kLa = kLain;
-
+m_steps = (Tend-Tin)/delT;
+T = Tin;
 
 n_steps = (pHend - pHin)/delpH;
-
-r_kL_pH = zeros(n_steps+1, 1+m_steps);
+r_temp = zeros(n_steps+1, 1+m_steps);
 
 for p = 1:1+m_steps
     
     pH = pHin;
     
     for c = 1:n_steps+1
-    
+        K_1 = calc_K1(T, S); %no units
+        pK1 = -log10(K_1); %no units
+        K_2 = calc_K2(T, S); %no units
+        pK2 = -log10(K_2); %no units
         %calculate alphas
         alpha0 = calc_alpha0(pH, pK1, pK2);
         alpha1 = calc_alpha1(pH, pK1, pK2);
@@ -38,11 +39,10 @@ for p = 1:1+m_steps
         %calculate loss of CO2 per hour
         loss = kLa*(H2CO3 - CO2sat)*44*24; %g CO2 per day
               
-        r_kL_pH(c,1)= pH; %record pH
-        r_kL_pH(c,1+p)= loss; %record loss
+        r_temp(c,1)= pH; %record pH
+        r_temp(c,1+p)= loss; %record loss
         pH = pH + delpH;  %increase pH 
     end
-   kLa = kLa + delkLa;
+   T = T + delT;
 end
 end
-
