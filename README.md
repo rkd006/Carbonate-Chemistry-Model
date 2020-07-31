@@ -80,6 +80,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - calc_Kh: creates a function to calculate Kh
 - calc_CO2_loss_alk: creates a function to calculate the CO2 losses to the atmosphere with inputs of kLa and alk ranges
 - calc_CO2_loss_temp: creates a function to calculate the CO2 losses to the atmosphere with inputs of pH and temperature ranges
+- calc_CO2_loss_sal: creates a function to calculate the CO2 losses to the atmosphere with inputs of pH and salinity ranges
 - calc_inorganiccarbon_pond: calculates inorganic carbon concentration in the pond at four days numerically and figure that plots the inorganic carbon concentration over four days
 - calc_algaecarbon: calculates the carbon concentration in algae at four days numerically 
 - plot_carbonates: figure that plots the distribution of carbonate species (H2CO3*, HCO3, CO3)
@@ -101,6 +102,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - CO2_loss_range_kLa: figure that plots CO2 losses to the atmosphere at different kLa values and pHs
 - CO2_loss_script: figure that plots CO2 losses to the atmosphere at different alkalinities and pHs
 - CO2_loss_script_temp: multiple figures that plot CO2 losses to the atmosphere at different alkalinities and pHs for different temperatures
+- CO2_loss_script_sal: multiple figures that plot CO2 losses to the atmosphere at different alkalinities and pHs for different salinities
 
 ### Python:
 *updated recently*
@@ -110,7 +112,6 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - calc_alphas: creates functions to calculate alpha0, alpha1, alpha2
 - calc_Ks: creates functions to calculate K1, K2, Kh
 - CO2_loss_dynamic_y3: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days for a combined y3 
-- calc_CO2_loss_sal: creates a function to calculate the CO2 losses to the atmosphere with inputs of pH and salinity ranges
 - subplot_sal: a) creates multiple subplots side by side of the figures from CO2_loss_script_sal b) creates multiple subplots side by side of the figures from CO2_loss_algal_growth_sal
 - subplot_temp: a) creates multiple subplots side by side of the figures from CO2_loss_script_temp b) creates multiple subplots side by side of the figures from CO2_loss_algal_growth_temp
 
@@ -127,7 +128,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 #### *without algal growth:*
 
 - subplot_kLa_comb: creates multiple subplots side by side of the figures of kLa = 0.5 1/hr and kLa = 3 1/hr from CO2_loss_kLa_comb
-- CO2_loss_script_sal: multiple figures that plot CO2 losses to the atmosphere at different alkalinities and pHs for different salinities
+
 
 ## Authors
 - Deborah Sills
