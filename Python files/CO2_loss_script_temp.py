@@ -18,7 +18,9 @@ while T <= 30 + 273.15:
     pK1 = -np.log10(K1)
     K2 = calc_K2(T,S)
     pK2 = -np.log10(K2)
-    CO2sat = 0.012716352
+    Kh = calc_Kh(T,S)
+    PCO2 = 0.000416
+    CO2sat = PCO2*Kh #mole/m3
     alkin = 2
     alkend = 27
     delalk = 5
@@ -30,7 +32,7 @@ while T <= 30 + 273.15:
     y = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
     plt.xlabel('pH')
     plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
-    plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L'])
+    plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L'], frameon=False)
     plt.figure()
     T += 10
 
@@ -39,15 +41,15 @@ Tin = 10 + 273.15
 Tend = 40 + 273.15
 delT = 10
 S = 35
-CO2sat = 0.012716352
+PCO2 = 0.000416
 alk = 2.5
 pHin = 6
 pHend = 8.2
 delpH = 0.1
 d = 0.15
 kLa = 0.5
-y = calc_CO2_loss_temp (pK1, pK2, alk, d, CO2sat, pHin, pHend, delpH, kLa, S, Tin, Tend, delT)
+y = calc_CO2_loss_temp (PCO2, alk, d, CO2sat, pHin, pHend, delpH, kLa, S, Tin, Tend, delT)
 plt.xlabel('pH')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
-plt.legend(['T = 10 $^o$C', 'T = 20 $^o$C', 'T = 30 $^o$C'])
+plt.legend(['T = 10 $^o$C', 'T = 20 $^o$C', 'T = 30 $^o$C'], frameon=False)
 plt.show()

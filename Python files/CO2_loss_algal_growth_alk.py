@@ -74,7 +74,8 @@ while kLa <= .5:
         plt.axis([0, 4, 0, 90])
         plt.legend(['CO$_2$ supply for alk = 2 meq/L', 'CO$_2$ loss for alk = 2 meq/L',
                     'CO$_2$ supply for alk = 7 meq/L', 'CO$_2$ loss for alk = 7 meq/L',
-                    'CO$_2$ supply for alk = 12 meq/L', 'CO$_2$ loss for alk = 12 meq/L' ])
+                    'CO$_2$ supply for alk = 12 meq/L', 'CO$_2$ loss for alk = 12 meq/L' ],
+                   frameon=False)
         b += 1
         alk0 += delalk
     plt.figure()

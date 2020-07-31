@@ -35,6 +35,6 @@ y = calc_CO2_loss_kLa(pK1, pK2, alk, d, colormap, CO2sat, pHin, pHend, delpH, kL
 
 plt.xlabel('pH')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
-plt.legend(['kLa = 0.1 1/hr', 'kLa = 0.5 1/hr', 'kLa = 1.5 1/hr', 'kLa = 3 1/hr'])
+plt.legend(['kLa = 0.1 1/hr', 'kLa = 0.5 1/hr', 'kLa = 1.5 1/hr', 'kLa = 3 1/hr'], frameon=False)
 plt.show()
 

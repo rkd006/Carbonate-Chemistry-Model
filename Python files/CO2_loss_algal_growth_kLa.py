@@ -74,5 +74,6 @@ for p in kLasteps:
     plt.plot(t,Cdel, C[b])
     plt.plot(t,Closs, C[b], linestyle='--')
     plt.legend(['CO$_2$ supply for kLa = 0.1 1/hr', 'CO$_2$ loss for kLa = 0.1 1/hr',
-                'CO$_2$ supply for kLa = 0.5 1/hr', 'CO$_2$ loss for kLa = 0.5 1/hr' ])
+                'CO$_2$ supply for kLa = 0.5 1/hr', 'CO$_2$ loss for kLa = 0.5 1/hr' ],
+               frameon=False)
     b += 1

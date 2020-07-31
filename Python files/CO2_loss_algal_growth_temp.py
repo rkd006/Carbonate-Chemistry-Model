@@ -73,5 +73,6 @@ for p in Tsteps:
     plt.plot(t,Closs, C[b], linestyle='--')
     plt.legend(['CO$_2$ supply for T = 10 $^o$C', 'CO$_2$ loss for T = 10 $^o$C',
                 'CO$_2$ supply for T = 20 $^o$C', 'CO$_2$ loss for T = 20 $^o$C',
-                'CO$_2$ supply for T = 30 $^o$C', 'CO$_2$ loss for T = 30 $^o$C'])
+                'CO$_2$ supply for T = 30 $^o$C', 'CO$_2$ loss for T = 30 $^o$C'],
+               frameon=False)
     b += 1

@@ -73,5 +73,6 @@ for p in Ssteps:
     plt.plot(t,Closs, C[b], linestyle='--')
     plt.legend(['CO$_2$ supply for S = 25 g/kg', 'CO$_2$ loss for S = 25 g/kg',
                 'CO$_2$ supply for S = 35 g/kg', 'CO$_2$ loss for S = 35 g/kg',
-                'CO$_2$ supply for S = 45 g/kg', 'CO$_2$ loss for S = 45 g/kg'])
+                'CO$_2$ supply for S = 45 g/kg', 'CO$_2$ loss for S = 45 g/kg'],
+               frameon=False)
     b += 1

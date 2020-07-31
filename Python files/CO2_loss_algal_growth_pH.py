@@ -73,7 +73,8 @@ while kLa <= .5:
         plt.ylabel('CO$_2$ (g/m$^2$)')
         plt.legend(['CO$_2$ supply for pH = 6', 'CO$_2$ loss for pH = 6',
                     'CO$_2$ supply for pH = 7', 'CO$_2$ loss for pH = 7',
-                    'CO$_2$ supply for pH = 8', 'CO$_2$ loss for pH = 8'])
+                    'CO$_2$ supply for pH = 8', 'CO$_2$ loss for pH = 8'],
+                   frameon=False)
 
         b += 1
         pH += delpH

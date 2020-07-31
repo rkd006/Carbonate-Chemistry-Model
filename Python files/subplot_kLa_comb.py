@@ -29,9 +29,9 @@ kLa = 3
 y1 = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
 plt.gca().axes.get_yaxis().set_visible(False)
 plt.xlabel('pH')
-plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L', 'alk = 27 meq/L', 'alk = 32 meq/L'])
+plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L', 'alk = 27 meq/L', 'alk = 32 meq/L'], frameon=False)
 plt.axis([6.5, 8.2, 0, 4000])
-plt.text(7.3, 4200, str('(b)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(6.9, 3600, str('(b) k$_L$a = 3 hr$^{-1}$'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,2,1)
 kLa = 0.5
@@ -39,6 +39,6 @@ y2 = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, 
 plt.xlabel('pH')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
 plt.axis([6.5, 8.2, 0, 4000])
-plt.text(7.3, 4200, str('(a)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(6.9, 3600, str('(a) k$_L$a = 0.5 hr$^{-1}$'), fontsize=10, fontweight='bold', ha='center')
 
 plt.show()

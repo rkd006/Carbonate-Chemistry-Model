@@ -30,7 +30,7 @@ while S <= 45:
     y = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
     plt.xlabel('pH')
     plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
-    plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L'])
+    plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L'], frameon=False)
     plt.figure()
     S += 10
 
@@ -49,5 +49,5 @@ kLa = 0.5
 y = calc_CO2_loss_sal (pK1, pK2, alk, d, CO2sat, pHin, pHend, delpH, kLa, T, Sin, Send, delS)
 plt.xlabel('pH')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
-plt.legend(['S = 25 g/kg', 'S = 35 g/kg', 'S = 45 g/kg'])
+plt.legend(['S = 25 g/kg', 'S = 35 g/kg', 'S = 45 g/kg'], frameon=False)
 plt.show()

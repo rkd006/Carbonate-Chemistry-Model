@@ -84,5 +84,5 @@ plt.subplot(1,2,2)
 plt.gca().axes.get_yaxis().set_visible(False)
 plt.text(2, 175, str('(b)'), fontsize=10, fontweight='bold', ha='center')
 plt.legend(['CO$_2$ supply for alk = 2 meq/L', 'CO$_2$ loss for alk = 2 meq/L',
-            'CO$_2$ supply for alk = 7 meq/L', 'CO$_2$ loss for alk = 7 meq/L'])
+            'CO$_2$ supply for alk = 7 meq/L', 'CO$_2$ loss for alk = 7 meq/L'], frameon=False)
 plt.show()

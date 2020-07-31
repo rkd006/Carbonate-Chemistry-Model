@@ -79,6 +79,6 @@ plt.text(2, 730, str('(b)'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.legend(['CO$_2$ supply', 'CO$_2$ loss'])
+plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False)
 plt.text(2, 730, str('(c)'), fontsize=10, fontweight='bold', ha='center')
 plt.show()

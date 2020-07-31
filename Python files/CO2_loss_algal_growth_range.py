@@ -74,7 +74,8 @@ for p in rsteps:
     #plt.axis([2, 4, 2, 6])
     plt.legend(['CO$_2$ supply for  r = 10 g/m$^2$/day', 'CO$_2$ loss for  r = 10 g/m$^2$/day',
                 'CO$_2$ supply for  r = 15 g/m$^2$/day', 'CO$_2$ loss for  r = 15 g/m$^2$/day', 
-                'CO$_2$ supply for  r = 20 g/m$^2$/day', 'CO$_2$ loss for r = 20 g/m$^2$/day' ])
+                'CO$_2$ supply for  r = 20 g/m$^2$/day', 'CO$_2$ loss for r = 20 g/m$^2$/day' ],
+               frameon=False, fontsize = 9)
     b += 1
 
 
