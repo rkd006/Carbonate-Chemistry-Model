@@ -3,7 +3,7 @@
 % file name: calc_CO2_loss_temp
 % output: Calculate loss with different temp values and pHs
 
-function r_temp = calc_CO2_loss_temp (S, CO2sat, alk, kLa, pHin, pHend, delpH, Tend, Tin, delT)
+function r_temp = calc_CO2_loss_temp (S, PCO2, alk, kLa, pHin, pHend, delpH, Tend, Tin, delT)
 
 %initialize
 m_steps = (Tend-Tin)/delT;
@@ -17,6 +17,8 @@ for p = 1:1+m_steps
     pH = pHin;
     
     for c = 1:n_steps+1
+        Kh = calc_Kh(T,S);
+        CO2sat = PCO2*Kh;
         K_1 = calc_K1(T, S); %no units
         pK1 = -log10(K_1); %no units
         K_2 = calc_K2(T, S); %no units

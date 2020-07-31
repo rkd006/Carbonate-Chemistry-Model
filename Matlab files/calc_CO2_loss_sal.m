@@ -3,7 +3,7 @@
 % file name: calc_CO2_loss_sal
 % output: Calculate loss with different temp values and pHs
 
-function r_sal = calc_CO2_loss_sal (T, CO2sat, alk, kLa, pHin, pHend, delpH, send, sin, dels)
+function r_sal = calc_CO2_loss_sal (T, PCO2, alk, kLa, pHin, pHend, delpH, send, sin, dels)
 
 %initialize
 m_steps = (send-sin)/dels;
@@ -21,6 +21,8 @@ for p = 1:1+m_steps
         pK1 = -log10(K_1); %no units
         K_2 = calc_K2(T, S); %no units
         pK2 = -log10(K_2); %no units
+        Kh = calc_Kh(T,S);
+        CO2sat = PCO2*Kh; %(mole/m3) saturation concentration of CO2 in water
         %calculate alphas
         alpha0 = calc_alpha0(pH, pK1, pK2);
         alpha1 = calc_alpha1(pH, pK1, pK2);

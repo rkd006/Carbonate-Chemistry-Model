@@ -14,7 +14,7 @@ Tin = 10 + 273.15; %temp in Kelvins
 Tend = 30 + 273.15;
 delT = 10;
 S = 35; %(salinity in g/kg)
-CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
+PCO2 = 0.000416; %atm
 kLa = 0.5; %(1/hr)
 pHin = 6.5; %no units
 pHend = 8.5; %no units
@@ -23,7 +23,7 @@ d = .15; %(m) depth of pond
 alk = 2.5;
 
 %define r_temp
-r_temp = calc_CO2_loss_temp (S, CO2sat, alk, kLa, pHin, pHend, delpH, Tend, Tin, delT);
+r_temp = calc_CO2_loss_temp (S, PCO2, alk, kLa, pHin, pHend, delpH, Tend, Tin, delT);
 
 %modify r for plotting
 %x axis is the first column of r

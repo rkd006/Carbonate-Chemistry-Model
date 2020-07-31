@@ -21,6 +21,7 @@ while T <= 30 + 273.15:
     Kh = calc_Kh(T,S)
     PCO2 = 0.000416
     CO2sat = PCO2*Kh #mole/m3
+    print (CO2sat)
     alkin = 2
     alkend = 27
     delalk = 5
