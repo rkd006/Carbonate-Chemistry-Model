@@ -1,16 +1,16 @@
 % author: Riley Doyle
 % date: 7/31/20
-% file name: calc_CO2_loss_temp
+% file name: calc_CO2_loss_sal
 % output: Calculate loss with different temp values and pHs
 
-function r_temp = calc_CO2_loss_temp (S, CO2sat, alk, kLa, pHin, pHend, delpH, Tend, Tin, delT)
+function r_sal = calc_CO2_loss_sal (T, CO2sat, alk, kLa, pHin, pHend, delpH, send, sin, dels)
 
 %initialize
-m_steps = (Tend-Tin)/delT;
-T = Tin;
+m_steps = (send-sin)/dels;
+S = sin;
 
 n_steps = (pHend - pHin)/delpH;
-r_temp = zeros(n_steps+1, 1+m_steps);
+r_sal = zeros(n_steps+1, 1+m_steps);
 
 for p = 1:1+m_steps
     
@@ -39,10 +39,10 @@ for p = 1:1+m_steps
         %calculate loss of CO2 per hour
         loss = kLa*(H2CO3 - CO2sat)*44*24; %g CO2 per day
               
-        r_temp(c,1)= pH; %record pH
-        r_temp(c,1+p)= loss; %record loss
+        r_sal(c,1)= pH; %record pH
+        r_sal(c,1+p)= loss; %record loss
         pH = pH + delpH;  %increase pH 
     end
-   T = T + delT;
+   S = S + dels;
 end
 end
