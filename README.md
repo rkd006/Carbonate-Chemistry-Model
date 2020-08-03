@@ -114,19 +114,14 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - CO2_loss_dynamic_y3: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days for a combined y3 
 - subplot_sal: a) creates multiple subplots side by side of the figures from CO2_loss_script_sal b) creates multiple subplots side by side of the figures from CO2_loss_algal_growth_sal
 - subplot_temp: a) creates multiple subplots side by side of the figures from CO2_loss_script_temp b) creates multiple subplots side by side of the figures from CO2_loss_algal_growth_temp
+- CO2_loss_algal_growth_temp: figure that plots CO2 requirements and losses over four days for several temperatures
+- CO2_loss_algal_growth_sal: figure that plots CO2 requirements and losses over four days for several salinities
 
-#### *with algal growth:*
+#### *subplots:*
 
 - subplot_algal_growth_pH: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_pH for kLa = 0.5 1/hr and alkalinity = 2.5 eq/m3
 - subplot_algal_growth_range: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_range for kLa = 0.5 1/hr, pH = 8, and alkalinity = 3.5 eq/m3
 - subplot_algal_growth_alk: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_alk for kLa = 0.5 1/hr and kLa = 3 1/hr
-- CO2_loss_algal_growth_temp: figure that plots CO2 requirements and losses over four days for several temperatures
-- CO2_loss_algal_growth_sal: figure that plots CO2 requirements and losses over four days for several salinities 
-
-
-
-#### *without algal growth:*
-
 - subplot_kLa_comb: creates multiple subplots side by side of the figures of kLa = 0.5 1/hr and kLa = 3 1/hr from CO2_loss_kLa_comb
 
 
