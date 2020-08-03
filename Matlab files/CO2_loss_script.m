@@ -16,7 +16,8 @@ K_1 = calc_K1(T, S); %no units
 pK1 = -log10(K_1); %no units
 K_2 = calc_K2(T, S); %no units
 pK2 = -log10(K_2); %no units
-CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
+Kh = calc_Kh(T,S);
+PCO2 = 0.000416;
 kLa = 0.5; %(1/hr)
 pHin = 6.5; %no units
 pHend = 8.5; %no units
@@ -28,7 +29,7 @@ alkend=32; %(eq/m3 or meq/L)
 delalk = 5; %(eq/m3 or meq/L)
 
 %define r
-r = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
+r = calc_CO2_loss(pK1, pK2, Kh, kLa, PCO2, pHin, pHend, delpH, alkin, alkend, delalk);
 
 %modify r for plotting
 %x axis is the first column of r

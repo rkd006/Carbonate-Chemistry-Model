@@ -16,7 +16,8 @@ K_1 = calc_K1(T, S); %no units
 pK1 = -log10(K_1); %no units
 K_2 = calc_K2(T, S); %no units
 pK2 = -log10(K_2); %no units
-CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
+Kh = calc_Kh(T,S);
+PCO2 = 0.000416;
 alk = 2.5; %(eq/m3) from Weissman et al. (1987)
 d = .15; %(m) depth of the pond
 pHin = 6.5; %no units
@@ -27,7 +28,7 @@ kLain= 0.5; %(1/hr)
 kLaend= 8.5; %(1/hr)
 delkLa = 2; %(1/hr)
 
-r_kL_pH = calc_CO2_loss_kLa (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
+r_kL_pH = calc_CO2_loss_kLa (pK1, pK2, Kh, PCO2, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
 
 x = r_kL_pH(:,1);
 r_kL_pH(:,1) = [];
@@ -37,7 +38,7 @@ pH = 8; %no units
 alkin=2; %(eq/m3 or meq/L)
 alkend=32; %(eq/m3 or meq/L)
 delalk = 2; %(eq/m3 or meq/L)
-r_kL_alk = calc_CO2_loss_alk (pK1, pK2, CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa, pH);
+r_kL_alk = calc_CO2_loss_alk (pK1, pK2, Kh, PCO2, alkin, alkend, delalk, kLain, kLaend, delkLa, pH);
 x2 = r_kL_alk(:,1);
 r_kL_alk(:,1) = [];
 r_kL_alk = r_kL_alk*d;

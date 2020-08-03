@@ -18,7 +18,7 @@ for p = 1:1+m_steps
     
     for c = 1:n_steps+1
         Kh = calc_Kh(T,S);
-        CO2sat = PCO2*Kh;
+        CO2sat = PCO2*Kh*1000; %mole/m3
         K_1 = calc_K1(T, S); %no units
         pK1 = -log10(K_1); %no units
         K_2 = calc_K2(T, S); %no units

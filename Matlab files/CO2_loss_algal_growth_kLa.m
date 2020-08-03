@@ -17,7 +17,7 @@ global k1 k2 k3 k4
 %Environmental conditions
 T = 20 + 273.15; %temp in Kelvins
 S = 35; %(salinity in g/kg)
-PCO2 = 0.00040; % (atm) (need to correct for temp, very crude approx)
+PCO2 = 0.000416; % (atm)
 
 %Pond characteristics
 d = 0.15; %(m) depth of pond
@@ -39,7 +39,7 @@ K_2 = calc_K2(T, S); %no units
 
 pK2= -log10(K_2); %no units
 
-Csat = PCO2*Kh*44;  %(g/kg)
+Csat = PCO2*Kh*44*1000;  %(g/m3)
 
 %Assumptions & initial conditions in moles per sample volume
 alk0 = 2.5;  %(eq/m3 or meq/L)
@@ -69,12 +69,12 @@ time = linspace(0, 4);  %4 days
 %Closs = CO2 losses
 x0 = [Caq0; Cin0; Closs0];
 
-delkLa = .4; %(1/hr)
-kLa = .1; %(1/hr)
+delkLa = 2.5; %(1/hr)
+kLa = .5; %(1/hr)
 C = {'r','b'};
 iterCount = 0;
 
-while kLa <= .5
+while kLa <= 3
 iterCount = iterCount + 1;
 %Solve ODEs with the ode15s solver
 %returns output arrays of tout and x
@@ -109,6 +109,6 @@ hold on
 figure(1)
 xlabel('Time (day)')
 ylabel('CO_2 (g m^{-2})')
-legend('CO_2 supply for kLa = 0.1 hr^{-1}', 'CO_2 loss for kLa = 0.1 hr^{-1}',...
-    'CO_2 supply for kLa = 0.5 hr^{-1}', 'CO_2 loss for kLa = 0.5 hr^{-1}')
+legend('CO_2 supply for kLa = 0.5 hr^{-1}', 'CO_2 loss for kLa = 0.5 hr^{-1}',...
+    'CO_2 supply for kLa = 3 hr^{-1}', 'CO_2 loss for kLa = 3 hr^{-1}')
 

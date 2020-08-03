@@ -16,7 +16,7 @@ global k1 k2 k3 k4
 %Environmental conditions
 T = 20 + 273.15; %temp in Kelvins
 S = 35; %(salinity in g/kg)
-PCO2 = 0.00040; %(atm) (need to correct for temp, very crude approx)
+PCO2 = 0.000416; %(atm) 
 
 %Pond characteristics
 d = 0.15; %(m) depth of pond
@@ -43,7 +43,7 @@ K_2 = calc_K2(T, S); %no units
 
 pK2= -log10(K_2); %no units
 
-Csat = PCO2*Kh*44;  %(g/kg)
+Csat = PCO2*Kh*44*1000;  %(g/m3)
 
 %%%%%Inputs%%%%%%
 %Assumptions & initial conditions 
@@ -88,7 +88,7 @@ x0 = [Caq0; Cin0; Closs0];
 %returns output arrays of tout and x
 %rates is the ODE system, time is the x values, x0 is the initial conditions
 [tout, x] = ode15s(@rates, time, x0);
-xmass = x
+xmass = x;
 
 %eff= xmass(end,3)/xmass(end,2)
 CO2aq = xmass(:,1);

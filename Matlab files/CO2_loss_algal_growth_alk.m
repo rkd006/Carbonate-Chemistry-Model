@@ -17,7 +17,7 @@ global k1 k2 k3 k4
 %Environmental conditions
 T = 20 + 273.15; %temp in Kelvins
 S = 35; %(salinity in g/kg)
-PCO2 = 0.00040; %(atm) (need to correct for temp, very crude approx)
+PCO2 = 0.000416; %(atm) 
 
 %Pond characteristics
 d = 0.15; %(m) depth of pond
@@ -38,7 +38,7 @@ K_2 = calc_K2(T, S); %no units
 
 pK2= -log10(K_2); %no units
 
-Csat = PCO2*Kh*44;  %(g/kg)
+Csat = PCO2*Kh*44*1000;  %(g/m3)
 
 %Assumptions & initial conditions in moles per sample volume
 r_algae = 10;  % growth rate (g/m2/day); 

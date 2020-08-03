@@ -16,7 +16,8 @@ K_1 = calc_K1(T, S); %no units
 pK1 = -log10(K_1); %no units
 K_2 = calc_K2(T, S); %no units
 pK2 = -log10(K_2); %no units
-CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
+Kh = calc_Kh(T,S);
+PCO2 = 0.000416;
 pHin = 6.5; %no units
 pHend = 8.5; %no units
 delpH = 0.1;  %no units
@@ -38,7 +39,7 @@ hold on
 for b = 1:s_steps+1
 C = {'b', 'g', 'r', 'y', 'c', 'k', 'm'};
 L = {'-', '--', '-.', '-.', '-', '--', '-.'};
-r1 = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
+r1 = calc_CO2_loss(pK1, pK2, Kh, kLa, PCO2, pHin, pHend, delpH, alkin, alkend, delalk);
 x = r1(:,1);
 r1(:,1) = [];
 r1 = r1*d; %y must be in g/m2*day
@@ -65,7 +66,7 @@ hold on
 for b = 1:s_steps+1
 C = {'b', 'g', 'r', 'y', 'c', 'k', 'm'};
 L = {'-', '--', '-.', '-.', '-', '--', '-.'};
-r1 = calc_CO2_loss(pK1, pK2, kLa, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk);
+r1 = calc_CO2_loss(pK1, pK2, Kh, kLa, PCO2, pHin, pHend, delpH, alkin, alkend, delalk);
 x = r1(:,1);
 r1(:,1) = [];
 r1 = r1*d; %y must be in g/m2*day

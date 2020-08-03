@@ -3,7 +3,7 @@
 % file name: calc_loss_kL_alk.m
 % output: Calculate loss with different kL values and alkalinities
 
-function r_kL_alk = calc_CO2_loss_alk (pK1, pK2,CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa, pH)
+function r_kL_alk = calc_CO2_loss_alk (pK1, pK2, Kh, PCO2, alkin, alkend, delalk, kLain, kLaend, delkLa, pH)
 m_steps = (kLaend-kLain)/delkLa;
 kLa = kLain;
 
@@ -21,6 +21,7 @@ for p = 1:m_steps+1
         alpha0 = calc_alpha0(pH, pK1, pK2);
         alpha1 = calc_alpha1(pH, pK1, pK2);
         alpha2 = calc_alpha2(pH, pK1, pK2);
+        CO2sat = PCO2*Kh*1000;
         
         %calculate H+ and OH and CT
         H = 10^(-pH);

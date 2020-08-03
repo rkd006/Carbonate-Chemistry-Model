@@ -22,7 +22,7 @@ for p = 1:1+m_steps
         K_2 = calc_K2(T, S); %no units
         pK2 = -log10(K_2); %no units
         Kh = calc_Kh(T,S);
-        CO2sat = PCO2*Kh; %(mole/m3) saturation concentration of CO2 in water
+        CO2sat = PCO2*Kh*1000; %(mole/m3) saturation concentration of CO2 in water
         %calculate alphas
         alpha0 = calc_alpha0(pH, pK1, pK2);
         alpha1 = calc_alpha1(pH, pK1, pK2);

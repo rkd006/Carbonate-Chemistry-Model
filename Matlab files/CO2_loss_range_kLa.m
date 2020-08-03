@@ -16,7 +16,8 @@ K_1 = calc_K1(T, S); %no units
 pK1 = -log10(K_1); %no units
 K_2 = calc_K2(T, S); %no units
 pK2 = -log10(K_2); %no units
-CO2sat = 0.012716352; %(mole/m3) saturation concentration of CO2 in water
+Kh = calc_Kh(T,S);
+PCO2 = 0.000416;
 d = .15; % (m) depth of the pond from Weissman
 pHin = 6.5; %no units
 pHend = 8.5; %no units
@@ -27,7 +28,7 @@ delkLa = 0.4; %(1/hr)
 alk = 2.5; %(eq/m3) from Weissman et al. (1987)
 %kL = 0.04 m/hr from Weissman et. al. 1987
 
-r = calc_CO2_loss_kLa (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
+r = calc_CO2_loss_kLa (pK1, pK2, Kh, PCO2, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
 x_axis = r(:,1);
 r(:,1) = [];
 r =r*d; %y must be in g/m2*day
@@ -40,7 +41,7 @@ kLain= 1.5; %(1/hr)
 kLaend= 3; %(1/hr)
 delkLa = 1.5; %(1/hr)
 
-r = calc_CO2_loss_kLa (pK1, pK2, CO2sat, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
+r = calc_CO2_loss_kLa (pK1, pK2, Kh, PCO2, alk, pHin, pHend, delpH, kLaend, kLain, delkLa);
 x_axis = r(:,1);
 r(:,1) = [];
 r =r*d; %y must be in g/m2*day
