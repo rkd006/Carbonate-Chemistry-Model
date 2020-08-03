@@ -17,7 +17,6 @@ K2 = calc_K2(T,S)
 pK2 = -np.log10(K2)
 Kh = calc_Kh(T,S)
 PCO2 = 0.000416
-CO2sat = PCO2*Kh #mole/m3
 kLa = 0.5 #1/hr
 pHin = 6
 pHend = 8.5
@@ -27,7 +26,7 @@ alkin = 2 #meq/L or eq/m3
 alkend = 37
 delalk = 5
 
-y = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
+y = calc_CO2_loss(pK1, pK2, Kh, kLa, d, PCO2, pHin, pHend, delpH, alkin, alkend, delalk)
 
 plt.xlabel('pH')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')

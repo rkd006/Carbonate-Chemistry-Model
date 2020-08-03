@@ -24,7 +24,7 @@ while T <= 30 + 273.15:
     pK2 = -np.log10(K2)
     Kh = calc_Kh(T,S)
     PCO2 = 0.000416
-    CO2sat = PCO2*Kh
+    Kh = calc_Kh(T,S)
     alkin = 2
     alkend = 27
     delalk = 5
@@ -34,7 +34,7 @@ while T <= 30 + 273.15:
     d = 0.15
     kLa = 0.5
     plt.subplot(1,3,b)
-    y = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
+    y = calc_CO2_loss(pK1, pK2, Kh, kLa, d, PCO2, pHin, pHend, delpH, alkin, alkend, delalk)
     plt.xlabel('pH')
     plt.axis([6, 8.2, 0, 1750])
     T += 10
@@ -75,7 +75,7 @@ for p in Tsteps:
     K2 = calc_K2(p, S)
     pK2 = - np.log10(K2)
     
-    Csat = PCO2*Kh*44
+    Csat = PCO2*Kh*44*1000
     
     alk0 = 2.5
     r_algae = 10

@@ -18,7 +18,8 @@ while S <= 45:
     pK1 = -np.log10(K1)
     K2 = calc_K2(T,S)
     pK2 = -np.log10(K2)
-    CO2sat = 0.012716352
+    PCO2 = 0.000416
+    Kh = calc_Kh(T,S)
     alkin = 2
     alkend = 27
     delalk = 5
@@ -27,7 +28,7 @@ while S <= 45:
     delpH = 0.1
     d = 0.15
     kLa = 0.5
-    y = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
+    y = calc_CO2_loss(pK1, pK2, Kh, kLa, d, PCO2, pHin, pHend, delpH, alkin, alkend, delalk)
     plt.xlabel('pH')
     plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
     plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L'], frameon=False)
@@ -38,15 +39,15 @@ while S <= 45:
 Sin = 25
 Send = 55
 delS = 10
-T = 20 + 273.15
-CO2sat = 0.012716352
+T = 20 + 273.15    
+PCO2 = 0.000416
 alk = 2.5
 pHin = 6
 pHend = 8.2
 delpH = 0.1
 d = 0.15
 kLa = 0.5
-y = calc_CO2_loss_sal (pK1, pK2, alk, d, CO2sat, pHin, pHend, delpH, kLa, T, Sin, Send, delS)
+y = calc_CO2_loss_sal (pK1, pK2, alk, d, PCO2, pHin, pHend, delpH, kLa, T, Sin, Send, delS)
 plt.xlabel('pH')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
 plt.legend(['S = 25 g/kg', 'S = 35 g/kg', 'S = 45 g/kg'], frameon=False)

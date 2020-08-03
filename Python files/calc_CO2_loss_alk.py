@@ -9,7 +9,7 @@ from calc_Ks import *
 from calc_alphas import *
 
 
-def calc_CO2_loss_alk (pK1, pK2, pH, d, CO2sat, alkin, alkend, delalk, kLain, kLaend, delkLa):
+def calc_CO2_loss_alk (pK1, pK2, Kh, pH, d, PCO2, alkin, alkend, delalk, kLain, kLaend, delkLa):
     L = np.array(['-', '--', '-.', ':', '--'])
     alk = np.arange(alkin, alkend, delalk)
     kLasteps = np.arange(kLain, kLaend, delkLa)
@@ -20,6 +20,7 @@ def calc_CO2_loss_alk (pK1, pK2, pH, d, CO2sat, alkin, alkend, delalk, kLain, kL
         alpha0 = calc_alpha0(pH, pK1, pK2)
         alpha1 = calc_alpha1(pH, pK1, pK2)
         alpha2 = calc_alpha2(pH, pK1, pK2)
+        CO2sat = PCO2*Kh*1000
             
         H = 10**(-pH)
         OH = 10**(-(14-pH))

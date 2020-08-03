@@ -14,7 +14,7 @@ global k1, k2, k3, k4
 
 T = 20 + 273.15
 S = 35
-PCO2 = 0.00040
+PCO2 = 0.000416
 d = 0.15
 y1 = 1.714 #g CO2 per g algae
 y2 = 0.1695 #g HCO3 as CO2 per g algae
@@ -23,7 +23,7 @@ K1 = calc_K1(T, S)
 pK1 = - np.log10(K1)
 K2 = calc_K2(T, S)
 pK2 = - np.log10(K2)
-Csat = PCO2*Kh*44
+Csat = PCO2*Kh*44*1000
 alk0 = 2.5
 pH = 8
 

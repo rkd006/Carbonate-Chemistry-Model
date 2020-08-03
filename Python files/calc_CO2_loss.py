@@ -9,7 +9,7 @@ from calc_Ks import *
 from calc_alphas import *
 
 
-def calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk):
+def calc_CO2_loss(pK1, pK2, Kh, kLa, d, PCO2, pHin, pHend, delpH, alkin, alkend, delalk):
     colormap = np.array(['b', 'r', 'k', 'c', 'm', 'y', 'g'])
     L= np.array(['-', '--', '-.', ':', '--', '-', '-.'])
     pH = np.arange(pHin, pHend, delpH)
@@ -21,6 +21,7 @@ def calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, d
         alpha0 = calc_alpha0(pH, pK1, pK2)
         alpha1 = calc_alpha1(pH, pK1, pK2)
         alpha2 = calc_alpha2(pH, pK1, pK2)
+        CO2sat = PCO2*Kh*1000 #mole/m3
             
         H = 10**(-pH)
         OH = 10**(-(14-pH))

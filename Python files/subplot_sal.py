@@ -22,7 +22,8 @@ while S <= 45:
     pK1 = -np.log10(K1)
     K2 = calc_K2(T,S)
     pK2 = -np.log10(K2)
-    CO2sat = 0.012716352
+    PCO2 = 0.000416
+    Kh = calc_Kh(T,S)
     alkin = 2
     alkend = 27
     delalk = 5
@@ -32,7 +33,7 @@ while S <= 45:
     d = 0.15
     kLa = 0.5
     plt.subplot(1,3,b)
-    y = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
+    y = calc_CO2_loss(pK1, pK2, Kh, kLa, d, PCO2, pHin, pHend, delpH, alkin, alkend, delalk)
     plt.xlabel('pH')
     plt.axis([6, 8.2, 0, 1500])
     S += 10
@@ -62,7 +63,7 @@ Ssteps = np.arange(Sin, Send, delS)
 b = 1
 for p in Ssteps:
     T = 20 + 273.15
-    PCO2 = 0.00040
+    PCO2 = 0.000416
     d = 0.15
     kLa = 0.5
     y1 = 1.714 #g CO2 per g algae
@@ -73,7 +74,7 @@ for p in Ssteps:
     K2 = calc_K2(T, p)
     pK2 = - np.log10(K2)
     
-    Csat = PCO2*Kh*44
+    Csat = PCO2*Kh*44*1000
     
     alk0 = 2.5
     r_algae = 10

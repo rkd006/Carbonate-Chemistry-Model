@@ -14,7 +14,7 @@ global k1, k2, k3, k4
 
 T = 20 + 273.15
 S = 35
-PCO2 = 0.00040
+PCO2 = 0.000416
 d = 0.15
 y1 = 1.714 #g CO2 per g algae
 y2 = 0.1695 #g HCO3 as CO2 per g algae
@@ -24,7 +24,7 @@ pK1 = - np.log10(K1)
 K2 = calc_K2(T, S)
 pK2 = - np.log10(K2)
 
-Csat = PCO2*Kh*44
+Csat = PCO2*Kh*44*1000
 
 alk0 = 2.5
 r_algae = 10
@@ -37,9 +37,9 @@ alpha2 = calc_alpha2(pH, pK1, pK2)
 OH = 10**-(14-pH)*(10**3)
 H = (10**(-pH))*(10**3)
 
-kLain = 0.1 
-kLaend = 0.9
-delkLa = 0.4
+kLain = 0.5
+kLaend = 5.5
+delkLa = 2.5
 kLasteps = np.arange(kLain, kLaend, delkLa)
 C = ['k', 'b']
 b = 0
@@ -73,7 +73,7 @@ for p in kLasteps:
     plt.ylabel('CO$_2$ (g/m$^2$)')
     plt.plot(t,Cdel, C[b])
     plt.plot(t,Closs, C[b], linestyle='--')
-    plt.legend(['CO$_2$ supply for kLa = 0.1 1/hr', 'CO$_2$ loss for kLa = 0.1 1/hr',
-                'CO$_2$ supply for kLa = 0.5 1/hr', 'CO$_2$ loss for kLa = 0.5 1/hr' ],
+    plt.legend(['CO$_2$ supply for kLa = 0.5 1/hr', 'CO$_2$ loss for kLa = 0.5 1/hr',
+                'CO$_2$ supply for kLa = 3 1/hr', 'CO$_2$ loss for kLa = 3 1/hr' ],
                frameon=False)
     b += 1

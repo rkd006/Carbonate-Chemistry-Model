@@ -15,7 +15,8 @@ K1 = calc_K1(T,S)
 pK1 = -np.log10(K1)
 K2 = calc_K2(T,S)
 pK2 = -np.log10(K2)
-CO2sat = 0.012716352
+PCO2 = 0.000416
+Kh = calc_Kh(T,S)
 alkin = 2
 alkend = 37
 delalk = 5
@@ -29,7 +30,7 @@ delkLa = 0.4
 kLasteps = np.arange(kLain, kLaend, delkLa)
 kLa = kLain
 for p in kLasteps:
-    y = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
+    y = calc_CO2_loss(pK1, pK2, Kh, kLa, d, PCO2, pHin, pHend, delpH, alkin, alkend, delalk)
     plt.xlabel('pH')
     plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
     plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L', 'alk = 27 meq/L', 'alk = 32 meq/L'])
@@ -43,7 +44,7 @@ delkLa = 1.5
 kLasteps = np.arange(kLain, kLaend, delkLa)
 kLa = kLain
 for c in kLasteps:
-    y = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
+    y = calc_CO2_loss(pK1, pK2, Kh, kLa, d, PCO2, pHin, pHend, delpH, alkin, alkend, delalk)
     plt.xlabel('pH')
     plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
     plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L', 'alk = 27 meq/L', 'alk = 32 meq/L'], frameon=False)

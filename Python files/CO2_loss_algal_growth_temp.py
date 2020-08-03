@@ -20,7 +20,7 @@ C = ['k', 'b', 'c']
 b = 0
 for p in Tsteps:
     S = 35
-    PCO2 = 0.00040
+    PCO2 = 0.000416
     d = 0.15
     kLa = 0.5
     y1 = 1.714 #g CO2 per g algae
@@ -31,7 +31,7 @@ for p in Tsteps:
     K2 = calc_K2(p, S)
     pK2 = - np.log10(K2)
     
-    Csat = PCO2*Kh*44
+    Csat = PCO2*Kh*44*1000
     
     alk0 = 2.5
     r_algae = 10

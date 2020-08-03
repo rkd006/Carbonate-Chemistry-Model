@@ -9,8 +9,7 @@ from calc_Ks import *
 from calc_alphas import *
 
 
-def calc_CO2_loss_kLa (pK1, pK2, alk, d, colormap, CO2sat, pHin, pHend, delpH, kLain, kLaend, delkLa):
-    #colormap = np.array(['b', 'r', 'k', 'c','y'])
+def calc_CO2_loss_kLa (pK1, pK2, Kh, alk, d, PCO2, pHin, pHend, delpH, kLain, kLaend, delkLa):
     L = np.array(['-', '--', '-.', ':', '--'])
     pH = np.arange(pHin, pHend, delpH)
     kLasteps = np.arange(kLain, kLaend, delkLa)
@@ -21,6 +20,7 @@ def calc_CO2_loss_kLa (pK1, pK2, alk, d, colormap, CO2sat, pHin, pHend, delpH, k
         alpha0 = calc_alpha0(pH, pK1, pK2)
         alpha1 = calc_alpha1(pH, pK1, pK2)
         alpha2 = calc_alpha2(pH, pK1, pK2)
+        CO2sat = PCO2*Kh*1000
             
         H = 10**(-pH)
         OH = 10**(-(14-pH))
@@ -31,5 +31,5 @@ def calc_CO2_loss_kLa (pK1, pK2, alk, d, colormap, CO2sat, pHin, pHend, delpH, k
         H2CO3 = alpha0*CT
         y[i,:] = c*(H2CO3 - CO2sat)*24*44
         y = y*d
-        plt.plot(pH, y[i,:].T, c=colormap[i], linestyle=L[i])
+        plt.plot(pH, y[i,:].T, linestyle=L[i])
         i += 1
