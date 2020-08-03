@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 T = 10 + 273.15
 b = 1
 plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3),sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.05)
 while T <= 30 + 273.15:
     S = 35
     K1 = calc_K1(T,S)
@@ -40,21 +41,22 @@ while T <= 30 + 273.15:
     b += 1
 
 plt.subplot(1,3,1)
-plt.text(7.3, 1800, str('(a)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(6.5, 1600, str('(a) T = 10 $^o$C'), fontsize=10, fontweight='bold', ha='center')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
 
 plt.subplot(1,3,2)
-plt.text(7.3, 1800, str('(b)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(6.5, 1600, str('(b) T = 20 $^o$C'), fontsize=10, fontweight='bold', ha='center')
 plt.gca().axes.get_yaxis().set_visible(False)
 
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(7.3, 1800, str('(c)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(6.5, 1600, str('(c) T = 30 $^o$C'), fontsize=10, fontweight='bold', ha='center')
 plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L'], frameon=False)
 plt.show()
 
 #with algal growth
 plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3),sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.05)
 Tin = 10 + 273.15
 Tend = 40 + 273.15
 delT = 10
@@ -117,15 +119,16 @@ for p in Tsteps:
     c += 1
 
 plt.subplot(1,3,1)
-plt.text(2, 80, str('(a)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1, 64, str('(a) T = 20 $^o$C'), fontsize=10, fontweight='bold', ha='center')
 plt.ylabel('CO$_2$ (g m$^{-2}$')
 
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 80, str('(b)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1, 64, str('(b) T = 20 $^o$C'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 80, str('(c)'), fontsize=10, fontweight='bold', ha='center')
-plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False)
+plt.text(1, 64, str('(c) T = 30 $^o$C'), fontsize=10, fontweight='bold', ha='center')
+plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False, bbox_to_anchor=(.79, .84),
+           bbox_transform=plt.gcf().transFigure)
 plt.show()

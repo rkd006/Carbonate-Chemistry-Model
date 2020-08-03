@@ -24,6 +24,7 @@ pHend = 8.2
 delpH = 0.1
 d = 0.15
 plt.subplots(nrows = 1, ncols = 2, figsize=(9, 3),sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.05)
 plt.subplot(1,2,2)
 kLa = 3
 y1 = calc_CO2_loss(pK1, pK2, kLa, d, CO2sat, pHin, pHend, delpH, alkin, alkend, delalk)
@@ -40,5 +41,4 @@ plt.xlabel('pH')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
 plt.axis([6.5, 8.2, 0, 4000])
 plt.text(6.9, 3600, str('(a) k$_L$a = 0.5 hr$^{-1}$'), fontsize=10, fontweight='bold', ha='center')
-
 plt.show()

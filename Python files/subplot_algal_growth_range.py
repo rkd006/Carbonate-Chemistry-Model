@@ -41,6 +41,7 @@ delr = 5
 rsteps = np.arange(rin, rend, delr)
 c = 1
 plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3),sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.05)
 for p in rsteps:
     k1 = alpha0/(alpha1 + 2*alpha2)*y2*p
     k2 = (kLa*d*24)
@@ -74,12 +75,13 @@ for p in rsteps:
     c += 1
     
 plt.subplot(1,3,1)
-plt.text(2, 150, str('(a)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1.4, 125, str('(a) r$_{algae}$ = 10 g/m$^2$/day'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 150, str('(b)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1.4, 125, str('(b) r$_{algae}$ = 15 g/m$^2$/day'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 150, str('(c)'), fontsize=10, fontweight='bold', ha='center')
-plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False)
+plt.text(1.4, 125, str('(c) r$_{algae}$ = 20 g/m$^2$/day'), fontsize=10, fontweight='bold', ha='center')
+plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False, bbox_to_anchor=(.78, .82),
+           bbox_transform=plt.gcf().transFigure)
 plt.show()

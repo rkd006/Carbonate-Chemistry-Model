@@ -31,6 +31,7 @@ pH = 6
 delpH = 1
 c = 1
 plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3),sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.1)
 while pH <= 8:
     alpha0 = calc_alpha0(pH, pK1, pK2)
     alpha1 = calc_alpha1(pH, pK1, pK2)
@@ -71,14 +72,14 @@ while pH <= 8:
     pH += delpH
 plt.subplot(1,3,1)
 plt.ylabel('CO$_2$ (g/m$^2$)')
-plt.text(2, 730, str('(a)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(.8, 640, str('(a) pH = 6'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 730, str('(b)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(.8, 640, str('(b) pH = 7'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
 plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False)
-plt.text(2, 730, str('(c)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(.8, 640, str('(c) pH = 8'), fontsize=10, fontweight='bold', ha='center')
 plt.show()

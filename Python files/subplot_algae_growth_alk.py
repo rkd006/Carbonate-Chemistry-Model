@@ -29,7 +29,8 @@ r_algae = 10
 kLa = 0.5
 delkLa = 2.5
 c = 1
-plt.subplots(nrows = 1, ncols = 2, figsize=(12, 3),sharex= True, sharey= True)
+plt.subplots(nrows = 1, ncols = 2, figsize=(9, 3),sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.05)
 while kLa <= 3:
     alk0 = 2
     delalk = 5
@@ -79,10 +80,10 @@ while kLa <= 3:
     kLa += delkLa
     c += 1
 plt.subplot(1,2,1)
-plt.text(2, 175, str('(a)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1, 158, str('(a) k$_L$a = 0.5 1/hr'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,2,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 175, str('(b)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1, 158, str('(b) k$_L$a = 3.0 1/hr'), fontsize=10, fontweight='bold', ha='center')
 plt.legend(['CO$_2$ supply for alk = 2 meq/L', 'CO$_2$ loss for alk = 2 meq/L',
-            'CO$_2$ supply for alk = 7 meq/L', 'CO$_2$ loss for alk = 7 meq/L'], frameon=False)
+            'CO$_2$ supply for alk = 7 meq/L', 'CO$_2$ loss for alk = 7 meq/L'], frameon=False, bbox_to_anchor=(-.05, 1.3), loc='upper center', ncol = 2)
 plt.show()

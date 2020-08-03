@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 S = 25
 b = 1
 plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3),sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.05)
 while S <= 45:
     T = 20 + 273.15
     K1 = calc_K1(T,S)
@@ -38,21 +39,22 @@ while S <= 45:
     b += 1
 
 plt.subplot(1,3,1)
-plt.text(7.3, 1600, str('(a)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(6.55, 1380, str('(a) S = 25 g/kg'), fontsize=10, fontweight='bold', ha='center')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
 
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(7.3, 1600, str('(b)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(6.55, 1380, str('(b) S = 35 g/kg'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(7.3, 1600, str('(c)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(6.55, 1380, str('(c) S = 45 g/kg'), fontsize=10, fontweight='bold', ha='center')
 plt.legend(['alk = 2 meq/L', 'alk = 7 meq/L', 'alk = 12 meq/L', 'alk = 17 meq/L', 'alk = 22 meq/L'], frameon=False)
 plt.show()
 
 #with algal growth
 plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3),sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.05)
 Sin = 25
 Send = 55
 delS = 10
@@ -115,15 +117,16 @@ for p in Ssteps:
     b += 1
 
 plt.subplot(1,3,1)
-plt.text(2, 85, str('(a)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1, 74, str('(a) S = 25 g/kg'), fontsize=10, fontweight='bold', ha='center')
 plt.ylabel('CO$_2$ (g m$^{-2}$')
 
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 85, str('(b)'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1, 74, str('(b) S = 35 g/kg'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 85, str('(c)'), fontsize=10, fontweight='bold', ha='center')
-plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False)
+plt.text(1, 74, str('(c) S = 45 g/kg'), fontsize=10, fontweight='bold', ha='center')
+plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False, bbox_to_anchor=(.78, .84),
+           bbox_transform=plt.gcf().transFigure)
 plt.show()
