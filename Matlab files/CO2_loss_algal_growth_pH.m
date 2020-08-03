@@ -53,7 +53,7 @@ b = 1;
 
 for c = 1:1+steps 
 pH = 6; %no units
-delpH = 2; %no units
+delpH = 1; %no units
 iterCount = 0;
 C = {'r','b'};
 %Solve ODEs with the ode15s solver
