@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 global k1, k2, k3, k4
 
 Tin = 10 + 273.15
-Tend = 40 + 273.15
+Tend = 30 + 273.15
 delT = 10
 Tsteps = np.arange(Tin, Tend, delT)
 C = ['k', 'b', 'c']
