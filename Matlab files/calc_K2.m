@@ -10,3 +10,4 @@ K2 = exp(-9.226508 - 3351.6106/T - 0.2005743*log(T) - ...
     log(1-0.001005*S));
 end 
 %Carbonate dissociation constants from Zeebe and Wolf Gladrow (2001) p.255
+%units mol/kg or mol/L

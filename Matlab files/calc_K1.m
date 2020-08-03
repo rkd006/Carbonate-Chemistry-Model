@@ -11,3 +11,4 @@ K1 = exp(2.83655 - 2307.1266/T - 1.5529413*log(T) - S^0.5*(0.207608410...
 
 end 
 %Carbonate dissociation constants from Zeebe and Wolf Gladrow (2001) p.255
+%units mol/kg or mol/L
