@@ -1,7 +1,7 @@
 % Author:Deborah Sills
 % Date January 27 2013
 %Dependent functions: rates, calc_K1, calc_K2, calc_Kh, calc_alpha0,
-    %calc_alpha1, calc_alpha2
+    %calc_alpha1, calc_alpha2, calc_density
 %Inputs: T, S, pCO2, pH, kLa, y_2, y_1, k1, k2, k3, k4, Csat, pk1, pk2, d, alk0, r_algae
 %Outputs: CO2 losses to the atmospher vs. time, CO2 requirements vs. time
 
@@ -16,34 +16,39 @@ global k1 k2 k3 k4
 %Environmental conditions
 T = 20 + 273.15; %temp in Kelvins
 S = 35; %(salinity in g/kg)
-PCO2 = 0.000416; %(atm) 
+PCO2 = 0.000416; %(atm)
+Tc = 20;
+P = 10; %(dbar)
+t = Tc*1.00024;
+p = P/10;
+den = calc_density(S, t, p); %(kg/m3)
 
 %Pond characteristics
 d = 0.15; %(m) depth of pond
 
 %mass transfer coefficient for CO2 out of pond
-kLa = .26667; %Weissmann et al., 1988 (1/hr)
+kLa = 0.5; %(1/hr)
+%Weissmann et al., 1988:
 %kL = 0.04 m/hr or 0.96 m/day (Weismann et al., 1987 pg. 6 at bottom)
 
 %Stoicheometric constants for algal growth
 y_2 = 0.1695; % (g bicarbonate as C02 per g algae) from stoicheometry
 y_1 = 1.714;  %(g CO2 per g algae) from stoicheometry
 
-
-
 Kh = calc_Kh(T, S); %(mole/kg sol/atm)
+Kh = Kh*(den); %(mol/m3/atm)
 
 %carbonic acid/bicarbonate equilibrium
-K_1 = calc_K1(T, S); %no units
-
-pK1=-log10(K_1); %no units
+K_1 = calc_K1(T, S); %(mol/kg)
+K1 = K_1*(den/1000); %(mol/L)
+pK1= -log10(K1); %(mol/L)
 
 %bicarbonate/carbonate equlibrium
-K_2 = calc_K2(T, S); %no units
+K_2 = calc_K2(T, S); %(mol/kg)
+K2 = K_2*(den/1000); %(mol/L)
+pK2= -log10(K2); %(mol/L)
 
-pK2= -log10(K_2); %no units
-
-Csat = PCO2*Kh*44*1000;  %(g/m3)
+Csat = PCO2*Kh*44;  %(g/m3)
 
 %%%%%Inputs%%%%%%
 %Assumptions & initial conditions 
@@ -61,7 +66,7 @@ OH=10^-(14-pH)*10^3; %(moles/m3)
 H=(10^(-pH))*10^3;  %(moles/m3)
         
 %Initial Conditions       
-Caq0=((alk0 - OH + H)*alpha0/(alpha1+2*alpha2))*44; %(g/m3)
+Caq0 =((alk0 - OH + H)*alpha0/(alpha1+2*alpha2))*44; %(g/m3)
 Cin0 = 0; %(g/m2)
 Closs0 = 0; %(g/m2)
 

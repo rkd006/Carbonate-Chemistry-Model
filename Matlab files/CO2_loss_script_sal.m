@@ -15,6 +15,10 @@ sin = 25;
 send = 45;
 dels = 10;
 PCO2 = 0.000416;
+Tc = 20;
+P = 10; %(dbar)
+t = Tc*1.00024;
+p = P/10;
 kLa = 0.5; %(1/hr)
 pHin = 6.5; %no units
 pHend = 8.5; %no units
@@ -23,7 +27,7 @@ d = .15; %(m) depth of pond
 alk = 2.5;
 
 %define r_temp
-r_sal = calc_CO2_loss_sal (T, PCO2, alk, kLa, pHin, pHend, delpH, send, sin, dels);
+r_sal = calc_CO2_loss_sal (T, PCO2, t, p, alk, kLa, pHin, pHend, delpH, send, sin, dels);
 
 %modify r for plotting
 %x axis is the first column of r

@@ -18,6 +18,11 @@ global k1 k2 k3 k4
 T = 20 + 273.15; %temp in Kelvins
 S = 35; %(salinity in g/kg)
 PCO2 = 0.000416; % (atm) 
+Tc = 20;
+P = 10; %(dbar)
+t = Tc*1.00024;
+p = P/10;
+den = calc_density(S, t, p); %(kg/m3)
 
 %Pond characteristics
 d = 0.15; %(m) depth of pond
@@ -27,17 +32,17 @@ y_2 = 0.1695; % (g bicarbonate as CO2 per g algae) from stoicheometry
 y_1 = 1.714;  %(g CO2 per g algae) from stoicheometry
 
 
-Kh = calc_Kh(T, S); %(mole/kg sol/atm)
+Kh = calc_Kh(T, S)*(den/1000); %(mole/L/atm)
 
 %carbonic acid/bicarbonate equilibrium
-K_1 = calc_K1(T, S); %no units
+K_1 = calc_K1(T, S)*(den/1000); %(mol/L)
 
-pK1=-log10(K_1); %no units
+pK1=-log10(K_1); 
 
 %bicarbonate/carbonate equlibrium
-K_2 = calc_K2(T, S); %no units
+K_2 = calc_K2(T, S)*(den/1000); %(mol/L)
 
-pK2= -log10(K_2); %no units
+pK2= -log10(K_2); 
 
 Csat = PCO2*Kh*44*1000;  %(g/m3)
 

@@ -8,15 +8,20 @@ T = 20 +273.15;
 S = 35;
 PCO2 = 0.000416;
 d = 0.15;
+Tc = 20;
+P = 10; %(dbar)
+t = Tc*1.00024;
+p = P/10;
+den = calc_density(S, t, p); %(kg/m3)
 
 kLa = 0.5;
 y1 = 1.714;
 y2 = 0.1695;
 y3 = 1.88;
-Kh = calc_Kh(T,S);
-K1 = calc_K1(T,S);
+Kh = calc_Kh(T,S)*(den/1000);
+K1 = calc_K1(T,S)*(den/1000);
 pK1 = -log10(K1);
-K2 = calc_K2(T,S);
+K2 = calc_K2(T,S)*(den/1000);
 pK2 = -log10(K2);
 
 alk0 = 2.5;

@@ -18,9 +18,14 @@ pH_end= 14;
 %define equilibrium constants 
 T = 20 + 273.15;
 S = 35;
-K_1 = calc_K1(T, S);
+Tc = 20;
+P = 10; %(dbar)
+t = Tc*1.00024;
+p = P/10;
+den = calc_density(S, t, p); %(kg/m3)
+K_1 = calc_K1(T, S)*(den/1000);
 pK1 = -log10(K_1);
-K_2 = calc_K2(T, S);
+K_2 = calc_K2(T, S)*(den/1000);
 pK2 = -log10(K_2);
 
 %create 100 linearly spaced points between pH_start and pH_end

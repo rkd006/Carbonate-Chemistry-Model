@@ -15,6 +15,11 @@ Tend = 30 + 273.15;
 delT = 10;
 S = 35; %(salinity in g/kg)
 PCO2 = 0.000416;
+Tc = 20;
+P = 10; %(dbar)
+t = Tc*1.00024;
+p = P/10;
+den = calc_density(S, t, p); %(kg/m3)
 kLa = 0.5; %(1/hr)
 pHin = 6.5; %no units
 pHend = 8.5; %no units
@@ -23,7 +28,7 @@ d = .15; %(m) depth of pond
 alk = 2.5;
 
 %define r_temp
-r_temp = calc_CO2_loss_temp (S, PCO2, alk, kLa, pHin, pHend, delpH, Tend, Tin, delT);
+r_temp = calc_CO2_loss_temp (S, PCO2, den, alk, kLa, pHin, pHend, delpH, Tend, Tin, delT);
 
 %modify r for plotting
 %x axis is the first column of r

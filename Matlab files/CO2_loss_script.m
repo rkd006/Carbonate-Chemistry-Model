@@ -12,11 +12,16 @@ close all
 %define variables
 T = 20 + 273.15; %temp in Kelvins
 S = 35; %(salinity in g/kg)
-K_1 = calc_K1(T, S); %no units
+Tc = 20;
+P = 10; %(dbar)
+t = Tc*1.00024;
+p = P/10;
+den = calc_density(S, t, p); %(kg/m3)
+K_1 = calc_K1(T, S)*(den/1000); %no units
 pK1 = -log10(K_1); %no units
-K_2 = calc_K2(T, S); %no units
+K_2 = calc_K2(T, S)*(den/1000); %no units
 pK2 = -log10(K_2); %no units
-Kh = calc_Kh(T,S);
+Kh = calc_Kh(T,S)*(den/1000);
 PCO2 = 0.000416;
 kLa = 0.5; %(1/hr)
 pHin = 6.5; %no units
