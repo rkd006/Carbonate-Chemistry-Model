@@ -73,6 +73,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - calc_alpha1: creates a function to calculate alpha1
 - calc_alpha2: creates a function to calculate alpha2
 - calc_alphas: calculate CO2 losses to the atmossphere numerically
+- calc_density: calculate the density of seawater
 - calc_CO2_loss: creates a function to calculate the CO2 losses to the atmosphere with inputs of pH and alkalinity ranges
 - calc_CO2_loss_kLa: creates a function to calculate the CO2 losses to the atmosphere with inputs of pH and kLa ranges
 - calc_K1: creates a function to calculate K1
