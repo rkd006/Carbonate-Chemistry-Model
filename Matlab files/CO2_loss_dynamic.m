@@ -36,19 +36,19 @@ y_2 = 0.1695; % (g bicarbonate as C02 per g algae) from stoicheometry
 y_1 = 1.714;  %(g CO2 per g algae) from stoicheometry
 
 Kh = calc_Kh(T, S); %(mole/kg sol/atm)
-Kh = Kh*(den); %(mol/m3/atm)
+Kh = Kh*(den/1000); %(mol/L/atm)
 
 %carbonic acid/bicarbonate equilibrium
 K_1 = calc_K1(T, S); %(mol/kg)
 K1 = K_1*(den/1000); %(mol/L)
-pK1= -log10(K1); %(mol/L)
+pK1= -log10(K1) %(mol/L)
 
 %bicarbonate/carbonate equlibrium
 K_2 = calc_K2(T, S); %(mol/kg)
 K2 = K_2*(den/1000); %(mol/L)
-pK2= -log10(K2); %(mol/L)
+pK2= -log10(K2) %(mol/L)
 
-Csat = PCO2*Kh*44;  %(g/m3)
+Csat = PCO2*Kh*44*1000;  %(g/m3)
 
 %%%%%Inputs%%%%%%
 %Assumptions & initial conditions 
@@ -64,13 +64,13 @@ alpha2 = calc_alpha2(pH,pK1, pK2); %no units
 %Calculate [H+] and [OH-]
 OH=10^-(14-pH)*10^3; %(moles/m3)
 H=(10^(-pH))*10^3;  %(moles/m3)
-        
+  
 %Initial Conditions       
-Caq0 =((alk0 - OH + H)*alpha0/(alpha1+2*alpha2))*44; %(g/m3)
+Caq0 = (((alk0 - OH + H)*(alpha0))/(alpha1+2*alpha2))*44; %(g/m3)
 Cin0 = 0; %(g/m2)
 Closs0 = 0; %(g/m2)
 
- % rate constants for odes
+% rate constants for odes
 %delivery requirements for the algal pond
 %rate of Caq removed due to alkalinity consumption by algae Eq(15)
 k1 = y_2*r_algae*alpha0/(alpha1+2*alpha2);

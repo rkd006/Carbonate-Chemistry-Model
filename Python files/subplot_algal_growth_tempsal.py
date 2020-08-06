@@ -5,6 +5,7 @@
 
 from calc_Ks import *
 from calc_alphas import *
+from calc_density import *
 from rates import *
 import numpy as np
 from scipy.integrate import odeint
@@ -20,17 +21,22 @@ delT = 20
 Tsteps = np.arange(Tin, Tend, delT)
 C = ['k', 'r']
 b = 0
-for p in Tsteps:
+for a in Tsteps:
     S = 35
+    Tc = a - 273.15
+    P = 10 #(dbar)
+    t = Tc*1.00024
+    p = P/10
+    den = calc_density(S, t, p) #(kg/m3)
     PCO2 = 0.000416
     d = 0.15
     kLa = 0.5
     y1 = 1.714 #g CO2 per g algae
     y2 = 0.1695 #g HCO3 as CO2 per g algae
-    Kh = calc_Kh(p,S)
-    K1 = calc_K1(p, S)
+    Kh = calc_Kh(a,S)*(den/1000) #mol/L/atm
+    K1 = calc_K1(a, S)*(den/1000) #mol/L
     pK1 = - np.log10(K1)
-    K2 = calc_K2(p, S)
+    K2 = calc_K2(a, S)*(den/1000) #mol/L
     pK2 = - np.log10(K2)
     
     Csat = PCO2*Kh*44*1000
@@ -85,17 +91,22 @@ delS = 20
 Ssteps = np.arange(Sin, Send, delS)
 C = ['b', 'c']
 b = 0
-for p in Ssteps:
+for a in Ssteps:
     T = 20 + 273.15
+    Tc = 20
+    P = 10 #(dbar)
+    t = Tc*1.00024
+    p = P/10
+    den = calc_density(a, t, p) #(kg/m3)
     PCO2 = 0.000416
     d = 0.15
     kLa = 0.5
     y1 = 1.714 #g CO2 per g algae
     y2 = 0.1695 #g HCO3 as CO2 per g algae
-    Kh = calc_Kh(T,p)
-    K1 = calc_K1(T, p)
+    Kh = calc_Kh(T,a)*(den/1000) #mol/L/atm
+    K1 = calc_K1(T, a)*(den/1000) #mol/L
     pK1 = - np.log10(K1)
-    K2 = calc_K2(T, p)
+    K2 = calc_K2(T, a)*(den/1000) #mol/L
     pK2 = - np.log10(K2)
     
     Csat = PCO2*Kh*44*1000

@@ -6,6 +6,7 @@
 from calc_Ks import *
 from calc_alphas import *
 from calc_CO2_loss import *
+from calc_density import *
 import numpy as np
 import matplotlib.pyplot as plt
 from calc_CO2_loss_temp import *
@@ -14,11 +15,16 @@ from calc_CO2_loss_temp import *
 T = 10 + 273.15
 while T <= 30 + 273.15:
     S = 35
-    K1 = calc_K1(T,S)
+    Tc = T - 273.15; #celcius
+    P = 10; #(dbar)
+    t = Tc*1.00024;
+    p = P/10;
+    den = calc_density(S, t, p); #(kg/m3)
+    K1 = calc_K1(T,S)*(den/1000) #mol/L
     pK1 = -np.log10(K1)
-    K2 = calc_K2(T,S)
+    K2 = calc_K2(T,S)*(den/1000) #mol/L
     pK2 = -np.log10(K2)
-    Kh = calc_Kh(T,S)
+    Kh = calc_Kh(T,S)*(den/1000) #mol/L/atm
     PCO2 = 0.000416
     alkin = 2
     alkend = 27
@@ -43,12 +49,12 @@ S = 35
 PCO2 = 0.000416
 alk = 2.5
 pHin = 6
-pHend = 8.2
+pHend = 8.5
 delpH = 0.1
 d = 0.15
 kLa = 0.5
 y = calc_CO2_loss_temp (PCO2, alk, d, pHin, pHend, delpH, kLa, S, Tin, Tend, delT)
 plt.xlabel('pH')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
-plt.legend(['T = 10 $^o$C', 'T = 20 $^o$C', 'T = 30 $^o$C'], frameon=False)
+plt.axis([6, 8.3, 0, 200])
 plt.show()

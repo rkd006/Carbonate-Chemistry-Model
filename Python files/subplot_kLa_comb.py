@@ -6,17 +6,23 @@
 from calc_Ks import *
 from calc_alphas import *
 from calc_CO2_loss import *
+from calc_density import *
 import numpy as np
 import matplotlib.pyplot as plt
 
 T = 20 + 273.15
 S = 35
-K1 = calc_K1(T,S)
+Tc = 20
+P = 10 #(dbar)
+t = Tc*1.00024
+p = P/10
+den = calc_density(S, t, p) #(kg/m3)
+K1 = calc_K1(T,S)*(den/1000) #mol/L
 pK1 = -np.log10(K1)
-K2 = calc_K2(T,S)
+K2 = calc_K2(T,S)*(den/1000) #mol/L
 pK2 = -np.log10(K2)
 PCO2 = 0.000416
-Kh = calc_Kh(T,S)
+Kh = calc_Kh(T,S)*(den/1000) #mol/L/atm
 alkin = 2
 alkend = 37
 delalk = 5

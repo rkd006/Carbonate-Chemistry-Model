@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from calc_Ks import *
 from calc_alphas import *
-
+from calc_density import *
 
 def calc_CO2_loss_sal (pK1, pK2, alk, d, PCO2, pHin, pHend, delpH, kLa, T, Sin, Send, delS):
     L = np.array(['-', '--', '-.', ':', '--'])
@@ -17,11 +17,16 @@ def calc_CO2_loss_sal (pK1, pK2, alk, d, PCO2, pHin, pHend, delpH, kLa, T, Sin, 
     y = np.zeros((nSsteps, len(pH)))
     i = 0
     for c in Ssteps:
-        K1 = calc_K1(T,c)
+        Tc = 20; #celcius
+        P = 10; #(dbar)
+        t = Tc*1.00024;
+        p = P/10;
+        den = calc_density(c, t, p); #(kg/m3)
+        K1 = calc_K1(T,c)*(den/1000) #mol/L
         pK1 = -np.log10(K1)
-        K2 = calc_K2(T,c)
+        K2 = calc_K2(T,c)*(den/1000) #mol/L
         pK2 = -np.log10(K2)
-        Kh = calc_Kh(T,c)
+        Kh = calc_Kh(T,c)*(den/1000) #mol/L/atm
         alpha0 = calc_alpha0(pH, pK1, pK2)
         alpha1 = calc_alpha1(pH, pK1, pK2)
         alpha2 = calc_alpha2(pH, pK1, pK2)

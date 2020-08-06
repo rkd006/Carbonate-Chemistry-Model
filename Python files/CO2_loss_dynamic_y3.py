@@ -5,6 +5,7 @@
 
 from calc_Ks import *
 from calc_alphas import *
+from calc_density import *
 import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
@@ -13,6 +14,11 @@ global k1, k2, k3, k4
 
 T = 20 + 273.15 #kelvins
 S = 35 #g/kg
+Tc = 20;
+P = 10; #(dbar)
+t = Tc*1.00024;
+p = P/10;
+den = calc_density(S, t, p); #(kg/m3)
 PCO2 = 0.000416 #atm
 d = 0.15 #m
 
@@ -20,10 +26,10 @@ kLa = 0.26667 #1/hr
 y3 = 1.88 #g CO2 total per g algae
 y2 = 0.1695 #g HCO3 as CO2 per g algae
 
-Kh = calc_Kh(T,S)
-K1 = calc_K1(T, S)
+Kh = calc_Kh(T,S)*(den/1000) #mol/L/atm
+K1 = calc_K1(T, S)*(den/1000) #mol/L
 pK1 = - np.log10(K1)
-K2 = calc_K2(T, S)
+K2 = calc_K2(T, S)*(den/1000) #mol/L
 pK2 = - np.log10(K2)
 
 Csat = PCO2*Kh*44*1000 #g/m3
