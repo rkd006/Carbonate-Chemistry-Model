@@ -22,7 +22,7 @@ den = calc_density(S, t, p) #(kg/m3)
 PCO2 = 0.000416 #atm
 d = 0.15 #m
 
-kLa = 0.5 #1/hr
+kLa = 3 #1/hr
 y1 = 1.714 #g CO2 per g algae
 y2 = 0.1695 #g HCO3 as CO2 per g algae
 
