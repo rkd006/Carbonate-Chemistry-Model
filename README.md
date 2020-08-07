@@ -126,6 +126,10 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - subplot_kLa_comb: creates multiple subplots side by side of the figures of kLa = 0.5 1/hr and kLa = 3 1/hr from CO2_loss_kLa_comb
 - subplot_algal_growth_tempsal: create subplots side by side of the figures from CO2_loss_algal_growth_temp and CO2_loss_algal_growth_sal
 
+#### *with algal growth kinetics:*
+
+- monod_simple: calculated the specific growth rate as a function of light intensity based on the Monod model
+
 
 ## Authors
 - Deborah Sills
