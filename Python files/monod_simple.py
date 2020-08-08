@@ -12,9 +12,12 @@ Ki = 178.7/4.6 #W/m2
 Iin = 0
 Iend = 401
 delI = 1
+delta = 1.066
+T = 20
+Tr = 20
 Isteps = np.arange(Iin, Iend, delI)
 I = Isteps
-u = ((umax)) * (I/(I + Ki))
+u = ((umax)) * (I/(I + Ki))*(delta**(T-Tr))
 plt.figure()
 plt.plot(I, u)
 plt.xlabel('light intensity (W/m$^2$)')
@@ -24,13 +27,16 @@ plt.show()
 umax = 1.44
 I = 186
 Ki = 178.7/4.6
+delta = 1.066
+T = 20
+Tr = 20
 def kinetics(s,t):
     global umax, X0, Y, Ks
     X = s[0]
-    dXdt = ((umax*X))*(I/(I + Ki))
+    dXdt = ((umax*X))*(I/(I + Ki))*(delta**(T-Tr))
     return [dXdt]
 
-X0 = 1
+X0 = .4
 
 s0 = [X0]
 t = np.linspace(0,4,100) 

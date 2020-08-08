@@ -21,9 +21,9 @@ p = P/10
 den = calc_density(S, t, p) #(kg/m3)
 PCO2 = 0.000416 #atm
 d = 0.15 #m
-umax = 1.44
-I = 186
-Ki = 178.7/4.6
+umax = 1.44 #1/day
+I = 186 #W/m2
+Ki = 178.7/4.6 #W/m2
 
 kLa = 3 #1/hr
 y1 = 1.714 #g CO2 per g algae
@@ -36,9 +36,7 @@ K2 = calc_K2(T, S)*(den/1000) #mol/L
 pK2 = - np.log10(K2)
 
 Csat = PCO2*Kh*44*1000 #g/m3
-
-alk0 = 2.5
-r_algae = 10
+alk0 = 2.5 #eq/m3
 pH = 8
 
 alpha0 = calc_alpha0(pH, pK1, pK2)
@@ -62,13 +60,13 @@ def rate_kinetics(x,t):
     Cdel = x[2]
     Closs = x[3]
     dXdt = k6*X
-    dCaqdt = -k1*X
-    dCdeldt = ((k2 *Caq) - k3) + (k4*X - k5*X)
+    dCaqdt = -k1*dXdt
+    dCdeldt = ((k2 *Caq) - k3) + (k4*dXdt - k5*dXdt)
     dClossdt = (k2 *Caq) - k3
     return [dXdt, dCaqdt, dCdeldt, dClossdt]
 
-X0 = 1
-Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44
+X0 = 0.4 #g/m2
+Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
 Cin0 = 0
 Closs0 = 0 
 
@@ -84,7 +82,6 @@ print (Closs)
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
-plt.figure()
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
 plt.show()
