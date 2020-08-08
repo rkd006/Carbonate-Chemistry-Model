@@ -21,17 +21,16 @@ plt.xlabel('light intensity (W/m$^2$)')
 plt.ylabel('specific growth rate (day$^{-1})$')
 plt.show()
 
-umax = 1#1.44
-X = 0
-I = 130 #186
-Ki = 200 #178.7/4.6
+umax = 1.44
+I = 186
+Ki = 178.7/4.6
 def kinetics(s,t):
     global umax, X0, Y, Ks
     X = s[0]
     dXdt = ((umax*X))*(I/(I + Ki))
     return [dXdt]
 
-X0 = 10
+X0 = 1
 
 s0 = [X0]
 t = np.linspace(0,4,100) 
