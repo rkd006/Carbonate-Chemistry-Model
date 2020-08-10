@@ -128,8 +128,9 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 
 #### *with algal growth kinetics:*
 
-- monod_simple: calculated the specific growth rate as a function of light intensity based on the Monod model
-- CO2_loss_dynamic_kinetics: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days, which includes algal growth kinetics
+- specific_growth: calculated the specific growth rate as a function of light intensity based on different models
+- algae_productiivity: calculate biomass productivity as a function of time based on different models
+- CO2_loss_dynamic_kinetics: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days, which includes algal growth kinetics based on Monod
 
 
 ## Authors
