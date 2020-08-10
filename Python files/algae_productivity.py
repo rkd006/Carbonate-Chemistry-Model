@@ -28,10 +28,10 @@ plt.xlabel('time')
 plt.ylabel('Biomass Productivity (g m$^{-2}$ day$^{-1})$')
 plt.show()
 
-
+#modified aiba model
 K1 = 200.1/24
 K2 = 0.1110/24
-I = 20 #W/m2
+I = 100 #W/m2
 def kinetics(s,t):
     global umax, X0, Y, Ks
     X = s[0]
