@@ -59,7 +59,7 @@ k5 = y2*(alpha1 + 2*alpha2)
 h = np.exp(-K*(Tc-Topt)**2)
 f = divI*np.exp(1-divI)
 u = umax*f*h
-    
+
 def rate_kinetics(x,t):
     global k1, k2, k3, k4, u
     X = x[0]
