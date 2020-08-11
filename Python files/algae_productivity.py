@@ -17,7 +17,7 @@ def kinetics(s,t):
     dXdt = ((umax*I)/(I + Ki))*X
     return [dXdt]
 
-X0 = 0.4 #g/m2
+X0 = 0.4 #g/m3
 
 s0 = [X0]
 t = np.linspace(0,4,100) 
@@ -25,7 +25,7 @@ t = np.linspace(0,4,100)
 s = odeint(kinetics, s0, t)
 plt.plot(t, s[:,0])
 plt.xlabel('time')
-plt.ylabel('Biomass Productivity (g m$^{-2}$ day$^{-1})$')
+plt.ylabel('Biomass Concentration (g m$^{-3}$)')
 plt.show()
 
 #modified aiba model
@@ -38,7 +38,7 @@ def kinetics(s,t):
     dXdt = (I)/(K1 + K2*(I**2))*X
     return [dXdt]
 
-X0 = 0.4 #g/m2
+X0 = 0.4 #g/m3
 
 s0 = [X0]
 t = np.linspace(0,4,100) 
@@ -46,5 +46,5 @@ t = np.linspace(0,4,100)
 s = odeint(kinetics, s0, t)
 plt.plot(t, s[:,0])
 plt.xlabel('time')
-plt.ylabel('Biomass Productivity (g m$^{-2}$ day$^{-1})$')
+plt.ylabel('Biomass Concentration (g m$^{-3}$)')
 plt.show()

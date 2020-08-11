@@ -29,4 +29,3 @@ plt.legend(['X = 50 g/m$^3$', 'X = 100 g/m$^3$', 'X = 150 g/m$^3$'], frameon=Fal
 plt.axis([0, 0.15, 0, 100])
 plt.show()
 
-#changing concentration

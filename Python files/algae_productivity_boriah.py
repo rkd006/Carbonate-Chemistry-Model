@@ -43,17 +43,40 @@ h = np.exp(-K*(T-Topt)**2)
 f = divI*np.exp(1-divI)
 u = umax*f*h
 
+
 def product(b,t):
     B = b[0]
     dBdt = u*B
     return [dBdt]
 
-B0 = 0.4 #g/m2
+B0 = 0.4 #g/m3
 b0 = [B0]
 t = np.linspace(0,4,100) 
 b = odeint(product, b0, t)
 plt.plot(t, b[:,0])
 
 plt.xlabel('time')
-plt.ylabel('Biomass Productivity (g m$^{-2}$ day$^{-1})$')
+plt.ylabel('Biomass Concentration (g m$^{-3}$)')
 plt.show()
+
+C = 1000
+def product(b,t):
+    B = b[0]
+    dBdt = u*(1-(B/C))*B
+    return [dBdt]
+
+B0 = 1-p #g/m3
+b0 = [B0]
+t = np.linspace(0,4,400) 
+b = odeint(product, b0, t)
+plt.plot(t, b[:,0])
+plt.xlabel('time')
+plt.ylabel('Biomass Concentration (g m$^{-3}$)') 
+plt.show()
+
+P1 = (b[99]-b[0])
+P2 = (b[199]-b[99])
+P3 = (b[299]-b[199])
+P4 = (b[399]-b[299])
+avg = np.average([P1,P2,P3,P4])
+print (avg)

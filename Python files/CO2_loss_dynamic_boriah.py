@@ -25,8 +25,8 @@ PCO2 = 0.000416 #atm
 d = 0.15 #m
 K = 0.007
 Topt = 20 #celcius
-I = 10 #W/m2
-Is = 20
+I = 70 #W/m2
+Is = 140
 divI = I/Is
 umax = 1.44 #1/day
 
