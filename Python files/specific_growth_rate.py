@@ -1,6 +1,6 @@
 #author: Riley Doyle
 #date: 8/7/20
-#file: specific_growth
+#file: specific_growth_rate
 #status: WORKING
 
 import numpy as np

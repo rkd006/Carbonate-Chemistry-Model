@@ -53,30 +53,36 @@ B0 = 0.4 #g/m3
 b0 = [B0]
 t = np.linspace(0,4,100) 
 b = odeint(product, b0, t)
-plt.plot(t, b[:,0])
+X = b[:,0]
+n = np.arange(0, 100, 1)
+P = (X[n] - X[n-1])/(t[n] - t[n-1])
+avg = np.average(P)
+print (avg)
 
+plt.plot(t, b[:,0])
 plt.xlabel('time')
 plt.ylabel('Biomass Concentration (g m$^{-3}$)')
 plt.show()
 
+#population dynamics model
 C = 1000
 def product(b,t):
     B = b[0]
     dBdt = u*(1-(B/C))*B
     return [dBdt]
 
-B0 = 1-p #g/m3
+B0 = 1 #g/m3
 b0 = [B0]
 t = np.linspace(0,4,400) 
 b = odeint(product, b0, t)
+X = b[:,0]
+n = np.arange(0, 400, 1)
+P = (X[n] - X[n-1])/(t[n] - t[n-1])
+avg = np.average(P)
+print (avg)
+
 plt.plot(t, b[:,0])
 plt.xlabel('time')
 plt.ylabel('Biomass Concentration (g m$^{-3}$)') 
 plt.show()
 
-P1 = (b[99]-b[0])
-P2 = (b[199]-b[99])
-P3 = (b[299]-b[199])
-P4 = (b[399]-b[299])
-avg = np.average([P1,P2,P3,P4])
-print (avg)
