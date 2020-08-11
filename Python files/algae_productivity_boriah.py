@@ -1,6 +1,6 @@
 #author: Riley Doyle
 #date: 8/10/20
-#file: algae_productivity_open
+#file: algae_productivity_boriah
 #status: WORKING
 
 import numpy as np
@@ -32,8 +32,6 @@ u = umax*f
 plt.plot(divI, f)
 plt.xlabel('I/Is')
 plt.ylabel('f(I)')
-plt.figure()
-plt.plot(divI, u)
 plt.show()
 
 I = 10 #W/m2

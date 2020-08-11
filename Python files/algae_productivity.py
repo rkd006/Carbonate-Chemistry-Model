@@ -31,14 +31,14 @@ plt.show()
 #modified aiba model
 K1 = 200.1/24
 K2 = 0.1110/24
-I = 100 #W/m2
+I = 140 #W/m2
 def kinetics(s,t):
     global umax, X0, Y, Ks
     X = s[0]
     dXdt = (I)/(K1 + K2*(I**2))*X
     return [dXdt]
 
-X0 = 0.04 #g/m2
+X0 = 0.4 #g/m2
 
 s0 = [X0]
 t = np.linspace(0,4,100) 

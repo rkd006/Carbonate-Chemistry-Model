@@ -57,14 +57,12 @@ plt.axis([0, 100, 0, 3])
 plt.show()
 
 #Beer Lambert Law
-from scipy import integrate
-I0 = 186 #W/m2
+I0 = 100 #W/m2
 o = 0.175 #m2/g
 X = 50 #g/m3
-z = np.arange(0, 0.20, 0.01)
-I = I0*np.exp(-o*X*z)
-I_int = integrate.cumtrapz(I, z, initial=0)
-plt.plot(z, I_int)
+z = np.arange(0, 0.15, 0.01)
+I = I0/np.exp(o*X*z)
+plt.plot(z, I)
 plt.xlabel('position (cm)')
 plt.ylabel('Light Intensity (W m$^{-2})$')
 plt.show()
