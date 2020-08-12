@@ -134,6 +134,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - CO2_loss_dynamic_monod: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days, which includes algal growth kinetics based on Monod
 - CO2_loss_dynamic_boriah: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days, which includes algal growth kinetics based on boriah
 - Beer_Lambert_Law: figure that plots light intensity as a function of position for constant biomass concentration 
+- CO2_loss_dynamic_aiba: figure that plots CO2 requirements and losses over four days, which includes algal growth kinetics based on the modified aiba model
 
 
 ## Authors
