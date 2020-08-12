@@ -17,20 +17,20 @@ def kinetics(s,t):
     dXdt = ((umax*I)/(I + Ki))*X
     return [dXdt]
 
-X0 = 0.006 #g/m3
+X0 = 0.006 #g/m2
 s0 = [X0]
 t = np.linspace(0,4,100)
 n = np.arange(0, 100, 1) 
 s1 = odeint(kinetics, s0, t)
 X = s1[:,0]
 
-#aiba model
-K1 = 182.6
-K2 = 0.0975 
-umax = 0.9923*24
+#modified aiba model
+K1 = (200.1/24)
+K2 = (0.1110/24)
+u2 = (I)/(K1 + K2*(I**2))
 def kinetics(s,t):
     X = s[0]
-    dXdt = (umax*I)/(K1 + I + K2*(I**2))*X
+    dXdt = u2*X
     return [dXdt]
 
 s0 = [X0] 
@@ -62,7 +62,7 @@ plt.plot(t, s1[:,0])
 plt.plot(t, s2[:,0])
 plt.plot(t, b[:,0])
 plt.axis([0, 4, 0, 80])
-plt.legend(['Monod', 'Aiba', 'Boriah'], frameon=False)
+plt.legend(['Monod', 'Modified Aiba', 'Boriah'], frameon=False)
 plt.xlabel('time')
 plt.ylabel('Biomass Density (g m$^{-2}$)')
 plt.show()

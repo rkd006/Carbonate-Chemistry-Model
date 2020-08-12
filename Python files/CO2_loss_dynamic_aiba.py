@@ -1,9 +1,9 @@
 #author: Riley Doyle
-#date: 8/8/20
-#file: CO2_loss_dynamic_monod
+#date: 8/12/20
+#file: CO2_loss_dynamic_aiba
 #status: WORKING
 
-#monod model
+#modified aiba model
 
 from calc_Ks import *
 from calc_alphas import *
@@ -21,9 +21,7 @@ p = P/10
 den = calc_density(S, t, p) #(kg/m3)
 PCO2 = 0.000416 #atm
 d = 0.15 #m
-umax = 3.2424 #1/day
 I = 30 #W/m2
-Ki = 13.9136 #178.7/4.6 #W/m2
 
 kLa = 3 #1/hr
 y1 = 1.714 #g CO2 per g algae
@@ -51,9 +49,12 @@ k2 = (kLa*d*24)
 k3 = (kLa*d*24)*Csat
 k4 = (y1 + y2)
 k5 = y2*(alpha1 + 2*alpha2)
-k6 = umax*(I/(I + Ki))
+K1 = (200.1/24)
+K2 = (0.1110/24)
+k6 = (I)/(K1 + K2*(I**2))
 
 def rate_kinetics(x,t):
+    global k1, k2, k3, k4, u
     X = x[0]
     Caq = x[1]
     Cdel = x[2]
@@ -74,7 +75,6 @@ t = np.linspace(0.01,4,100)
 n = np.arange(0, 100, 1)
 x = odeint(rate_kinetics, x0, t)
 X = x[:,0]
-print (X)
 Caq = x[:,1]
 Cdel = x[:,2]
 Closs = x[:,3]
@@ -83,12 +83,6 @@ plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
-print (Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.axis([0, 4, 0, 80])
-plt.show()
-
-plt.xlabel('time (days)')
-plt.ylabel('CO$_2$ (g/m$^2$)')
-plt.plot(t,Caq)
+plt.axis([0, 4, 0, 160])
 plt.show()

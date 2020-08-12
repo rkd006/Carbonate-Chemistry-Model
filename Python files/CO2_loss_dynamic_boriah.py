@@ -12,8 +12,6 @@ import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
-global k1, k2, k3, k4
-
 T = 20 + 273.15 #kelvins
 S = 35 #g/kg
 Tc = 20
@@ -58,17 +56,16 @@ k4 = (y1 + y2)
 k5 = y2*(alpha1 + 2*alpha2)
 h = np.exp(-K*(Tc-Topt)**2)
 f = divI*np.exp(1-divI)
-u = umax*f*h
+k6 = umax*f*h
 
 def rate_kinetics(x,t):
-    global k1, k2, k3, k4, u
     X = x[0]
     Caq = x[1]
     Cdel = x[2]
     Closs = x[3]
-    dXdt = u*(X)
-    dCaqdt = -k1*dXdt
-    dCdeldt = ((k2 *Caq) - k3) + (k4*dXdt - k5*dXdt)
+    dXdt = X*k6
+    dCaqdt = -k1*X*k6
+    dCdeldt = ((k2 *Caq) - k3) + (k4*X*k6 - k5*X*k6)
     dClossdt = (k2 *Caq) - k3
     return [dXdt, dCaqdt, dCdeldt, dClossdt]
 
@@ -86,16 +83,12 @@ Caq = x[:,1]
 Cdel = x[:,2]
 Closs = x[:,3]
 
-P = (X[n] - X[n-1])/(t[n] - t[n-1])
-avg = np.average(P)
-print (avg)
-
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.axis([0, 4, 0, 75])
+plt.axis([0, 4, 0, 95])
 plt.show()
 
 plt.xlabel('time (days)')
