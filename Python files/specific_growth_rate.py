@@ -36,7 +36,7 @@ u4 = (umax*I)/(K1 + I + K2*(I**2))
 
 #open pond
 umax = 3.2424
-Is = 50
+Is = 80
 T = 25
 K = 0.007
 Topt = 20

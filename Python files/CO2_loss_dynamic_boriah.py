@@ -25,10 +25,10 @@ PCO2 = 0.000416 #atm
 d = 0.15 #m
 K = 0.007
 Topt = 20 #celcius
-I = 70 #W/m2
-Is = 140
+I = 30 #W/m2
+Is = 80
 divI = I/Is
-umax = 1.44 #1/day
+umax = 3.2424 #1/day
 
 kLa = 3 #1/hr
 y1 = 1.714 #g CO2 per g algae
@@ -66,19 +66,19 @@ def rate_kinetics(x,t):
     Caq = x[1]
     Cdel = x[2]
     Closs = x[3]
-    dXdt = u*X
+    dXdt = u*(X)
     dCaqdt = -k1*dXdt
     dCdeldt = ((k2 *Caq) - k3) + (k4*dXdt - k5*dXdt)
     dClossdt = (k2 *Caq) - k3
     return [dXdt, dCaqdt, dCdeldt, dClossdt]
 
-X0 = 0.35 #g/m2
+X0 = 0.006 #g/m2
 Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
 Cin0 = 0
 Closs0 = 0 
 
 x0 = [X0, Caq0, Cin0, Closs0]
-t = np.linspace(0,4,100) 
+t = np.linspace(0.01,4,100) 
 n = np.arange(0, 100, 1)
 x = odeint(rate_kinetics, x0, t)
 X = x[:,0]
