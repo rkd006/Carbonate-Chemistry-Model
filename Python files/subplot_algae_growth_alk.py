@@ -39,10 +39,10 @@ plt.subplots(nrows = 1, ncols = 2, figsize=(9, 3),sharex= True, sharey= True)
 plt.subplots_adjust(wspace = 0.05)
 while kLa <= 3:
     alk0 = 2
-    delalk = 5
+    delalk = 30
     C = ['k', 'b', 'r']
     b = 0
-    while alk0 <= 7:
+    while alk0 <= 32:
 
         alpha0 = calc_alpha0(pH, pK1, pK2)
         alpha1 = calc_alpha1(pH, pK1, pK2)
@@ -80,16 +80,144 @@ while kLa <= 3:
         plt.ylabel('CO$_2$ (g/m$^2$)')
         plt.plot(t,Cdel, C[b])
         plt.plot(t,Closs, C[b], linestyle='--')
-        plt.axis([0, 4, 0, 170])
+        plt.axis([0, 4, 0, 500])
         b += 1
         alk0 += delalk
     kLa += delkLa
     c += 1
 plt.subplot(1,2,1)
-plt.text(1, 158, str('(a) k$_L$a = 0.5 1/hr'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1, 450, str('(a) k$_L$a = 0.5 1/hr'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,2,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(1, 158, str('(b) k$_L$a = 3.0 1/hr'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1, 450, str('(b) k$_L$a = 3.0 1/hr'), fontsize=10, fontweight='bold', ha='center')
 plt.legend(['CO$_2$ supply for alk = 2 meq/L', 'CO$_2$ loss for alk = 2 meq/L',
-            'CO$_2$ supply for alk = 7 meq/L', 'CO$_2$ loss for alk = 7 meq/L'], frameon=False, bbox_to_anchor=(-.05, 1.3), loc='upper center', ncol = 2)
+            'CO$_2$ supply for alk = 32 meq/L', 'CO$_2$ loss for alk = 32 meq/L'], frameon=False, bbox_to_anchor=(-.05, 1.3), loc='upper center', ncol = 2)
+plt.show()
+
+pH = 7
+r_algae = 10
+kLa = 0.5
+delkLa = 2.5
+c = 1
+plt.subplots(nrows = 1, ncols = 2, figsize=(9, 3),sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.05)
+while kLa <= 3:
+    alk0 = 2
+    delalk = 30
+    C = ['k', 'b', 'r']
+    b = 0
+    while alk0 <= 32:
+
+        alpha0 = calc_alpha0(pH, pK1, pK2)
+        alpha1 = calc_alpha1(pH, pK1, pK2)
+        alpha2 = calc_alpha2(pH, pK1, pK2)
+    
+        OH = 10**-(14-pH)*(10**3)
+        H = (10**(-pH))*(10**3)
+        
+        k1 = alpha0/(alpha1 + 2*alpha2)*y2*r_algae
+        k2 = (kLa*d*24)
+        k3 = (kLa*d*24)*Csat
+        k4 = (y1 + y2)*r_algae - y2*r_algae*(alpha1 + 2*alpha2)
+    
+        Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44
+        Cin0 = 0
+        Closs0 = 0 
+        def rates(x,t):
+            Caq = x[0]
+            Cdel = x[1]
+            Closs = x[2]
+            dCaqdt = -k1
+            dCdeldt = ((k2 *Caq) - k3) + k4
+            dClossdt = (k2 *Caq) - k3
+            return [dCaqdt, dCdeldt, dClossdt]
+        
+        x0 = [Caq0, Cin0, Closs0]
+        t = np.linspace(0,4,100) 
+        x = odeint(rates, x0, t)
+        Caq = x[:,0]
+        Cdel = x[:,1]
+        Closs = x[:,2]
+        
+        plt.subplot(1, 2, c)
+        plt.xlabel('time (days)')
+        plt.ylabel('CO$_2$ (g/m$^2$)')
+        plt.plot(t,Cdel, C[b])
+        plt.plot(t,Closs, C[b], linestyle='--')
+        plt.axis([0, 4, 0, 5000])
+        b += 1
+        alk0 += delalk
+    kLa += delkLa
+    c += 1
+plt.subplot(1,2,1)
+plt.text(1, 4500, str('(a) k$_L$a = 0.5 1/hr'), fontsize=10, fontweight='bold', ha='center')
+plt.subplot(1,2,2)
+plt.gca().axes.get_yaxis().set_visible(False)
+plt.text(1, 4500, str('(b) k$_L$a = 3.0 1/hr'), fontsize=10, fontweight='bold', ha='center')
+plt.legend(['CO$_2$ supply for alk = 2 meq/L', 'CO$_2$ loss for alk = 2 meq/L',
+            'CO$_2$ supply for alk = 32 meq/L', 'CO$_2$ loss for alk = 32 meq/L'], frameon=False, bbox_to_anchor=(-.05, 1.3), loc='upper center', ncol = 2)
+plt.show()
+
+pH = 6
+r_algae = 10
+kLa = 0.5
+delkLa = 2.5
+c = 1
+plt.subplots(nrows = 1, ncols = 2, figsize=(9, 3),sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.05)
+while kLa <= 3:
+    alk0 = 2
+    delalk = 30
+    C = ['k', 'b', 'r']
+    b = 0
+    while alk0 <= 32:
+
+        alpha0 = calc_alpha0(pH, pK1, pK2)
+        alpha1 = calc_alpha1(pH, pK1, pK2)
+        alpha2 = calc_alpha2(pH, pK1, pK2)
+    
+        OH = 10**-(14-pH)*(10**3)
+        H = (10**(-pH))*(10**3)
+        
+        k1 = alpha0/(alpha1 + 2*alpha2)*y2*r_algae
+        k2 = (kLa*d*24)
+        k3 = (kLa*d*24)*Csat
+        k4 = (y1 + y2)*r_algae - y2*r_algae*(alpha1 + 2*alpha2)
+    
+        Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44
+        Cin0 = 0
+        Closs0 = 0 
+        def rates(x,t):
+            Caq = x[0]
+            Cdel = x[1]
+            Closs = x[2]
+            dCaqdt = -k1
+            dCdeldt = ((k2 *Caq) - k3) + k4
+            dClossdt = (k2 *Caq) - k3
+            return [dCaqdt, dCdeldt, dClossdt]
+        
+        x0 = [Caq0, Cin0, Closs0]
+        t = np.linspace(0,4,100) 
+        x = odeint(rates, x0, t)
+        Caq = x[:,0]
+        Cdel = x[:,1]
+        Closs = x[:,2]
+        
+        plt.subplot(1, 2, c)
+        plt.xlabel('time (days)')
+        plt.ylabel('CO$_2$ (g/m$^2$)')
+        plt.plot(t,Cdel, C[b])
+        plt.plot(t,Closs, C[b], linestyle='--')
+        plt.axis([0, 4, 0, 50000])
+        b += 1
+        alk0 += delalk
+    kLa += delkLa
+    c += 1
+plt.subplot(1,2,1)
+plt.text(1, 45000, str('(a) k$_L$a = 0.5 1/hr'), fontsize=10, fontweight='bold', ha='center')
+plt.subplot(1,2,2)
+plt.gca().axes.get_yaxis().set_visible(False)
+plt.text(1, 45000, str('(b) k$_L$a = 3.0 1/hr'), fontsize=10, fontweight='bold', ha='center')
+plt.legend(['CO$_2$ supply for alk = 2 meq/L', 'CO$_2$ loss for alk = 2 meq/L',
+            'CO$_2$ supply for alk = 32 meq/L', 'CO$_2$ loss for alk = 32 meq/L'], frameon=False, bbox_to_anchor=(-.05, 1.3), loc='upper center', ncol = 2)
 plt.show()
