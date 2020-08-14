@@ -44,7 +44,7 @@ hold on
 for b = 1:s_steps+1
 C = {'b', 'g', 'r', 'y', 'c', 'k', 'm'};
 L = {'-', '--', '-.', '-.', '-', '--', '-.'};
-r1 = calc_CO2_loss(pK1, pK2, Kh, kLa, PCO2, pHin, pHend, delpH, alkin, alkend, delalk);
+r1 = calc_CO2_loss(pK1, pK2, Kh, kLa, PCO2, pHin, pHend, delpH, alkin, alkend, delalk)
 x = r1(:,1);
 r1(:,1) = [];
 r1 = r1*d; %y must be in g/m2*day
@@ -71,7 +71,7 @@ hold on
 for b = 1:s_steps+1
 C = {'b', 'g', 'r', 'y', 'c', 'k', 'm'};
 L = {'-', '--', '-.', '-.', '-', '--', '-.'};
-r1 = calc_CO2_loss(pK1, pK2, Kh, kLa, PCO2, pHin, pHend, delpH, alkin, alkend, delalk);
+r1 = calc_CO2_loss(pK1, pK2, Kh, kLa, PCO2, pHin, pHend, delpH, alkin, alkend, delalk)
 x = r1(:,1);
 r1(:,1) = [];
 r1 = r1*d; %y must be in g/m2*day
