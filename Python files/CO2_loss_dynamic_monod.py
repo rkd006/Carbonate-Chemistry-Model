@@ -24,7 +24,7 @@ d = 0.15 #m
 umax = 3.2424 #1/day
 I = 30 #W/m2
 kd = 0.3 #1/day
-K = 70 #g/m2
+K = 90 #g/m2
 Ki = 13.9136 #W/m2
 
 kLa = 3 #1/hr
@@ -53,7 +53,6 @@ k2 = (kLa*d*24)
 k3 = (kLa*d*24)*Csat
 k4 = (y1 + y2)
 k5 = y2*(alpha1 + 2*alpha2)
-k6 = ((umax*(I/(I + Ki)))-kd)
 
 def kinetics(s,t):
     x = s[0]
