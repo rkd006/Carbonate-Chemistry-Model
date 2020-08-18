@@ -56,28 +56,27 @@ k5 = y2*(alpha1 + 2*alpha2)
 k6 = ((umax*(I/(I + Ki)))-kd)
 
 def kinetics(s,t):
-    X = s[0]
-    dXdt = (((umax*I)/(I + Ki))-kd)*(1-(X/K))*X
-    return [dXdt]
+    x = s[0]
+    dxdt = (((umax*I)/(I + Ki))-kd)*(1-(x/K))*x
+    return [dxdt]
 
-X0 = 0.006 #g/m2
-s0 = [X0]
+x0 = 0.006 #g/m2
+s0 = [x0]
 t = np.linspace(0,4,100)
 n = np.arange(0, 100, 1) 
 s1 = odeint(kinetics, s0, t)
-X = s1[:,0]
+x = s1[:,0]
 
 for i in n:
-    P1 = s1[i]/t[i]
-    print (P1)
+    P = s1[i]/t[i]
     def rate_kinetics(x,t):
         X = x[0]
         Caq = x[1]
         Cdel = x[2]
         Closs = x[3]
-        dXdt = X*P1*(1-(X/K))
-        dCaqdt = -k1*X*P1
-        dCdeldt = ((k2 *Caq) - k3) + (k4*X*P1 - k5*X*P1)
+        dXdt = X*P*(1-(X/K))
+        dCaqdt = -k1*X*P
+        dCdeldt = ((k2 *Caq) - k3) + (k4*X*P - k5*X*P)
         dClossdt = (k2 *Caq) - k3
         return [dXdt, dCaqdt, dCdeldt, dClossdt]
     
@@ -96,10 +95,10 @@ for i in n:
 
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
+plt.axis([0, 3, 0, 80])
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.axis([0, 4, 0, 80])
 plt.show()
 
 plt.xlabel('time (days)')

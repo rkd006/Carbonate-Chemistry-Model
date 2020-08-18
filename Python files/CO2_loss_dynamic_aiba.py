@@ -22,8 +22,8 @@ den = calc_density(S, t, p) #(kg/m3)
 PCO2 = 0.000416 #atm
 d = 0.15 #m
 I = 30 #W/m2
-kd = 0.1 #1/day
-K = 90 #g/m2
+kd = 0.3 #1/day
+K = 80 #g/m2
 
 kLa = 3 #1/hr
 y1 = 1.714 #g CO2 per g algae
@@ -72,7 +72,6 @@ X = s1[:,0]
 
 for i in n:
     P = s1[i]/t[i]
-    print (P)
     def rate_kinetics(x,t):
         global k1, k2, k3, k4, u
         X = x[0]
@@ -91,7 +90,7 @@ for i in n:
     Closs0 = 0 
     
     x0 = [X0, Caq0, Cin0, Closs0]
-    t = np.linspace(0.01,4,100) 
+    t = np.linspace(0,4,100) 
     n = np.arange(0, 100, 1)
     x = odeint(rate_kinetics, x0, t)
     X = x[:,0]
@@ -104,5 +103,5 @@ plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.axis([0, 4, 0, 160])
+plt.axis([0, 3, 0, 160])
 plt.show()

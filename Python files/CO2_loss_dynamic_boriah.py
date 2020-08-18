@@ -21,7 +21,7 @@ p = P/10
 den = calc_density(S, t, p) #(kg/m3)
 PCO2 = 0.000416 #atm
 d = 0.15 #m
-K = 0.007
+Kt = 0.007
 Topt = 20 #celcius
 I = 30 #W/m2
 Is = 80
@@ -56,41 +56,54 @@ k2 = (kLa*d*24)
 k3 = (kLa*d*24)*Csat
 k4 = (y1 + y2)
 k5 = y2*(alpha1 + 2*alpha2)
-h = np.exp(-K*(Tc-Topt)**2)
-f = divI*np.exp(1-divI)
-k6 = ((umax*f*h)-kd)
 
-def rate_kinetics(x,t):
-    X = x[0]
-    Caq = x[1]
-    Cdel = x[2]
-    Closs = x[3]
-    dXdt = X*k6*(1-(X/K))
-    dCaqdt = -k1*X*k6
-    dCdeldt = ((k2 *Caq) - k3) + (k4*X*k6 - k5*X*k6)
-    dClossdt = (k2 *Caq) - k3
-    return [dXdt, dCaqdt, dCdeldt, dClossdt]
+h = np.exp(-Kt*(Tc-Topt)**2)
+f = divI*np.exp(1-divI)
+u = umax*f*h
+def product(b,t):
+    X = b[0]
+    dBdt = (u-kd)*(1-(X/K))*X
+    return [dBdt]
 
 X0 = 0.006 #g/m2
-Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
-Cin0 = 0
-Closs0 = 0 
-
-x0 = [X0, Caq0, Cin0, Closs0]
-t = np.linspace(0.01,4,100) 
-n = np.arange(0, 100, 1)
-x = odeint(rate_kinetics, x0, t)
-X = x[:,0]
-Caq = x[:,1]
-Cdel = x[:,2]
-Closs = x[:,3]
+b0 = [X0]
+t = np.linspace(0,4,100)
+n = np.arange(0, 100, 1) 
+b = odeint(product, b0, t)
+B = b[:,0]
+for i in n:
+    P = b[i]/t[i]
+    def rate_kinetics(x,t):
+        X = x[0]
+        Caq = x[1]
+        Cdel = x[2]
+        Closs = x[3]
+        dXdt = X*P*(1-(X/K))
+        dCaqdt = -k1*X*P
+        dCdeldt = ((k2 *Caq) - k3) + (k4*X*P - k5*X*P)
+        dClossdt = (k2 *Caq) - k3
+        return [dXdt, dCaqdt, dCdeldt, dClossdt]
+    
+    X0 = 0.006 #g/m2
+    Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
+    Cin0 = 0
+    Closs0 = 0 
+    
+    x0 = [X0, Caq0, Cin0, Closs0]
+    t = np.linspace(0.01,4,100) 
+    n = np.arange(0, 100, 1)
+    x = odeint(rate_kinetics, x0, t)
+    X = x[:,0]
+    Caq = x[:,1]
+    Cdel = x[:,2]
+    Closs = x[:,3]
 
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.axis([0, 4, 0, 95])
+plt.axis([0, 3, 0, 95])
 plt.show()
 
 plt.xlabel('time (days)')
