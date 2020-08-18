@@ -21,7 +21,7 @@ def kinetics(s,t):
 
 X0 = 0.006 #g/m2
 s0 = [X0]
-t = np.linspace(0,10,1000)
+t = np.linspace(0,6,100)
 n = np.arange(0, 100, 1) 
 s1 = odeint(kinetics, s0, t)
 X = s1[:,0]
@@ -68,3 +68,20 @@ plt.legend(['Monod', 'Modified Aiba', 'Boriah'], frameon=False)
 plt.xlabel('time (days)')
 plt.ylabel('Biomass Density (g m$^{-2}$)')
 plt.show()
+
+#calculate productivity
+
+#Monod
+for i in n:
+    P1 = s1[i]/t[i]
+    print (P1)
+
+#Aiba
+for i in n:
+    P2 = s2[i]/t[i]
+    print (P2)
+
+#Boriah
+for i in n:
+    P3 = b[i]/t[i]
+    print (P3)

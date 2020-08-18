@@ -26,6 +26,8 @@ Topt = 20 #celcius
 I = 30 #W/m2
 Is = 80
 divI = I/Is
+kd = 0.1 #1/day
+K = 90 #g/m2
 umax = 3.2424 #1/day
 
 kLa = 3 #1/hr
@@ -56,14 +58,14 @@ k4 = (y1 + y2)
 k5 = y2*(alpha1 + 2*alpha2)
 h = np.exp(-K*(Tc-Topt)**2)
 f = divI*np.exp(1-divI)
-k6 = umax*f*h
+k6 = ((umax*f*h)-kd)
 
 def rate_kinetics(x,t):
     X = x[0]
     Caq = x[1]
     Cdel = x[2]
     Closs = x[3]
-    dXdt = X*k6
+    dXdt = X*k6*(1-(X/K))
     dCaqdt = -k1*X*k6
     dCdeldt = ((k2 *Caq) - k3) + (k4*X*k6 - k5*X*k6)
     dClossdt = (k2 *Caq) - k3

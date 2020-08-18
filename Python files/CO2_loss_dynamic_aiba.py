@@ -22,6 +22,8 @@ den = calc_density(S, t, p) #(kg/m3)
 PCO2 = 0.000416 #atm
 d = 0.15 #m
 I = 30 #W/m2
+kd = 0.1 #1/day
+K = 90 #g/m2
 
 kLa = 3 #1/hr
 y1 = 1.714 #g CO2 per g algae
@@ -51,33 +53,51 @@ k4 = (y1 + y2)
 k5 = y2*(alpha1 + 2*alpha2)
 K1 = (200.1/24)
 K2 = (0.1110/24)
-k6 = (I)/(K1 + K2*(I**2))
+k6 = (((I)/(K1 + K2*(I**2)))-kd)
 
-def rate_kinetics(x,t):
-    global k1, k2, k3, k4, u
-    X = x[0]
-    Caq = x[1]
-    Cdel = x[2]
-    Closs = x[3]
-    dXdt = X*k6
-    dCaqdt = -k1*X*k6
-    dCdeldt = ((k2 *Caq) - k3) + (k4*X*k6 - k5*X*k6)
-    dClossdt = (k2 *Caq) - k3
-    return [dXdt, dCaqdt, dCdeldt, dClossdt]
+K1 = (200.1/24)
+K2 = (0.1110/24)
+u2 = (I)/(K1 + K2*(I**2))
+def kinetics(s,t):
+    X = s[0]
+    dXdt = (u2-kd)*(1-(X/K))*X
+    return [dXdt]
 
 X0 = 0.006 #g/m2
-Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
-Cin0 = 0
-Closs0 = 0 
+s0 = [X0]
+t = np.linspace(0,4,100)
+n = np.arange(0, 100, 1) 
+s1 = odeint(kinetics, s0, t)
+X = s1[:,0]
 
-x0 = [X0, Caq0, Cin0, Closs0]
-t = np.linspace(0.01,4,100) 
-n = np.arange(0, 100, 1)
-x = odeint(rate_kinetics, x0, t)
-X = x[:,0]
-Caq = x[:,1]
-Cdel = x[:,2]
-Closs = x[:,3]
+for i in n:
+    P = s1[i]/t[i]
+    print (P)
+    def rate_kinetics(x,t):
+        global k1, k2, k3, k4, u
+        X = x[0]
+        Caq = x[1]
+        Cdel = x[2]
+        Closs = x[3]
+        dXdt = X*P*(1-(X/K))
+        dCaqdt = -k1*X*P
+        dCdeldt = ((k2 *Caq) - k3) + (k4*X*P - k5*X*P)
+        dClossdt = (k2 *Caq) - k3
+        return [dXdt, dCaqdt, dCdeldt, dClossdt]
+    
+    X0 = 0.006 #g/m2
+    Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
+    Cin0 = 0
+    Closs0 = 0 
+    
+    x0 = [X0, Caq0, Cin0, Closs0]
+    t = np.linspace(0.01,4,100) 
+    n = np.arange(0, 100, 1)
+    x = odeint(rate_kinetics, x0, t)
+    X = x[:,0]
+    Caq = x[:,1]
+    Cdel = x[:,2]
+    Closs = x[:,3]
 
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
