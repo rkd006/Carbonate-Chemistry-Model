@@ -26,8 +26,8 @@ Topt = 20 #celcius
 I = 30 #W/m2
 Is = 80
 divI = I/Is
-kd = 0.3 #1/day
-K = 90 #g/m2
+kd = 0.4 #1/day
+K = 200 #g/m2
 umax = 3.2424 #1/day
 
 kLa = 3 #1/hr
