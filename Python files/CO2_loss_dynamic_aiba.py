@@ -94,6 +94,8 @@ for i in n:
     Cdel = x[:,2]
     Closs = x[:,3]
 
+print (np.average(P))
+
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)

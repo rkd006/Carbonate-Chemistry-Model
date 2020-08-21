@@ -9,8 +9,8 @@ from scipy.integrate import odeint
 
 #monod model 
 d = 0.15 #m
-kd = 0.1 #1/day
-K = 90 #g/m2
+kd = 0.3 #1/day
+K = 100 #g/m2
 umax = 3.2424 #1/day
 Ki = 13.9136 #W/m2
 I = 40 #W/m2
@@ -19,9 +19,9 @@ def kinetics(s,t):
     dXdt = (((umax*I)/(I + Ki))-kd)*(1-(X/K))*X
     return [dXdt]
 
-X0 = 0.006 #g/m2
+X0 = 0.06 #g/m2
 s0 = [X0]
-t = np.linspace(0,6,100)
+t = np.linspace(0,4,100)
 n = np.arange(0, 100, 1) 
 s1 = odeint(kinetics, s0, t)
 X = s1[:,0]
@@ -63,7 +63,7 @@ B = b[:,0]
 plt.plot(t, s1[:,0])
 plt.plot(t, s2[:,0])
 plt.plot(t, b[:,0])
-plt.axis([0, 6, 0, 100])
+plt.axis([0, 4, 0, 100])
 plt.legend(['Monod', 'Modified Aiba', 'Boriah'], frameon=False)
 plt.xlabel('time (days)')
 plt.ylabel('Biomass Density (g m$^{-2}$)')
@@ -72,16 +72,25 @@ plt.show()
 #calculate productivity
 
 #Monod
+P1 = np.zeros((100,1))
 for i in n:
-    P1 = s1[i]/t[i]
-    print (P1)
+    P1[i] = s1[i]/t[i]
 
 #Aiba
+P2 = np.zeros((100,1))
 for i in n:
-    P2 = s2[i]/t[i]
-    print (P2)
+    P2[i] = s2[i]/t[i]
 
 #Boriah
+P3 = np.zeros((100,1))
 for i in n:
-    P3 = b[i]/t[i]
-    print (P3)
+    P3[i] = b[i]/t[i]
+
+plt.plot(t, P1)
+plt.plot(t,P2)
+plt.plot(t,P3)
+plt.xlabel('time (days)')
+plt.ylabel('Productivity (g m$^{-2}$ day$^{-1}$)')
+plt.axis([0.3, 4, 0, 25])
+plt.legend(['Monod', 'Modified Aiba', 'Boriah'], frameon=False)
+plt.show()
