@@ -10,7 +10,7 @@ from scipy.integrate import odeint
 #monod model 
 d = 0.15 #m
 kd = 0.3 #1/day
-K = 100 #g/m2
+K = 500 #g/m2
 umax = 3.2424 #1/day
 Ki = 13.9136 #W/m2
 I = 40 #W/m2
@@ -63,34 +63,40 @@ B = b[:,0]
 plt.plot(t, s1[:,0])
 plt.plot(t, s2[:,0])
 plt.plot(t, b[:,0])
-plt.axis([0, 4, 0, 100])
+plt.axis([0, 4, 0, 200])
 plt.legend(['Monod', 'Modified Aiba', 'Boriah'], frameon=False)
 plt.xlabel('time (days)')
 plt.ylabel('Biomass Density (g m$^{-2}$)')
 plt.show()
 
-#calculate productivity
+#calculate areal productivity
 
 #Monod
 P1 = np.zeros((100,1))
 for i in n:
     P1[i] = s1[i]/t[i]
+Pavg1 = (P1[99] - P1[1])/(t[99] - t[1])
+print (Pavg1)
 
 #Aiba
 P2 = np.zeros((100,1))
 for i in n:
     P2[i] = s2[i]/t[i]
+Pavg2 = (P2[99] - P2[1])/(t[99] - t[1])
+print (Pavg2)
 
 #Boriah
 P3 = np.zeros((100,1))
 for i in n:
     P3[i] = b[i]/t[i]
+Pavg2 = (P2[99] - P2[1])/(t[99] - t[1])
+print (Pavg2)
 
 plt.plot(t, P1)
-plt.plot(t,P2)
-plt.plot(t,P3)
+plt.plot(t, P2)
+plt.plot(t, P3)
 plt.xlabel('time (days)')
 plt.ylabel('Productivity (g m$^{-2}$ day$^{-1}$)')
-plt.axis([0.3, 4, 0, 25])
+plt.axis([0.3, 4, 0, 70])
 plt.legend(['Monod', 'Modified Aiba', 'Boriah'], frameon=False)
 plt.show()

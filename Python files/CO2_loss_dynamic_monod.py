@@ -24,7 +24,7 @@ d = 0.15 #m
 umax = 3.2424 #1/day
 I = 40 #W/m2
 kd = 0.3 #1/day
-K = 100 #g/m2
+K = 500 #g/m2
 Ki = 13.9136 #W/m2
 
 kLa = 3 #1/hr
@@ -59,7 +59,7 @@ while pH <= 8:
         dxdt = (((umax*I)/(I + Ki))-kd)*(1-(x/K))*x
         return [dxdt]
     
-    x0 = 0.006 #g/m2
+    x0 = 0.06 #g/m2
     s0 = [x0]
     t = np.linspace(0,4,100)
     n = np.arange(0, 100, 1) 
@@ -74,8 +74,8 @@ while pH <= 8:
             Cdel = x[2]
             Closs = x[3]
             dXdt = X*P*(1-(X/K))
-            dCaqdt = -k1*X*P
-            dCdeldt = ((k2 *Caq) - k3) + (k4*X*P - k5*X*P)
+            dCaqdt = -k1*P
+            dCdeldt = ((k2 *Caq) - k3) + (k4*P - k5*P)
             dClossdt = (k2 *Caq) - k3
             return [dXdt, dCaqdt, dCdeldt, dClossdt]
         

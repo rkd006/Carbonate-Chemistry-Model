@@ -79,8 +79,8 @@ for i in n:
         Cdel = x[2]
         Closs = x[3]
         dXdt = X*P*(1-(X/K))
-        dCaqdt = -k1*X*P
-        dCdeldt = ((k2 *Caq) - k3) + (k4*X*P - k5*X*P)
+        dCaqdt = -k1*P
+        dCdeldt = ((k2 *Caq) - k3) + (k4*P - k5*P)
         dClossdt = (k2 *Caq) - k3
         return [dXdt, dCaqdt, dCdeldt, dClossdt]
     
