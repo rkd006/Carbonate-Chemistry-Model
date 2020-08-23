@@ -1,6 +1,6 @@
 #author: Riley Doyle
-#date: 8/8/20
-#file: CO2_loss_dynamic_monod
+#date: 8/22/20
+#file: subplot_algae_kinetic_monod
 #status: WORKING
 
 #monod model
@@ -40,6 +40,9 @@ pK2 = - np.log10(K2)
 Csat = PCO2*Kh*44*1000 #g/m3
 alk0 = 2.5 #eq/m3
 pH = 6
+c = 1
+plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3), sharex= True, sharey= True)
+plt.subplots_adjust(wspace = 0.05)
 while pH <= 8:
     alpha0 = calc_alpha0(pH, pK1, pK2)
     alpha1 = calc_alpha1(pH, pK1, pK2)
@@ -90,15 +93,23 @@ while pH <= 8:
         Caq = x[:,1]
         Cdel = x[:,2]
         Closs = x[:,3]
-        
-    print (np.average(P))
-    
+ 
+    plt.subplot(1, 3, c)
     plt.xlabel('time (days)')
     plt.ylabel('CO$_2$ (g/m$^2$)')
-    plt.axis([0, 3, 0, 4000])
+    plt.axis([0, 4, 0, 3500])
     plt.plot(t,Cdel)
     plt.plot(t, Closs)
-    plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-    plt.show()
-
+    c +=1
     pH += 1
+    
+plt.subplot(1,3,1)
+plt.text(2, 3700, str('(a) pH = 6'), fontsize=10, fontweight='bold', ha='center')
+plt.subplot(1,3,2)
+plt.gca().axes.get_yaxis().set_visible(False)
+plt.text(2, 3700, str('(b) pH = 7'), fontsize=10, fontweight='bold', ha='center')
+plt.subplot(1,3,3)
+plt.gca().axes.get_yaxis().set_visible(False)
+plt.text(2, 3700, str('(b) pH = 8'), fontsize=10, fontweight='bold', ha='center')
+plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
+plt.show()

@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
+#Biomass Density
 #monod model 
 d = 0.15 #m
 kd = 0.3 #1/day

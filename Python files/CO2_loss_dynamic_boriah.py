@@ -26,8 +26,8 @@ Topt = 20 #celcius
 I = 40 #W/m2
 Is = 80
 divI = I/Is
-kd = 0.1 #1/day
-K = 80 #g/m2
+kd = 0.3 #1/day
+K = 500 #g/m2
 umax = 3.2424 #1/day
 
 kLa = 3 #1/hr
@@ -97,8 +97,6 @@ for i in n:
     Caq = x[:,1]
     Cdel = x[:,2]
     Closs = x[:,3]
-    
-print (np.average(P))
 
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
