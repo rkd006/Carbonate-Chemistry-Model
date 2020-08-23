@@ -131,6 +131,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - specific_growth_rate: calculated the specific growth rate as a function of light intensity based on different models
 - algae_productiivity: calculate biomass density and productivity as a function of time based on different models
 - algae_productivity_monod: calculate biomass productivity as a function of time based on Monod for different light intensities
+- algae_productivity_boriah: calculates light f as a function of light intensityd, h as a function of temperature, and biomass concentration as a function of time based on the Boriah model
 - CO2_loss_dynamic_monod: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days at pH = 8, which includes algal growth kinetics based on Monod
 - CO2_loss_dynamic_boriah: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days, which includes algal growth kinetics based on boriah
 - Beer_Lambert_Law: figure that plots light intensity as a function of position for constant biomass concentration 
