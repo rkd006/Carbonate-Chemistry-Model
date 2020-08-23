@@ -20,7 +20,7 @@ def kinetics(s,t):
     dXdt = (((umax*I)/(I + Ki))-kd)*(1-(X/K))*X
     return [dXdt]
 
-X0 = 0.06 #g/m2
+X0 = 0.006 #g/m2
 s0 = [X0]
 t = np.linspace(0,4,100)
 n = np.arange(0, 100, 1) 
@@ -64,7 +64,7 @@ B = b[:,0]
 plt.plot(t, s1[:,0])
 plt.plot(t, s2[:,0])
 plt.plot(t, b[:,0])
-plt.axis([0, 4, 0, 200])
+plt.axis([0, 4, 0, 80])
 plt.legend(['Monod', 'Modified Aiba', 'Boriah'], frameon=False)
 plt.xlabel('time (days)')
 plt.ylabel('Biomass Density (g m$^{-2}$)')
@@ -76,21 +76,21 @@ plt.show()
 P1 = np.zeros((100,1))
 for i in n:
     P1[i] = s1[i]/t[i]
-Pavg1 = (P1[99] - P1[1])/(t[99] - t[1])
+Pavg1 = (s1[99] - s1[1])/(t[99] - t[1])
 print (Pavg1)
 
 #Aiba
 P2 = np.zeros((100,1))
 for i in n:
     P2[i] = s2[i]/t[i]
-Pavg2 = (P2[99] - P2[1])/(t[99] - t[1])
+Pavg2 = (s2[99] - s2[1])/(t[99] - t[1])
 print (Pavg2)
 
 #Boriah
 P3 = np.zeros((100,1))
 for i in n:
     P3[i] = b[i]/t[i]
-Pavg2 = (P2[99] - P2[1])/(t[99] - t[1])
+Pavg2 = (b[99] - b[1])/(t[99] - t[1])
 print (Pavg2)
 
 plt.plot(t, P1)
@@ -98,6 +98,6 @@ plt.plot(t, P2)
 plt.plot(t, P3)
 plt.xlabel('time (days)')
 plt.ylabel('Productivity (g m$^{-2}$ day$^{-1}$)')
-plt.axis([0.3, 4, 0, 70])
+plt.axis([0.3, 4, 0, 20])
 plt.legend(['Monod', 'Modified Aiba', 'Boriah'], frameon=False)
 plt.show()

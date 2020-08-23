@@ -22,7 +22,7 @@ for p in Isteps:
         dXdt = (((umax*p)/(p + Ki))-kd)*(1-(X/K))*X
         return [dXdt]
     
-    X0 = 0.06 #g/m2
+    X0 = 0.006 #g/m2
     s0 = [X0]
     t = np.linspace(0,4,100)
     n = np.arange(0, 100, 1) 
@@ -31,13 +31,13 @@ for p in Isteps:
     
     P1 = np.zeros((100,1))
     for i in n:
-        P1[i] = s1[i]/t[i]
-    Pavg1 = (P1[99] - P1[1])/(t[99] - t[1])
+        P1[i] = X[i]/t[i]
+    Pavg1 = (X[99] - X[1])/(t[99] - t[1])
     print (Pavg1)
 
     plt.plot(t, P1)
     plt.xlabel('time (days)')
     plt.ylabel('Productivity (g m$^{-2}$ day$^{-1}$)')
     plt.legend(['I = 40 W/m$^{2}$', 'I = 50 W/m$^{2}$', 'I = 60 W/m$^{2}$', 'I = 70 W/m$^{2}$'], frameon=False)
-    plt.axis([0.3, 4, 0, 80])
+    plt.axis([0.3, 4, 0, 20])
 plt.show()

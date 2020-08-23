@@ -53,17 +53,17 @@ k4 = (y1 + y2)
 k5 = y2*(alpha1 + 2*alpha2)
 
 c = 1
-I = 10 #W/m2
+I = 20 #W/m2
 b = 1
 plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3), sharex= True, sharey= True)
 plt.subplots_adjust(wspace = 0.05)
-while I <= 50:
+while I <= 60:
     def kinetics(s,t):
         x = s[0]
         dxdt = (((umax*I)/(I + Ki))-kd)*(1-(x/K))*x
         return [dxdt]
     
-    x0 = 0.06 #g/m2
+    x0 = 0.006 #g/m2
     s0 = [x0]
     t = np.linspace(0,4,100)
     n = np.arange(0, 100, 1) 
@@ -73,31 +73,28 @@ while I <= 50:
     for i in n:
         P = s1[i]/t[i]
         def rate_kinetics(x,t):
-            X = x[0]
-            Caq = x[1]
-            Cdel = x[2]
-            Closs = x[3]
-            dXdt = X*P*(1-(X/K))
+            Caq = x[0]
+            Cdel = x[1]
+            Closs = x[2]
             dCaqdt = -k1*P
             dCdeldt = ((k2 *Caq) - k3) + (k4*P - k5*P)
             dClossdt = (k2 *Caq) - k3
-            return [dXdt, dCaqdt, dCdeldt, dClossdt]
+            return [dCaqdt, dCdeldt, dClossdt]
         
         Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
         Cin0 = 0
         Closs0 = 0 
         
-        x10 = [x0, Caq0, Cin0, Closs0]
+        x10 = [Caq0, Cin0, Closs0]
         t = np.linspace(0,4,100)
         x = odeint(rate_kinetics, x10, t)
-        X = x[:,0]
-        Caq = x[:,1]
-        Cdel = x[:,2]
-        Closs = x[:,3]
+        Caq = x[:,0]
+        Cdel = x[:,1]
+        Closs = x[:,2]
     plt.figure(b)
     plt.subplot(1, 3, c)
     plt.ylabel('CO$_2$ (g/m$^2$)')
-    plt.axis([0, 3, 0, 500])
+    plt.axis([0, 4, 0, 100])
     plt.plot(t,Cdel)
     plt.plot(t, Closs)
     
@@ -105,29 +102,29 @@ while I <= 50:
     plt.subplot(1, 3, c)
     plt.xlabel('time (days)')
     plt.ylabel('CO$_2$ (g/m$^2$)')
-    plt.axis([0, 3, 0, 4])
+    plt.axis([0, 4, 0, 5])
     plt.plot(t, Closs)
     c +=1
     I += 20
     
 plt.figure(b)
 plt.subplot(1,3,1)
-plt.text(1.5, 550, str('(a) I = 10 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(2, 105, str('(a) I = 20 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(1.5, 550, str('(b) I = 20 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(2, 105, str('(b) I = 40 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(1.5, 550, str('(b) I = 50 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(2, 105, str('(b) I = 60 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False)
 
 plt.figure(b+1)
 plt.subplot(1,3,1)
-plt.text(1.5, 4.3, str('(a) I = 10 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(2, 5.3, str('(a) I = 20 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(1.5, 4.3, str('(b) I = 20 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(2, 5.3, str('(b) I = 40 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(1.5, 4.3, str('(b) I = 50 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(2, 5.3, str('(b) I = 60 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.show()

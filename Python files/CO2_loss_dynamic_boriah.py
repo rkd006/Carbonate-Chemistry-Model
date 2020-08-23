@@ -23,7 +23,7 @@ PCO2 = 0.000416 #atm
 d = 0.15 #m
 Kt = 0.007
 Topt = 20 #celcius
-I = 40 #W/m2
+I = 50 #W/m2
 Is = 80
 divI = I/Is
 kd = 0.3 #1/day
@@ -74,36 +74,32 @@ B = b[:,0]
 for i in n:
     P = b[i]/t[i]
     def rate_kinetics(x,t):
-        X = x[0]
-        Caq = x[1]
-        Cdel = x[2]
-        Closs = x[3]
-        dXdt = X*P*(1-(X/K))
+        Caq = x[0]
+        Cdel = x[1]
+        Closs = x[2]
         dCaqdt = -k1*P
         dCdeldt = ((k2 *Caq) - k3) + (k4*P - k5*P)
         dClossdt = (k2 *Caq) - k3
-        return [dXdt, dCaqdt, dCdeldt, dClossdt]
+        return [dCaqdt, dCdeldt, dClossdt]
     
-    X0 = 0.006 #g/m2
     Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
     Cin0 = 0
     Closs0 = 0 
     
-    x0 = [X0, Caq0, Cin0, Closs0]
+    x0 = [Caq0, Cin0, Closs0]
     t = np.linspace(0.01,4,100) 
     n = np.arange(0, 100, 1)
     x = odeint(rate_kinetics, x0, t)
-    X = x[:,0]
-    Caq = x[:,1]
-    Cdel = x[:,2]
-    Closs = x[:,3]
+    Caq = x[:,0]
+    Cdel = x[:,1]
+    Closs = x[:,2]
 
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.axis([0, 3, 0, 95])
+plt.axis([0, 4, 0, 300])
 plt.show()
 
 plt.xlabel('time (days)')
