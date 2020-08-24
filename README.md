@@ -138,6 +138,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - CO2_loss_dynamic_aiba: figure that plots CO2 requirements and losses over four days, which includes algal growth kinetics based on the modified aiba model
 - subplot_algae_kinetic_monod: multiple subplots side by side plotting CO2 requirements and losses over four days at pHs = 6, 7, and 8, which includes algal growth kinetics based on Monod
 - subplot_algae_kinetic_light: multiple subplots side by side plotting CO2 requirements and losses over four days at different light intensity, which includes algal growth kinetics based on Monod. 
+- subplot_algae_kinetics: multiple subplots side by side that compare the CO2 requirements and losses over four days from the model without kinetics with the model with kinetics 
 
 
 ## Authors
