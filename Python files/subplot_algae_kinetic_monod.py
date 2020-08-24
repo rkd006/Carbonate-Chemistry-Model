@@ -57,39 +57,34 @@ while pH <= 8:
     k4 = (y1 + y2)
     k5 = y2*(alpha1 + 2*alpha2)
     
-    def kinetics(s,t):
-        x = s[0]
-        dxdt = (((umax*I)/(I + Ki))-kd)*(1-(x/K))*x
-        return [dxdt]
-    
-    x0 = 0.006 #g/m2
-    s0 = [x0]
+    def rate_kinetics(x,t):
+        X = x[0]
+        P = x[1]
+        Caq = x[2]
+        Cdel = x[3]
+        Closs = x[4]
+        dXdt = (((umax*I)/(I + Ki))-kd)*(1-(X/K))*X
+        dPdt = dXdt
+        dCaqdt = -k1*P
+        dCdeldt = ((k2 *Caq) - k3) + (k4*P - k5*P)
+        dClossdt = (k2 *Caq) - k3
+        return [dXdt, dPdt, dCaqdt, dCdeldt, dClossdt]
+            
+    Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
+    Cin0 = 0
+    Closs0 = 0 
+    X0 = 0.006
+    P0 = 0
+    x0 = [X0, P0, Caq0, Cin0, Closs0]
     t = np.linspace(0,4,100)
-    n = np.arange(0, 100, 1) 
-    s1 = odeint(kinetics, s0, t)
-    x = s1[:,0]
+    x = odeint(rate_kinetics, x0, t)
     
-    for i in n:
-        P = s1[i]/t[i]
-        def rate_kinetics(x,t):
-            Caq = x[0]
-            Cdel = x[1]
-            Closs = x[2]
-            dCaqdt = -k1*P
-            dCdeldt = ((k2 *Caq) - k3) + (k4*P - k5*P)
-            dClossdt = (k2 *Caq) - k3
-            return [dCaqdt, dCdeldt, dClossdt]
-        
-        Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
-        Cin0 = 0
-        Closs0 = 0 
-        
-        x10 = [Caq0, Cin0, Closs0]
-        t = np.linspace(0,4,100)
-        x = odeint(rate_kinetics, x10, t)
-        Caq = x[:,0]
-        Cdel = x[:,1]
-        Closs = x[:,2]
+    X = x[:,0]
+    P = x[:, 1]
+    Caq = x[:,2]
+    Cdel = x[:,3]
+    Closs = x[:,4]
+    print (P/t)
  
     plt.subplot(1, 3, c)
     plt.xlabel('time (days)')

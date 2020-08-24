@@ -60,46 +60,42 @@ k5 = y2*(alpha1 + 2*alpha2)
 h = np.exp(-Kt*(Tc-Topt)**2)
 f = divI*np.exp(1-divI)
 u = umax*f*h
-def product(b,t):
-    X = b[0]
-    dBdt = (u-kd)*(1-(X/K))*X
-    return [dBdt]
 
-X0 = 0.006 #g/m2
-b0 = [X0]
+def rate_kinetics(x,t):
+    X = x[0]
+    P = x[1]
+    Caq = x[2]
+    Cdel = x[3]
+    Closs = x[4]
+    dXdt = (u-kd)*(1-(X/K))*X
+    dPdt = dXdt
+    dCaqdt = -k1*P
+    dCdeldt = ((k2 *Caq) - k3) + (k4*P - k5*P)
+    dClossdt = (k2 *Caq) - k3
+    return [dXdt, dPdt, dCaqdt, dCdeldt, dClossdt]
+        
+Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
+Cin0 = 0
+Closs0 = 0 
+X0 = 0.006
+P0 = 0
+x0 = [X0, P0, Caq0, Cin0, Closs0]
 t = np.linspace(0,4,100)
-n = np.arange(0, 100, 1) 
-b = odeint(product, b0, t)
-B = b[:,0]
-for i in n:
-    P = b[i]/t[i]
-    def rate_kinetics(x,t):
-        Caq = x[0]
-        Cdel = x[1]
-        Closs = x[2]
-        dCaqdt = -k1*P
-        dCdeldt = ((k2 *Caq) - k3) + (k4*P - k5*P)
-        dClossdt = (k2 *Caq) - k3
-        return [dCaqdt, dCdeldt, dClossdt]
-    
-    Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
-    Cin0 = 0
-    Closs0 = 0 
-    
-    x0 = [Caq0, Cin0, Closs0]
-    t = np.linspace(0.01,4,100) 
-    n = np.arange(0, 100, 1)
-    x = odeint(rate_kinetics, x0, t)
-    Caq = x[:,0]
-    Cdel = x[:,1]
-    Closs = x[:,2]
+x = odeint(rate_kinetics, x0, t)
+
+X = x[:,0]
+P = x[:, 1]
+Caq = x[:,2]
+Cdel = x[:,3]
+Closs = x[:,4]
+print (P/t)
 
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.axis([0, 4, 0, 300])
+plt.axis([0, 4, 0, 150])
 plt.show()
 
 plt.xlabel('time (days)')
