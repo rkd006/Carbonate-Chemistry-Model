@@ -24,10 +24,10 @@ d = 0.15 #m
 Kt = 0.007
 Topt = 20 #celcius
 I = 50 #W/m2
-Is = 80
+Is = 250
 divI = I/Is
 kd = 0.3 #1/day
-K = 500 #g/m2
+K = 120 #g/m2
 umax = 3.2424 #1/day
 
 kLa = 3 #1/hr
@@ -77,7 +77,7 @@ def rate_kinetics(x,t):
 Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
 Cin0 = 0
 Closs0 = 0 
-X0 = 0.006
+X0 = 0.04
 P0 = 0
 x0 = [X0, P0, Caq0, Cin0, Closs0]
 t = np.linspace(0,4,100)

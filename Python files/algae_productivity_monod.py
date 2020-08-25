@@ -9,12 +9,12 @@ from scipy.integrate import odeint
 
 d = 0.15 #m
 kd = 0.3 #1/day
-K = 500 #g/m2
+K = 120 #g/m2
 umax = 3.2424 #1/day
 Ki = 13.9136 #W/m2
-Iin = 40 #W/m2
-Iend = 80
-delI = 10
+Iin = 100 #W/m2
+Iend = 500
+delI = 100
 Isteps = np.arange(Iin, Iend, delI)
 for p in Isteps:
     def kinetics(s,t):
@@ -22,9 +22,9 @@ for p in Isteps:
         dXdt = (((umax*p)/(p + Ki))-kd)*(1-(X/K))*X
         return [dXdt]
     
-    X0 = 0.006 #g/m2
+    X0 = 0.04 #g/m2
     s0 = [X0]
-    t = np.linspace(0,4,100)
+    t = np.linspace(0,3,100)
     n = np.arange(0, 100, 1) 
     s1 = odeint(kinetics, s0, t)
     X = s1[:,0]
@@ -38,6 +38,6 @@ for p in Isteps:
     plt.plot(t, P1)
     plt.xlabel('time (days)')
     plt.ylabel('Productivity (g m$^{-2}$ day$^{-1}$)')
-    plt.legend(['I = 40 W/m$^{2}$', 'I = 50 W/m$^{2}$', 'I = 60 W/m$^{2}$', 'I = 70 W/m$^{2}$'], frameon=False)
-    plt.axis([0.3, 4, 0, 20])
+    plt.legend(['I = 100 W/m$^{2}$', 'I = 200 W/m$^{2}$', 'I = 300 W/m$^{2}$', 'I = 400 W/m$^{2}$'], frameon=False)
+    plt.axis([0.3, 3, 0, 30])
 plt.show()

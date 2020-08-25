@@ -21,9 +21,9 @@ p = P/10
 den = calc_density(S, t, p) #(kg/m3)
 PCO2 = 0.000416 #atm
 d = 0.15 #m
-I = 50 #W/m2
+I = 100 #W/m2
 kd = 0.3 #1/day
-K = 500 #g/m2
+K = 120 #g/m2
 
 kLa = 3 #1/hr
 y1 = 1.714 #g CO2 per g algae
@@ -70,7 +70,7 @@ def rate_kinetics(x,t):
 Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
 Cin0 = 0
 Closs0 = 0 
-X0 = 0.006
+X0 = 0.04
 P0 = 0
 x0 = [X0, P0, Caq0, Cin0, Closs0]
 t = np.linspace(0,4,100)

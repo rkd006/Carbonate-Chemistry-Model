@@ -22,9 +22,9 @@ den = calc_density(S, t, p) #(kg/m3)
 PCO2 = 0.000416 #atm
 d = 0.15 #m
 umax = 3.2424 #1/day
-I = 50 #W/m2
+I = 100 #W/m2
 kd = 0.3 #1/day
-K = 500 #g/m2
+K = 120 #g/m2
 Ki = 13.9136 #W/m2
 
 kLa = 3 #1/hr
@@ -69,10 +69,10 @@ def rate_kinetics(x,t):
 Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
 Cin0 = 0
 Closs0 = 0 
-X0 = 0.006
+X0 = 0.04
 P0 = 0
 x0 = [X0, P0, Caq0, Cin0, Closs0]
-t = np.linspace(0,4,100)
+t = np.linspace(0,3,100)
 x = odeint(rate_kinetics, x0, t)
 
 X = x[:,0]
@@ -83,7 +83,7 @@ Closs = x[:,4]
 print (P/t)
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
-plt.axis([0, 4, 0, 40])
+plt.axis([0, 3, 0, 50])
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
