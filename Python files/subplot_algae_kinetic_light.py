@@ -101,7 +101,8 @@ while I <= 300:
     plt.plot(t, Closs)
     c +=1
     I += 100
-    
+
+plt.subplots_adjust(wspace = 0.05)
 plt.figure(b)
 plt.subplot(1,3,1)
 plt.text(2, 260, str('(a) I = 100 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')

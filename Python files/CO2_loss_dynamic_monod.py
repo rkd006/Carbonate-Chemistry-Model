@@ -39,54 +39,55 @@ pK2 = - np.log10(K2)
 
 Csat = PCO2*Kh*44*1000 #g/m3
 alk0 = 2.5 #eq/m3
-pH = 8
-alpha0 = calc_alpha0(pH, pK1, pK2)
-alpha1 = calc_alpha1(pH, pK1, pK2)
-alpha2 = calc_alpha2(pH, pK1, pK2)
-    
-OH = 10**-(14-pH)*(10**3)
-H = (10**(-pH))*(10**3)
-    
-k1 = alpha0/(alpha1 + 2*alpha2)*y2
-k2 = (kLa*d*24)
-k3 = (kLa*d*24)*Csat
-k4 = (y1 + y2)
-k5 = y2*(alpha1 + 2*alpha2)
-
-def rate_kinetics(x,t):
-    X = x[0]
-    P = x[1]
-    Caq = x[2]
-    Cdel = x[3]
-    Closs = x[4]
-    dXdt = (((umax*I)/(I + Ki))-kd)*(1-(X/K))*X
-    dPdt = dXdt
-    dCaqdt = -k1*P
-    dCdeldt = ((k2 *Caq) - k3) + (k4*P - k5*P)
-    dClossdt = (k2 *Caq) - k3
-    return [dXdt, dPdt, dCaqdt, dCdeldt, dClossdt]
+pH = 6
+while pH <= 8:
+    alpha0 = calc_alpha0(pH, pK1, pK2)
+    alpha1 = calc_alpha1(pH, pK1, pK2)
+    alpha2 = calc_alpha2(pH, pK1, pK2)
         
-Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
-Cin0 = 0
-Closs0 = 0 
-X0 = 0.04
-P0 = 0
-x0 = [X0, P0, Caq0, Cin0, Closs0]
-t = np.linspace(0,3,100)
-x = odeint(rate_kinetics, x0, t)
+    OH = 10**-(14-pH)*(10**3)
+    H = (10**(-pH))*(10**3)
+        
+    k1 = alpha0/(alpha1 + 2*alpha2)*y2
+    k2 = (kLa*d*24)
+    k3 = (kLa*d*24)*Csat
+    k4 = (y1 + y2)
+    k5 = y2*(alpha1 + 2*alpha2)
+    
+    def rate_kinetics(x,t):
+        X = x[0]
+        P = x[1]
+        Caq = x[2]
+        Cdel = x[3]
+        Closs = x[4]
+        dXdt = (((umax*I)/(I + Ki))-kd)*(1-(X/K))*X
+        dPdt = dXdt
+        dCaqdt = -k1*P
+        dCdeldt = ((k2 *Caq) - k3) + (k4*P - k5*P)
+        dClossdt = (k2 *Caq) - k3
+        return [dXdt, dPdt, dCaqdt, dCdeldt, dClossdt]
+            
+    Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
+    Cin0 = 0
+    Closs0 = 0 
+    X0 = 0.04
+    P0 = 0
+    x0 = [X0, P0, Caq0, Cin0, Closs0]
+    t = np.linspace(0,3,100)
+    x = odeint(rate_kinetics, x0, t)
+    
+    X = x[:,0]
+    P = x[:, 1]
+    Caq = x[:,2]
+    Cdel = x[:,3]
+    Closs = x[:,4]
 
-X = x[:,0]
-P = x[:, 1]
-Caq = x[:,2]
-Cdel = x[:,3]
-Closs = x[:,4]
-print (P/t)
-plt.xlabel('time (days)')
-plt.ylabel('CO$_2$ (g/m$^2$)')
-plt.axis([0, 3, 0, 50])
-plt.plot(t,Cdel)
-plt.plot(t, Closs)
-plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.show()
+    plt.xlabel('time (days)')
+    plt.ylabel('CO$_2$ (g/m$^2$)')
+    plt.plot(t,Cdel)
+    plt.plot(t, Closs)
+    plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
+    plt.show()
+    pH += 1
 
 
