@@ -56,7 +56,7 @@ c = 1
 I = 100 #W/m2
 b = 1
 plt.subplots(nrows = 1, ncols = 3, figsize=(12, 3), sharex= True, sharey= True)
-plt.subplots_adjust(wspace = 0.05)
+plt.subplots_adjust(wspace = 0.1)
 while I <= 300:
     def rate_kinetics(x,t):
         X = x[0]
@@ -89,7 +89,7 @@ while I <= 300:
     plt.figure(b)
     plt.subplot(1, 3, c)
     plt.ylabel('CO$_2$ (g/m$^2$)')
-    plt.axis([0, 4, 0, 250])
+    plt.axis([0, 3, 0, 80])
     plt.plot(t,Cdel)
     plt.plot(t, Closs)
     
@@ -97,30 +97,30 @@ while I <= 300:
     plt.subplot(1, 3, c)
     plt.xlabel('time (days)')
     plt.ylabel('CO$_2$ (g/m$^2$)')
-    plt.axis([0, 4, 0, 5])
+    plt.axis([0, 3, 0, 4])
     plt.plot(t, Closs)
     c +=1
     I += 100
 
-plt.subplots_adjust(wspace = 0.05)
+plt.subplots_adjust(wspace = 0.10)
 plt.figure(b)
 plt.subplot(1,3,1)
-plt.text(2, 260, str('(a) I = 100 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1.5, 85, str('(a) I = 100 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 260, str('(b) I = 200 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1.5, 85, str('(b) I = 200 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 260, str('(b) I = 300 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1.5, 85, str('(b) I = 300 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False)
 
 plt.figure(b+1)
 plt.subplot(1,3,1)
-plt.text(2, 5.3, str('(a) I = 100 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1.5, 4.3, str('(a) I = 100 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 5.3, str('(b) I = 200 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1.5, 4.3, str('(b) I = 200 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(2, 5.3, str('(b) I = 300 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1.5, 4.3, str('(b) I = 300 W/m$^2$'), fontsize=10, fontweight='bold', ha='center')
 plt.show()
