@@ -124,7 +124,8 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - subplot_algal_growth_range: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_range for kLa = 0.5 1/hr, and alkalinity = 3.5 eq/m3 at pH = 6, 7, and 8
 - subplot_algal_growth_alk: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_alk for kLa = 0.5 1/hr, kLa = 3 1/hr, alkalinity = 2 and 32 eq/m3 at pH = 6, 7, and 8
 - subplot_kLa_comb: creates multiple subplots side by side of the figures of kLa = 0.5 1/hr and kLa = 3 1/hr from CO2_loss_kLa_comb
-- subplot_algal_growth_tempsal: create subplots side by side of the figures from CO2_loss_algal_growth_temp and CO2_loss_algal_growth_sal
+- subplot_algal_growth_tempsal: creates subplots side by side of the figures from CO2_loss_algal_growth_temp and CO2_loss_algal_growth_sal
+- subplot_different_kLa: creates subplots side by side of figures that plot CO2 losses as a function of pH for alkalinity = 2.5 and 7 eq/m3
 
 #### *with algal growth kinetics:*
 
