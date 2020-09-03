@@ -77,21 +77,21 @@ plt.show()
 P1 = np.zeros((100,1))
 for i in n:
     P1[i] = s1[i]/t[i]
-Pavg1 = (s1[99] - s1[1])/(t[99] - t[1])
+Pavg1 = (P1[99] - P1[1])/(t[99] - t[1])
 print (Pavg1)
 
 #Aiba
 P2 = np.zeros((100,1))
 for i in n:
     P2[i] = s2[i]/t[i]
-Pavg2 = (s2[99] - s2[1])/(t[99] - t[1])
+Pavg2 = (P2[99] - P2[1])/(t[99] - t[1])
 print (Pavg2)
 
 #Boriah
 P3 = np.zeros((100,1))
 for i in n:
     P3[i] = b[i]/t[i]
-Pavg2 = (b[99] - b[1])/(t[99] - t[1])
+Pavg2 = (P3[99] - P3[1])/(t[99] - t[1])
 print (Pavg2)
 
 plt.plot(t, P1)

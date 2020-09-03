@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
 d = 0.15 #m
-kd = 0.3 #1/day
-K = 120 #g/m2
+kd = 0 #1/day #not added yet
+K = 160 #g/m2
 umax = 3.2424 #1/day
 Ki = 13.9136 #W/m2
 Iin = 100 #W/m2
@@ -29,15 +29,16 @@ for p in Isteps:
     s1 = odeint(kinetics, s0, t)
     X = s1[:,0]
     
-    P1 = np.zeros((100,1))
+    P = np.zeros((100,1))
     for i in n:
-        P1[i] = X[i]/t[i]
-    Pavg1 = (X[99] - X[1])/(t[99] - t[1])
-    print (Pavg1)
-
-    plt.plot(t, P1)
+        P[i] = X[i]/t[i]
+    Pavgsum = sum((P[99],P[1]))/len((P[99],P[1]))
+    print (Pavgsum)
+    Pavg = (P[99] - P[1])/(t[99] - t[1])
+    print (Pavg)
+    plt.plot(t, P)
     plt.xlabel('time (days)')
     plt.ylabel('Productivity (g m$^{-2}$ day$^{-1}$)')
     plt.legend(['I = 100 W/m$^{2}$', 'I = 200 W/m$^{2}$', 'I = 300 W/m$^{2}$', 'I = 400 W/m$^{2}$'], frameon=False)
-    plt.axis([0.3, 3, 0, 30])
+    plt.axis([0.3, 3, 0, 45])
 plt.show()
