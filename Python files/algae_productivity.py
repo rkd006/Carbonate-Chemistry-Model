@@ -11,8 +11,8 @@ from scipy.integrate import odeint
 #Biomass Density
 #monod model 
 d = 0.15 #m
-kd = 0.3 #1/day
-K = 120 #g/m2
+kd = 0 #1/day not added yet
+K = 160 #g/m2
 umax = 3.2424 #1/day
 Ki = 13.9136 #W/m2
 I = 100 #W/m2
@@ -21,7 +21,7 @@ def kinetics(s,t):
     dXdt = (((umax*I)/(I + Ki))-kd)*(1-(X/K))*X
     return [dXdt]
 
-X0 = 0.04 #g/m2
+X0 = 0.1 #g/m2
 s0 = [X0]
 t = np.linspace(0,4,100)
 n = np.arange(0, 100, 1) 
@@ -65,7 +65,7 @@ B = b[:,0]
 plt.plot(t, s1[:,0])
 plt.plot(t, s2[:,0])
 plt.plot(t, b[:,0])
-plt.axis([0, 4, 0, 120])
+plt.axis([0, 4, 0, 160])
 plt.legend(['Monod', 'Modified Aiba', 'Boriah'], frameon=False)
 plt.xlabel('time (days)')
 plt.ylabel('Biomass Density (g m$^{-2}$)')
@@ -99,6 +99,6 @@ plt.plot(t, P2)
 plt.plot(t, P3)
 plt.xlabel('time (days)')
 plt.ylabel('Productivity (g m$^{-2}$ day$^{-1}$)')
-plt.axis([0.3, 3, 0, 30])
+plt.axis([0.3, 3, 0, 45])
 plt.legend(['Monod', 'Modified Aiba', 'Boriah'], frameon=False)
 plt.show()

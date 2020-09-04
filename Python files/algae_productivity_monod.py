@@ -9,7 +9,7 @@ from scipy.integrate import odeint
 
 d = 0.15 #m
 kd = 0 #1/day #not added yet
-K = 160 #g/m2
+K = 135 #g/m2
 umax = 3.2424 #1/day
 Ki = 13.9136 #W/m2
 Iin = 100 #W/m2
@@ -22,7 +22,7 @@ for p in Isteps:
         dXdt = (((umax*p)/(p + Ki))-kd)*(1-(X/K))*X
         return [dXdt]
     
-    X0 = 0.04 #g/m2
+    X0 = 0.1 #g/m2
     s0 = [X0]
     t = np.linspace(0,3,100)
     n = np.arange(0, 100, 1) 
@@ -32,10 +32,7 @@ for p in Isteps:
     P = np.zeros((100,1))
     for i in n:
         P[i] = X[i]/t[i]
-    Pavgsum = sum((P[99],P[1]))/len((P[99],P[1]))
-    print (Pavgsum)
-    Pavg = (P[99] - P[1])/(t[99] - t[1])
-    print (Pavg)
+        
     plt.plot(t, P)
     plt.xlabel('time (days)')
     plt.ylabel('Productivity (g m$^{-2}$ day$^{-1}$)')
