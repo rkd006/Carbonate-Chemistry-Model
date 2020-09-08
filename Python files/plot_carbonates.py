@@ -12,12 +12,12 @@ from calc_alphas import *
 pH_start = 2
 pH_end = 14
 
-T = 20 + 273.15
+T = 20 + 273.15 #kelvins
 S = 35
 K_1 = calc_K1(T,S)
-pK1 = -math.log10(K_1)
+pK1 = -np.log10(K_1)
 K_2 = calc_K2(T,S)
-pK2 = -math.log10(K_2)
+pK2 = -np.log10(K_2)
 
 vpH = numpy.linspace(pH_start, pH_end)
 
