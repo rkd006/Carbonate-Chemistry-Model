@@ -117,6 +117,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - subplot_temp: a) creates multiple subplots side by side of the figures from CO2_loss_script_temp b) creates multiple subplots side by side of the figures from CO2_loss_algal_growth_temp
 - CO2_loss_algal_growth_temp: figure that plots CO2 requirements and losses over four days for several temperatures
 - CO2_loss_algal_growth_sal: figure that plots CO2 requirements and losses over four days for several salinities
+- temperature_function: plots the saturation concentration of carbon dioxide and the carbonate species as a function of temperature
 
 #### *subplots:*
 
