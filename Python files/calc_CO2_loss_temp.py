@@ -10,7 +10,7 @@ from calc_Ks import *
 from calc_alphas import *
 
 
-def calc_CO2_loss_temp (PCO2, alk, d, pHin, pHend, delpH, kLa, S, Tin, Tend, delT):
+def calc_CO2_loss_temp (PCO2, alk, d, pHin, pHend, delpH, S, Tin, Tend, delT):
     L = np.array(['-', '--', '-.', ':', '--'])
     pH = np.arange(pHin, pHend, delpH)
     Tsteps = np.arange(Tin, Tend, delT)
@@ -29,6 +29,7 @@ def calc_CO2_loss_temp (PCO2, alk, d, pHin, pHend, delpH, kLa, S, Tin, Tend, del
         pK2 = -np.log10(K2)
         Kh = calc_Kh(c,S)*(den/1000) #mol/L/atm
         CO2sat = PCO2*Kh*1000 #mole/m3
+        kLa = 0.5*(1.024**((Tc)-20))
         alpha0 = calc_alpha0(pH, pK1, pK2)
         alpha1 = calc_alpha1(pH, pK1, pK2)
         alpha2 = calc_alpha2(pH, pK1, pK2)
