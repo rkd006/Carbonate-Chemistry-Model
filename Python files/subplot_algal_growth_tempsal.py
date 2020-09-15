@@ -12,7 +12,6 @@ from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
 global k1, k2, k3, k4
-#temperature correction factor
 c = 1
 plt.subplots(nrows = 1, ncols = 2, figsize=(9, 3),sharex= True, sharey= True)
 plt.subplots_adjust(wspace = 0.05)
