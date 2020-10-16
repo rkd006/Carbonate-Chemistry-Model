@@ -41,12 +41,12 @@ Kh = Kh*(den/1000); %(mol/L/atm)
 %carbonic acid/bicarbonate equilibrium
 K_1 = calc_K1(T, S); %(mol/kg)
 K1 = K_1*(den/1000); %(mol/L)
-pK1= -log10(K1) %(mol/L)
+pK1= -log10(K1); %(mol/L)
 
 %bicarbonate/carbonate equlibrium
 K_2 = calc_K2(T, S); %(mol/kg)
 K2 = K_2*(den/1000); %(mol/L)
-pK2= -log10(K2) %(mol/L)
+pK2= -log10(K2); %(mol/L)
 
 Csat = PCO2*Kh*44*1000;  %(g/m3)
 
