@@ -87,6 +87,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - plot_carbonates: figure that plots the distribution of carbonate species (H2CO3*, HCO3, CO3)
 - rates: creates a function to calculate the system of ODEs
 - rates2: creates a function to calulate the ODE for calc_inorganiccarbon_pond
+- pCpHdiagram: creates a open and closed carbonate system based on the model's conditions
 
 #### *with algal growth:*
 
@@ -118,6 +119,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - CO2_loss_algal_growth_temp: figure that plots CO2 requirements and losses over four days for several temperatures
 - CO2_loss_algal_growth_sal: figure that plots CO2 requirements and losses over four days for several salinities
 - temperature_function: plots the saturation concentration of carbon dioxide and the carbonate species as a function of temperature
+- model_CO2_input: the initial step to model a CO2 input to the pond that is not continuous
 
 #### *subplots:*
 
