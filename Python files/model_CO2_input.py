@@ -59,9 +59,6 @@ loss = np.zeros(len(algaegrowth)+1)
 CO2aqw[0] = CO2aq*(efficiency/100)
 HCO3[0] = 0.02
 H[0] = (K1*CO2aqw[0])/HCO3[0]
-CO3 = (K2*HCO3[0])/H[0]
-Tc = (CO3+HCO3[0]+CO2aqw[0])*1000*1000
-print (Tc)
 pH[0] = -np.log10(H[0])
 loss[0] = kLa*(CO2aqw[0] - CO2sat) #M
 additionalCO2 = CO2aqw[0]
@@ -100,19 +97,19 @@ plt.xlabel('time (hrs)')
 plt.ylabel('pH')
 plt.show()
 
-#CO2aqw = CO2aqw*CO2MW*1000
+CO2aqw = CO2aqw*CO2MW*1000
 plt.plot(t, CO2aqw)
 plt.xlabel('time (hrs)')
 plt.ylabel('CO$_2$ (mg/L)')
 plt.show()
 
-#HCO3 = HCO3*HCO3MW*1000
+HCO3 = HCO3*HCO3MW*1000
 plt.plot(t, HCO3)
 plt.xlabel('time (hrs)')
 plt.ylabel('HCO$_3$$^-$ (mg/L)')
 plt.show()
 
-#loss = loss*CO2MW*1000
+loss = loss*CO2MW*1000
 plt.plot(t, loss)
 plt.xlabel('time (hrs)')
 plt.ylabel('CO$_2$ loss to atmosphere (mg/L)')
