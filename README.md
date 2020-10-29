@@ -144,7 +144,7 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - subplot_algae_kinetics: creates multiple subplots side by side that compare the CO2 requirements and losses over four days from the model without kinetics with the model with kinetics 
 - mean_value_theorem: uses the Mean Value Theorem to calculate productivities for the file 'algae_productivity_model'
 
-#### *with CO2 input that is not continuous*
+#### *with CO2 input that is not continuous:*
 - model_CO2_input: the initial step to model a CO2 input to the pond that is not continuous with a constant algae growth rate
 - model_CO2_input_algae_growth: models a CO2 input to the pond that is not continuous with algae growth that follows a monod model
 
