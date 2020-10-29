@@ -119,7 +119,6 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - CO2_loss_algal_growth_temp: figure that plots CO2 requirements and losses over four days for several temperatures
 - CO2_loss_algal_growth_sal: figure that plots CO2 requirements and losses over four days for several salinities
 - temperature_function: plots the saturation concentration of carbon dioxide and the carbonate species as a function of temperature
-- model_CO2_input: the initial step to model a CO2 input to the pond that is not continuous
 
 #### *subplots:*
 
@@ -144,6 +143,10 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - subplot_algae_kinetic_light: creates multiple subplots side by side plotting CO2 requirements and losses over four days at different light intensity, which includes algal growth kinetics based on Monod. 
 - subplot_algae_kinetics: creates multiple subplots side by side that compare the CO2 requirements and losses over four days from the model without kinetics with the model with kinetics 
 - mean_value_theorem: uses the Mean Value Theorem to calculate productivities for the file 'algae_productivity_model'
+
+#### *with CO2 input that is not continuous*
+- model_CO2_input: the initial step to model a CO2 input to the pond that is not continuous with a constant algae growth rate
+- model_CO2_input_algae_growth: models a CO2 input to the pond that is not continuous with algae growth that follows a monod model
 
 
 ## Authors
