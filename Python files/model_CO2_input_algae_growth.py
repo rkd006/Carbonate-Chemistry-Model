@@ -27,7 +27,7 @@ HCO3MW = 61 #g/mol
 #Given
 T = 20 + 273.15
 S = 35
-CO2g = 0.006 #atm
+CO2g = 0.005 #atm
 Tc = 20
 P = 10 #(dbar)
 t = Tc*1.00024
@@ -44,6 +44,9 @@ efficiency = 95
 CO2sat = Kh*PCO2
 y1 = CO2coef/algaecoef
 y2 = HCO3coef/algaecoef
+d = 0.15
+kLa = 0.5
+kLa = kLa*d*24
 
 #solving for algae growth
 umax = 3.2424 #1/day
@@ -73,15 +76,21 @@ X2 = (x2[:,0]/1000)/algaeMW
 
 #initial conditions
 CO2aqw = np.zeros(len(X)+1)
+CO2delcum = np.zeros(len(X)+1)
+CO2addcum = np.zeros(len(X)+1)
+losscum = np.zeros(len(X)+1)
 HCO3 = np.zeros(len(X)+1)
 H = np.zeros(len(X)+1)
 pH = np.zeros(len(X)+1)
 loss = np.zeros(len(X)+1)
 CO2aqw[0] = CO2aq*(efficiency/100)
+CO2delcum[0] = 0
+CO2addcum[0] = 0
 HCO3[0] = 0.02
 H[0] = (K1*CO2aqw[0])/HCO3[0]
 pH[0] = -np.log10(H[0])
-loss[0] = (CO2aqw[0] - CO2sat) #M
+loss[0] = 0 
+losscum[0] = loss[0]
 additionalCO2 = CO2aq*(efficiency/100)
 
 #Calculations
@@ -94,19 +103,39 @@ for p in X:
         HCO3[i+1] = HCO3[i] + ((y2)*((step)))
         H[i+1] = (K1*CO2aqw[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])
-        loss[i+1] = (CO2aqw[i+1] - CO2sat)
+        losscum[i+1] = sum(loss)
+        CO2delcum[i+1] = sum(CO2addcum)
         i = i + 1
     else:
+        step = X2[i+1] - X[i]
         CO2aqw[i+1] = CO2aqw[i] + additionalCO2  - ((y1)*(step))
         HCO3[i+1] = HCO3[i] + ((y2)*((step)))
         H[i+1] = (K1*CO2aqw[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])
-        loss[i+1] = (CO2aqw[i+1] - CO2sat)
+        loss[i+1] = kLa*((CO2aqw[i]) - CO2sat)*t2[i]
+        losscum[i+1] = sum(loss)
+        CO2addcum[i+1] = CO2aqw[i+1] + ((y1)*(step))
+        CO2delcum[i+1] = sum(CO2addcum)
         i = i + 1
 
 data = {'CO2 (M)': CO2aqw, 'HCO3 (M)': HCO3, 'pH': pH}
 table1 = pandas.DataFrame(data=data)
 print (table1)
+
+CO2delcum = CO2delcum*CO2MW*1000*d
+losscum = losscum*CO2MW*1000*d
+plt.plot(t2, CO2delcum)
+plt.plot(t2, losscum)
+plt.xlabel('time (days)')
+plt.ylabel('cummulative CO2 delivered (g/m2)')
+plt.legend(['CO$_2$ supply delivered', 'CO$_2$ loss to atmosphere'], frameon=False)
+plt.show()
+
+X = X*algaeMW*1000*d
+plt.plot(t, X)
+plt.xlabel('time (days)')
+plt.ylabel('biomass concentration (g/m2)')
+plt.show()
 
 plt.plot(t2, pH)
 plt.xlabel('time (days)')

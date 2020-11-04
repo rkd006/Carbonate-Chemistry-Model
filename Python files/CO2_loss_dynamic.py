@@ -35,7 +35,7 @@ pK2 = - np.log10(K2)
 Csat = PCO2*Kh*44*1000 #g/m3
 
 alk0 = 2.5
-r_algae = 10.65
+r_algae = 10
 pH = 8
 
 alpha0 = calc_alpha0(pH, pK1, pK2)

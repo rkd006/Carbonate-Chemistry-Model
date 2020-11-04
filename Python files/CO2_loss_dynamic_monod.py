@@ -23,8 +23,8 @@ PCO2 = 0.000416 #atm
 d = 0.15 #m
 umax = 3.2424 #1/day
 I = 100 #W/m2
-kd = 0.3 #1/day
-K = 120 #g/m2
+kd = 0 #1/day
+K = 200 #g/m2
 Ki = 13.9136 #W/m2
 
 kLa = 3 #1/hr
