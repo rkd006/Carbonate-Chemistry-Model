@@ -112,12 +112,12 @@ for p in X:
         step = X2[i+1] - X[i]
         loss[i] = kLa*((additionalCO2 - CO2aqw[i]) - CO2sat)*t2[i]
         losscum[i+1] = sum(loss)
-        CO2aqw[i+1] = CO2aqw[i] + additionalCO2  - ((y1)*(step))
+        CO2needcum[i] = additionalCO2 + loss[i]
+        CO2reqcum[i+1] = sum(CO2needcum)
+        CO2aqw[i+1] = CO2aqw[i] + CO2needcum[i]  - ((y1)*(step))
         HCO3[i+1] = HCO3[i] + ((y2)*((step)))
         H[i+1] = (K1*CO2aqw[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])
-        CO2needcum[i+1] = additionalCO2 + loss[i]
-        CO2reqcum[i+1] = sum(CO2needcum)
         i = i + 1
 
 data = {'CO2 (M)': CO2aqw, 'HCO3 (M)': HCO3, 'pH': pH}
