@@ -40,7 +40,6 @@ pK1 = -np.log10(K1)
 K2 = calc_K2(T, S)*(den/1000) #mol/L
 pK2 = -np.log10(K2)
 CO2aq = Kh*CO2g
-efficiency = 95
 CO2sat = Kh*PCO2
 y1 = CO2coef/algaecoef
 y2 = HCO3coef/algaecoef
@@ -52,7 +51,7 @@ kLa = kLa*d*24
 umax = 3.2424 #1/day
 I = 100 #W/m2
 kd = 0 #1/day
-K = 300 #g/m3
+K = 350 #g/m3
 Ki = 13.9136 #W/m2
 def algaegrowth(x,t):
     X = x[0]
@@ -76,24 +75,23 @@ X2 = (x2[:,0]/1000)/algaeMW
 
 #initial conditions
 CO2aqw = np.zeros(len(X)+1)
-CO2needcum = np.zeros(len(X)+1)
+CO2add = np.zeros(len(X)+1)
+percent = np.zeros(len(X)+1)
 CO2reqcum = np.zeros(len(X)+1)
-alpha1 = np.zeros(len(X)+1)
-alpha2 = np.zeros(len(X)+1)
 losscum = np.zeros(len(X)+1)
 HCO3 = np.zeros(len(X)+1)
 H = np.zeros(len(X)+1)
 pH = np.zeros(len(X)+1)
 loss = np.zeros(len(X)+1)
-CO2aqw[0] = CO2aq*(efficiency/100)
+CO2aqw[0] = CO2aq
 CO2reqcum[0] = 0
-CO2needcum[0] = 0
+CO2add[0] = 0
 HCO3[0] = 0.02
 H[0] = (K1*CO2aqw[0])/HCO3[0]
 pH[0] = -np.log10(H[0])
 loss[0] = 0 
 losscum[0] = loss[0]
-additionalCO2 = CO2aq*(efficiency/100)
+additionalCO2 = Kh*CO2g
 
 #Calculations
 i = 0
@@ -106,15 +104,17 @@ for p in X:
         H[i+1] = (K1*CO2aqw[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])
         losscum[i+1] = sum(loss)
-        CO2reqcum[i+1] = sum(CO2needcum)
+        CO2reqcum[i+1] = sum(CO2add)
         i = i + 1
     else:
         step = X2[i+1] - X[i]
-        loss[i] = kLa*((additionalCO2 - CO2aqw[i]) - CO2sat)*t2[i]
+        CO2aqw[i+1] = CO2aqw[i] + additionalCO2
+        loss[i+1] = kLa*(CO2aqw[i+1]* CO2sat)*t2[i]
         losscum[i+1] = sum(loss)
-        CO2needcum[i] = additionalCO2 + loss[i]
-        CO2reqcum[i+1] = sum(CO2needcum)
-        CO2aqw[i+1] = CO2aqw[i] + CO2needcum[i]  - ((y1)*(step))
+        percent[i+1] = (loss[i+1]/additionalCO2)*100
+        CO2add[i+1] = additionalCO2
+        CO2reqcum[i+1] = sum(CO2add)
+        CO2aqw[i+1] = CO2aqw[i+1] - loss[i+1] - ((y1)*(step))
         HCO3[i+1] = HCO3[i] + ((y2)*((step)))
         H[i+1] = (K1*CO2aqw[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])
@@ -129,8 +129,13 @@ CO2reqcum = CO2reqcum*CO2MW*d*1000
 plt. plot(t2, CO2reqcum)
 plt.plot(t2, losscum)
 plt.xlabel('time (days)')
-plt.ylabel('CO$_2$ (g/m$^2$)')
+plt.ylabel('cummulative CO$_2$ (g/m$^2$)')
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
+plt.show()
+
+plt.plot(t2, losscum)
+plt.xlabel('time (days)')
+plt.ylabel('CO$_2$ loss to atmosphere (g/m$^2$)')
 plt.show()
 
 X = X*algaeMW*1000*d
@@ -154,4 +159,9 @@ HCO3 = HCO3*HCO3MW*1000
 plt.plot(t2, HCO3)
 plt.xlabel('time (days)')
 plt.ylabel('HCO$_3$$^-$ (mg/L)')
+plt.show()
+
+plt.plot(t2, percent)
+plt.xlabel('time (days)')
+plt.ylabel('Percent loss')
 plt.show()
