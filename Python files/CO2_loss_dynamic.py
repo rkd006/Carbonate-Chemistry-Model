@@ -36,7 +36,7 @@ Csat = PCO2*Kh*44*1000 #g/m3
 
 alk0 = 2.5
 r_algae = 10
-pH = 7
+pH = 8
 
 alpha0 = calc_alpha0(pH, pK1, pK2)
 alpha1 = calc_alpha1(pH, pK1, pK2)
@@ -70,7 +70,7 @@ t = np.linspace(0,4,100)
 
 x = odeint(rates, x0, t)
 
-Caq = x[:,0]
+Caq = x[:,0]*d
 Cdel = x[:,1]
 Closs = x[:,2]
 plt.xlabel('time (days)')
@@ -78,7 +78,7 @@ plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.axis([0, 4, 0, 150])
+plt.axis([0, 3, 0, 70])
 plt.show()
 
 plt.xlabel('time (days)')

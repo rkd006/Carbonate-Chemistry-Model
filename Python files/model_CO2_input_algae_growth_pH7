@@ -1,6 +1,6 @@
 #author = Riley Doyle
 #date = 10/13/20
-#file = model_CO2_input_algae_growth
+#file = model_CO2_input_algae_growth_pH7
 #status = working
 
 from IPython import get_ipython
@@ -82,7 +82,7 @@ H = np.zeros(len(X)+1)
 pH = np.zeros(len(X)+1)
 loss = np.zeros(len(X)+1)
 alk = 2.5/1000 #eq/L
-pH[0] = 8 
+pH[0] = 7
 H[0] = 10**(-pH[0])
 OH = (10**(-14))/H[0]
 alpha0 = calc_alpha0(pH[0], pK1, pK2)
@@ -96,12 +96,12 @@ CO2req[0] = 0
 CO2del[0] = 0
 CO2delcum[0] = 0
 loss[0] = 0 
-additionalCO2 = Kh*0.0002 #mol/L
+additionalCO2 = Kh*0.002 #mol/L
 
 #Calculations
 i = 0
 for p in X:
-    if H[i] < 10**-8.2:
+    if H[i] < 10**-7.2:
         step = X2[i+1] - X[i]
         CO2aq[i+1] = CO2aq[i] + additionalCO2
         loss[i+1] = kLa*((CO2aq[i+1] - CO2sat)*1000)*(t2[i+1])
@@ -110,7 +110,7 @@ for p in X:
         CO2req[i+1] = additionalCO2 + ((loss[i+1] - loss[i])/d/1000)
         CO2reqcum[i+1] = sum(CO2req)
         CO2delcum[i+1] = sum(CO2del)
-        CO2aq[i+1] = CO2aq[i+1] - (y1)*(step) - ((loss[i+1] - loss[i])/d/1000)
+        CO2aq[i+1] = CO2aq[i+1] - (y1)*(step) #- ((loss[i+1] - loss[i])/d/1000)
         HCO3[i+1] = HCO3[i] + ((y2)*((step)))
         H[i+1] = (K1*CO2aq[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])
