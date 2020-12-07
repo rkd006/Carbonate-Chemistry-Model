@@ -82,7 +82,7 @@ H = np.zeros(len(X)+1)
 pH = np.zeros(len(X)+1)
 loss = np.zeros(len(X)+1)
 alk = 2.5/1000 #eq/L
-pH[0] = 7
+pH[0] = 7.2 
 H[0] = 10**(-pH[0])
 OH = (10**(-14))/H[0]
 alpha0 = calc_alpha0(pH[0], pK1, pK2)
@@ -136,7 +136,7 @@ plt. plot(t2, CO2reqcum)
 plt.plot(t2, loss)
 plt.xlabel('time (days)')
 plt.ylabel('cummulative CO$_2$ (g/m$^2$)')
-plt.legend(['CO$_2$ supply delivered', 'CO$_2$ loss to atmosphere'], frameon=False)
+plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
 plt.show()
 
 X = X*algaeMW*d*1000
@@ -153,11 +153,11 @@ plt.show()
 CO2aq = CO2aq*CO2MW*d*1000
 plt.plot(t2, CO2aq)
 plt.xlabel('time (days)')
-plt.ylabel('CO$_2$ (g/m2)')
+plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.show()
 
 HCO3 = HCO3*HCO3MW*d*1000
 plt.plot(t2, HCO3)
 plt.xlabel('time (days)')
-plt.ylabel('HCO$_3$$^-$ (g/m2)')
+plt.ylabel('HCO$_3$$^-$ (g/m$^2$)')
 plt.show()

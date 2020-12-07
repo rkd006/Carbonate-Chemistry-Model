@@ -1,6 +1,6 @@
 #author = Riley Doyle
 #date = 11/18/20
-#file = CO2Sys_Program
+#file = CO2Sys_Program_TApCO2
 #status = working
 #Taken From Pierrot, D. E. Lewis,and D. W. R. Wallace. 2006. MS Excel Program Developed for 
 #CO2 System Calculations. ORNL/CDIAC-105a. Carbon Dioxide Information Analysis Center, 
@@ -10,7 +10,7 @@
 import numpy as np
 from CO2Sys_functions import *
 from constants import *
-def CO2Sys_Program(T, S, P, TP, TSi, TA, pCO2, Tout, Pout):
+def CO2Sys_Program_TApCO2(T, S, P, TP, TSi, TA, pCO2, Tout, Pout):
     ## Inputs
     RGasConstant = 83.1451 
     sqrSal = np.sqrt(S)

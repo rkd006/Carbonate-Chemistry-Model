@@ -1,18 +1,20 @@
 #author = Riley Doyle
-#date = 10/13/20
-#file = model_CO2_input_algae_growth
+#date = 12/7/20
+#file = model_CO2_input_algae_growth_pH7_CO2SYS
 #status = working
 
 from IPython import get_ipython
 get_ipython().magic('reset -sf')
 
 from calc_Ks import *
-from calc_alphas import *
 from calc_density import *
 import numpy as np
 from pandas import *
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+from CO2Sys_functions import *
+from constants import *
+from CO2Sys_Program_pHTA import *
 
 #Stiochiometric ratios
 CO2coef = 452
@@ -25,20 +27,22 @@ CO2MW = 44 #g/mol
 HCO3MW = 61 #g/mol
 
 #Given
-T = 20 + 273.15 #K
+T = 20 
 S = 35 #g/kg
-Tc = 20 #C
-P = 10 #(dbar)
-t = Tc*1.00024
+P = 0.5 #dbars
+TP = 10/10**6 #mol/kg SW
+TSi = 30/10**6 #mol/kg SW
+t = T*1.00024
 p = P/10
 den = calc_density(S, t, p) #(kg/m3)
+Tout = 20
+Pout = 0.5
+TA = 2350/10**6 #mol/kg SW
+pH = 7.2
+CO2Sys = CO2Sys_Program_pHTA(T, S, P, TP, TSi, TA, Tout, Pout, pH)
 PCO2 = 0.000416 #atm
-Kh = calc_Kh(T,S)*(den/1000) #mol/L/atm
-K1 = calc_K1(T, S)*(den/1000) #mol/L
-pK1 = -np.log10(K1)
-K2 = calc_K2(T, S)*(den/1000) #mol/L
-pK2 = -np.log10(K2)
-CO2sat = Kh*PCO2 #mol/L
+Kh = calc_Kh((T+273.15),S) #mol/kg/atm
+CO2sat = Kh*PCO2*den/1000 #mol/L
 y1 = CO2coef/algaecoef #mol/mol
 y2 = HCO3coef/algaecoef #mol/mol
 d = 0.15 #m
@@ -81,27 +85,22 @@ HCO3 = np.zeros(len(X)+1)
 H = np.zeros(len(X)+1)
 pH = np.zeros(len(X)+1)
 loss = np.zeros(len(X)+1)
-alk = 2.5/1000 #eq/L
-pH[0] = 8.2 
-H[0] = 10**(-pH[0])
-OH = (10**(-14))/H[0]
-alpha0 = calc_alpha0(pH[0], pK1, pK2)
-alpha1 = calc_alpha1(pH[0], pK1, pK2)
-alpha2 = calc_alpha2(pH[0], pK1, pK2)
-Ct = (-(OH) + (H[0]) + alk)/(alpha1+2*alpha2)
-CO2aq[0] = alpha0*Ct #mol/L
-HCO3[0] = alpha1*Ct #mol/L
+alk = TA*den/1000 #eq/L
+K1 = CO2Sys[0]
+CO2aq[0] = (CO2Sys[49])*den/1000 #mol/L
+pH[0] = 7.2
+HCO3[0] = (CO2Sys[29])*den/1000 #mol/L
 CO2reqcum[0] = 0
 CO2req[0] = 0
 CO2del[0] = 0
 CO2delcum[0] = 0
 loss[0] = 0 
-additionalCO2 = Kh*0.0002 #mol/L
+additionalCO2 = Kh*0.002 #mol/L
 
 #Calculations
 i = 0
 for p in X:
-    if H[i] < 10**-8.2:
+    if H[i] < 10**-7.2:
         step = X2[i+1] - X[i]
         CO2aq[i+1] = CO2aq[i] + additionalCO2
         loss[i+1] = kLa*((CO2aq[i+1] - CO2sat)*1000)*(t2[i+1])
@@ -110,7 +109,7 @@ for p in X:
         CO2req[i+1] = additionalCO2 + ((loss[i+1] - loss[i])/d/1000)
         CO2reqcum[i+1] = sum(CO2req)
         CO2delcum[i+1] = sum(CO2del)
-        CO2aq[i+1] = CO2aq[i+1] - (y1)*(step) - ((loss[i+1] - loss[i])/d/1000)
+        CO2aq[i+1] = CO2aq[i+1] - (y1)*(step) #- ((loss[i+1] - loss[i])/d/1000)
         HCO3[i+1] = HCO3[i] + ((y2)*((step)))
         H[i+1] = (K1*CO2aq[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])

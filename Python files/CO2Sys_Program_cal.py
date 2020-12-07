@@ -7,15 +7,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from CO2Sys_functions import *
 from constants import *
-from CO2Sys_Program import *
+from CO2Sys_Program_TApCO2 import *
 
 #Input Conditions
 S = 35 #g/kg
 T = 20 #C
 P = 0.5 #dbars
-TP = 10/10**6 #umol/kg SW
-TSi = 30/10**6 #umol/kg SW
-TA = 2350/10**6 #umol/kg SW
+TP = 10/10**6 #mol/kg SW
+TSi = 30/10**6 #mol/kg SW
+TA = 2350/10**6 #mol/kg SW
 pCO2 = 415/10**6 
 
 #Output Conditions
@@ -23,7 +23,7 @@ Tout = 20
 Pout = 0.5
 
 #simple calculations of output units: umol/kg SW
-CO2Sys = CO2Sys_Program(T, S, P, TP, TSi, TA, pCO2, Tout, Pout)
+CO2Sys = CO2Sys_Program_TApCO2(T, S, P, TP, TSi, TA, pCO2, Tout, Pout)
 HCO3in = (CO2Sys[20])*10**6
 CO3in = (CO2Sys[21])*10**6
 BAlkin = (CO2Sys[22])*10**6

@@ -27,7 +27,7 @@ delpCO2 = 10000/10**6
 TC = np.zeros([100,1])
 pH = np.zeros([100,1])
 i = 0
-while pCO2 < 1:
+while pCO2 <= 1:
     CO2Sys = CO2Sys_Program(T, S, P, TP, TSi, TA, pCO2, Tout, Pout)
     TC[i] = (CO2Sys[39])*10**6
     pH[i] = (CO2Sys[51])
@@ -37,19 +37,18 @@ while pCO2 < 1:
 #Case 2
 pCO2 = 0
 TA = 2000/10**6
-delTA = 3000/10**6
+delTA = 280/10**6
 TC2 = np.zeros([100,1])
 pH2 = np.zeros([100,1])
 i = 0
-while pCO2 < 1:
-    while TA < 29000/10**6:
-        CO2Sys = CO2Sys_Program(T, S, P, TP, TSi, TA, pCO2, Tout, Pout)
-        TC2[i] = (CO2Sys[39])*10**6
-        pH2[i] = (CO2Sys[51])
-        pCO2 = pCO2 + delpCO2
-        TA = TA + delTA
-        i = i + 1
-        
+while pCO2 <= 1:
+    CO2Sys = CO2Sys_Program(T, S, P, TP, TSi, TA, pCO2, Tout, Pout)
+    TC2[i] = (CO2Sys[39])*10**6
+    pH2[i] = (CO2Sys[51])
+    pCO2 = pCO2 + delpCO2
+    TA = TA + delTA
+    i = i + 1
+      
 plt.figure()
 pCO2 = np.arange(0, 1, delpCO2)
 plt.plot(pCO2, TC)
