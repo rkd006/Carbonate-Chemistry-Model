@@ -113,21 +113,10 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 
 - calc_alphas: creates functions to calculate alpha0, alpha1, alpha2
 - calc_Ks: creates functions to calculate K1, K2, Kh
-- CO2_loss_dynamic_y3: figure that plots CO2 requirements and losses over four days and figure that plots CO2 concentration over four days for a combined y3 
-- subplot_sal: a) creates multiple subplots side by side of the figures from CO2_loss_script_sal b) creates multiple subplots side by side of the figures from CO2_loss_algal_growth_sal
-- subplot_temp: a) creates multiple subplots side by side of the figures from CO2_loss_script_temp b) creates multiple subplots side by side of the figures from CO2_loss_algal_growth_temp
 - CO2_loss_algal_growth_temp: figure that plots CO2 requirements and losses over four days for several temperatures
 - CO2_loss_algal_growth_sal: figure that plots CO2 requirements and losses over four days for several salinities
 - temperature_function: plots the saturation concentration of carbon dioxide and the carbonate species as a function of temperature
 
-#### *subplots:*
-
-- subplot_algal_growth_pH: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_pH for kLa = 0.5 1/hr and alkalinity = 2.5 eq/m3
-- subplot_algal_growth_range: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_range for kLa = 0.5 1/hr, and alkalinity = 3.5 eq/m3 at pH = 6, 7, and 8
-- subplot_algal_growth_alk: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_alk for kLa = 0.5 1/hr, kLa = 3 1/hr, alkalinity = 2 and 32 eq/m3 at pH = 6, 7, and 8
-- subplot_kLa_comb: creates multiple subplots side by side of the figures of kLa = 0.5 1/hr and kLa = 3 1/hr from CO2_loss_kLa_comb
-- subplot_algal_growth_tempsal: creates subplots side by side of the figures from CO2_loss_algal_growth_temp and CO2_loss_algal_growth_sal
-- subplot_different_kLa: creates subplots side by side of figures that plot CO2 losses as a function of pH for alkalinity = 2.5 and 7 eq/m3
 
 #### *with algal growth kinetics:*
 
@@ -139,10 +128,21 @@ git clone https://github.com/rkd006/Carbonate-Chemistry-Model
 - CO2_loss_dynamic_boriah: plots CO2 requirements and losses over four days and plots CO2 concentration over four days, which includes algal growth kinetics based on boriah
 - Beer_Lambert_Law:plots light intensity as a function of position for constant biomass concentration 
 - CO2_loss_dynamic_aiba: plots CO2 requirements and losses over four days, which includes algal growth kinetics based on the modified aiba model
+- mean_value_theorem: uses the Mean Value Theorem to calculate productivities for the file 'algae_productivity_model'
+
+#### *subplots:*
+
+- subplot_algal_growth_pH: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_pH for kLa = 0.5 1/hr and alkalinity = 2.5 eq/m3
+- subplot_algal_growth_range: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_range for kLa = 0.5 1/hr, and alkalinity = 3.5 eq/m3 at pH = 6, 7, and 8
+- subplot_algal_growth_alk: creates multiple subplots side by side of the figures from CO2_loss_algal_growth_alk for kLa = 0.5 1/hr, kLa = 3 1/hr, alkalinity = 2 and 32 eq/m3 at pH = 6, 7, and 8
+- subplot_kLa_comb: creates multiple subplots side by side of the figures of kLa = 0.5 1/hr and kLa = 3 1/hr from CO2_loss_kLa_comb
+- subplot_algal_growth_tempsal: creates subplots side by side of the figures from CO2_loss_algal_growth_temp and CO2_loss_algal_growth_sal
+- subplot_different_kLa: creates subplots side by side of figures that plot CO2 losses as a function of pH for alkalinity = 2.5 and 7 eq/m3
+- subplot_sal: a) creates multiple subplots side by side of the figures from CO2_loss_script_sal b) creates multiple subplots side by side of the figures from CO2_loss_algal_growth_sal
+- subplot_temp: a) creates multiple subplots side by side of the figures from CO2_loss_script_temp b) creates multiple subplots side by side of the figures from CO2_loss_algal_growth_temp
 - subplot_algae_kinetic_monod: creates multiple subplots side by side plotting CO2 requirements and losses over four days at pHs = 6, 7, and 8, which includes algal growth kinetics based on Monod
 - subplot_algae_kinetic_light: creates multiple subplots side by side plotting CO2 requirements and losses over four days at different light intensity, which includes algal growth kinetics based on Monod. 
 - subplot_algae_kinetics: creates multiple subplots side by side that compare the CO2 requirements and losses over four days from the model without kinetics with the model with kinetics 
-- mean_value_theorem: uses the Mean Value Theorem to calculate productivities for the file 'algae_productivity_model'
 
 #### *with CO2 input that is not continuous:*
 - model_CO2_input: the initial step to model a CO2 input to the pond that is not continuous with a constant algae growth rate
