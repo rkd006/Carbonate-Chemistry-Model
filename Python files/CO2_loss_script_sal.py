@@ -41,7 +41,7 @@ while S <= 45:
     plt.figure()
     S += 10
 
-#figure with different temperatures
+#figure with different salinities
 Sin = 25
 Send = 55
 delS = 10

@@ -110,7 +110,7 @@ for p in X:
         CO2req[i+1] = additionalCO2 + ((loss[i+1] - loss[i])/d/1000)
         CO2reqcum[i+1] = sum(CO2req)
         CO2delcum[i+1] = sum(CO2del)
-        CO2aq[i+1] = CO2aq[i+1] - (y1)*(step) - ((loss[i+1] - loss[i])/d/1000)
+        CO2aq[i+1] = CO2aq[i+1] - (y1)*(step)# - ((loss[i+1] - loss[i])/d/1000)
         HCO3[i+1] = HCO3[i] + ((y2)*((step)))
         H[i+1] = (K1*CO2aq[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])

@@ -99,21 +99,26 @@ additionalCO2 = Kh*0.0002 #mol/L
 
 #Calculations
 i = 0
+m = 0
 for p in X:
-    if H[i] < 10**-8.2:
-        step = X2[i+1] - X[i]
-        CO2aq[i+1] = CO2aq[i] + additionalCO2
-        loss[i+1] = kLa*((CO2aq[i+1] - CO2sat)*1000)*(t2[i+1])
-        loss[i+1] = np.clip(loss[i+1],loss[i], 1000)
-        CO2del[i+1] = additionalCO2
-        CO2req[i+1] = additionalCO2 + ((loss[i+1] - loss[i])/d/1000)
-        CO2reqcum[i+1] = sum(CO2req)
-        CO2delcum[i+1] = sum(CO2del)
-        CO2aq[i+1] = CO2aq[i+1] - (y1)*(step) #- ((loss[i+1] - loss[i])/d/1000)
-        HCO3[i+1] = HCO3[i] + ((y2)*((step)))
-        H[i+1] = (K1*CO2aq[i+1])/HCO3[i+1]
-        pH[i+1] = -np.log10(H[i+1])
-        i = i + 1
+    if H[i] < 10**-8.2: #or m == 1:
+            step = X2[i+1] - X[i]
+            CO2aq[i+1] = CO2aq[i] + additionalCO2
+            CO2aq[i+1] = CO2aq[i+1] - (y1)*(step) #- ((loss[i+1] - loss[i])/d/1000)
+            HCO3[i+1] = HCO3[i] + ((y2)*((step)))
+            H[i+1] = (K1*CO2aq[i+1])/HCO3[i+1]
+            loss[i+1] = kLa*((CO2aq[i+1] - CO2sat)*1000)*(t2[i+1])
+            loss[i+1] = np.clip(loss[i+1],loss[i], 1000)
+            CO2del[i+1] = additionalCO2
+            CO2req[i+1] = additionalCO2 + ((loss[i+1] - loss[i])/d/1000)
+            CO2reqcum[i+1] = sum(CO2req)
+            CO2delcum[i+1] = sum(CO2del)
+            pH[i+1] = -np.log10(H[i+1])
+            i = i + 1
+            #if H[i] < 10**-7.9:
+               # m = 1
+            #else:
+               # m = 0
     else:
         step = X2[i+1] - X[i]
         CO2aq[i+1] = CO2aq[i] - ((y1)*(step))

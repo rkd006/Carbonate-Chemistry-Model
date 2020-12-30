@@ -61,20 +61,25 @@ HCO3[0] = 0.02
 H[0] = (K1*CO2aqw[0])/HCO3[0]
 pH[0] = -np.log10(H[0])
 loss[0] = kLa*(CO2aqw[0] - CO2sat) #M
-additionalCO2 = CO2aqw[0]
+additionalCO2 = 0.00002
 
 #Calculations
 i = 0
+m = 0
 for p in algaegrowth:
-    if pH[i] <= 8.2:
-        CO2aqw[i+1] = CO2aqw[i] - ((y1)*((step/1000)/algaeMW))
-        HCO3[i+1] = HCO3[i] + ((y2)*((step/1000)/algaeMW))
-        H[i+1] = (K1*CO2aqw[i+1])/HCO3[i+1]
-        pH[i+1] = -np.log10(H[i+1])
-        loss[i+1] = kLa*(CO2aqw[i+1] - CO2sat)
-        i = i + 1
+    if pH[i] >= 8.2 or m == 1:
+            CO2aqw[i+1] = CO2aqw[i] + additionalCO2 - ((y1)*((step/1000)/algaeMW))
+            HCO3[i+1] = HCO3[i] + ((y2)*((step/1000)/algaeMW))
+            H[i+1] = (K1*CO2aqw[i+1])/HCO3[i+1]
+            pH[i+1] = -np.log10(H[i+1])
+            loss[i+1] = kLa*(CO2aqw[i+1] - CO2sat)
+            i = i + 1
+            if pH[i] > 8:
+                m = 1
+            else:
+                m = 0
     else:
-        CO2aqw[i+1] = CO2aqw[i] + additionalCO2 - ((y1)*((step/1000)/algaeMW))
+        CO2aqw[i+1] = CO2aqw[i] - ((y1)*((step/1000)/algaeMW))
         HCO3[i+1] = HCO3[i] + ((y2)*((step/1000)/algaeMW))
         H[i+1] = (K1*CO2aqw[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])

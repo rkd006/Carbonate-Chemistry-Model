@@ -113,7 +113,6 @@ for p in X:
         HCO3[i+1] = HCO3[i] + ((y2)*((step)))
         H[i+1] = (K1*CO2aq[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])
-        i = i + 1
     else:
         step = X2[i+1] - X[i]
         CO2aq[i+1] = CO2aq[i] - ((y1)*(step))
@@ -123,7 +122,7 @@ for p in X:
         loss[i+1] = loss[i]
         CO2reqcum[i+1] = sum(CO2req)
         CO2delcum[i+1] = sum(CO2del)
-        i = i + 1
+    i = i + 1
 data = {'CO2 (M)': CO2aq, 'HCO3 (M)': HCO3, 'pH': pH}
 table1 = pandas.DataFrame(data=data)
 print (table1)

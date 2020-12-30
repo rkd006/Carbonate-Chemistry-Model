@@ -1,6 +1,6 @@
 #author = Riley Doyle
 #date = 12/4/20
-#file = CO2Sys_Program_Cal_CO2loss_pH
+#file = CO2_loss_script_CO2Sys
 #status = working
 
 import numpy as np
