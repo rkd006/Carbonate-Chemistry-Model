@@ -71,8 +71,10 @@ while kLa <= 3:
     kLa = kLa + delkLa
     j = j + 1
     
-plt.plot(pHout1, loss1)
-plt.plot(pHout2, loss2)
+plt.plot(pHout1[:,0], loss1[:,0], 'b')
+plt.plot(pHout1[:,1], loss1[:,1], 'r--')
+plt.plot(pHout2[:,0], loss2[:,0], 'c')
+plt.plot(pHout2[:,1], loss2[:,1], 'y--')
 plt.xlabel('pH')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
 plt.axis([6, 8.2, 0, 2500])
@@ -135,8 +137,10 @@ while kLa <= 3:
     kLa = kLa + delkLa
     j = j + 1
     
-plt.plot(pHout1, loss1)
-plt.plot(pHout2, loss2)
+plt.plot(pHout1[:,0], loss1[:,0], 'b')
+plt.plot(pHout1[:,1], loss1[:,1], 'r--')
+plt.plot(pHout2[:,0], loss2[:,0], 'c')
+plt.plot(pHout2[:,1], loss2[:,1], 'y--')
 plt.xlabel('pH')
 plt.ylabel('CO$_2$ loss to the atmosphere (g m$^{-2}$ day$^{-1})$')
 plt.gca().axes.get_yaxis().set_visible(False)
