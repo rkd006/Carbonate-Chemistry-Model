@@ -9,6 +9,7 @@ from calc_Ks import *
 from calc_alphas import *
 from calc_density import *
 import numpy as np
+import scipy.integrate as integrate
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
@@ -24,12 +25,12 @@ d = 0.15 #m
 umax = 3.2424 #1/day
 I = 100 #W/m2
 kd = 0 #1/day
-K = 135 #g/m2
+K = 60 #g/m2
 Ki = 13.9136 #W/m2
 
-kLa = 3 #1/hr
-y1 = 1.714 #g CO2 per g algae
-y2 = 0.1695 #g HCO3 as CO2 per g algae
+kLa = 0.5 #1/hr
+y1 = 2.128 #1.714 (old algae eqn) #g CO2 per g algae
+y2 = 0.3395 #0.1695 (old algae eqn) #g HCO3 as CO2 per g algae
 
 Kh = calc_Kh(T,S)*(den/1000) #mol/L/atm
 K1 = calc_K1(T, S)*(den/1000) #mol/L
@@ -82,18 +83,25 @@ P = x[:, 1]
 Caq = x[:,2]
 Cdel = x[:,3]
 Closs = x[:,4]
-print (P/t)
 
 plt.subplot(1, 2, 1)
-plt.text(1.5, 210, str('(a) with kinetics'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1.5, 105, str('(a) with kinetics'), fontsize=10, fontweight='bold', ha='center')
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
-plt.axis([0, 3, 0, 200])
+plt.axis([0, 3, 0, 100])
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 
-Pavg = (X[99] - X[0])/(t[99] - t[0])
-r_algae = Pavg
+#Pavg = (X[99] - X[0])/(t[99] - t[0])
+#r_algae = Pavg
+C = ((umax*I)/(I + Ki))-kd
+X = lambda t:(X0*K)/(X0 + (K - X0)*np.exp(-(C*t)))
+#limits
+a = 0
+b = 3  
+integral = integrate.quad(X, a, b)
+meanP = (1/(b - a))*integral[0]
+r_algae = meanP
 k1 = alpha0/(alpha1 + 2*alpha2)*y2*r_algae
 k2 = (kLa*d*24)
 k3 = (kLa*d*24)*Csat
@@ -128,9 +136,9 @@ plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.axis([0, 3, 0, 200])
+plt.axis([0, 3, 0, 100])
 
 plt.subplot(1,2,2)
-plt.text(1.5, 210, str('(a) without kinetics'), fontsize=10, fontweight='bold', ha='center')
+plt.text(1.5, 105, str('(a) without kinetics'), fontsize=10, fontweight='bold', ha='center')
 plt.gca().axes.get_yaxis().set_visible(False)
 plt.show()
