@@ -49,7 +49,7 @@ kLa = kLa*d*24 #m/day
 umax = 3.2424 #1/day
 I = 100 #W/m2
 kd = 0 #1/day
-K = 350 #g/m3
+K = 60 #g/m3
 Ki = 13.9136 #W/m2
 def algaegrowth(x,t):
     X = x[0]

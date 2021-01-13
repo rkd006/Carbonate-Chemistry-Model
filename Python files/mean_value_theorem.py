@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 #define variables
 kd = 0 #1/day #not added yet
-K = 135 #g/m2
+K = 60 #g/m2
 umax = 3.2424 #1/day
 Ki = 13.9136 #W/m2
 X0 = 0.1 #g/m2
@@ -35,6 +35,5 @@ for p in Isteps:
     b = 3
     
     integral = integrate.quad(X, a, b)
-    meanbiomass = (1/(b - a))*integral[0]
-    meanproductivity = meanbiomass/(b - a)
-    print (meanproductivity)
+    meanP = (1/(b - a))*integral[0]
+    print (meanP)
