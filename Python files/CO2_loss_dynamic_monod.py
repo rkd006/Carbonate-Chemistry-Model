@@ -27,7 +27,7 @@ kd = 0 #1/day
 K = 60 #g/m2
 Ki = 13.9136 #W/m2
 
-kLa = 0.5 #1/hr
+kLa = 1.5 #1/hr
 y1 = 2.128 #1.714 (old algae eqn) #g CO2 per g algae
 y2 = 0.3395 #0.1695 (old algae eqn) #g HCO3 as CO2 per g algae
 
@@ -86,6 +86,7 @@ while pH <= 8:
     plt.ylabel('CO$_2$ (g/m$^2$)')
     plt.plot(t,Cdel)
     plt.plot(t, Closs)
+    plt.axis([0, 3, 0, 140])
     plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
     plt.show()
     pH += 1

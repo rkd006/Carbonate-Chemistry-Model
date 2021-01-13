@@ -20,8 +20,8 @@ p = P/10
 den = calc_density(S, t, p) #(kg/m3)
 PCO2 = 0.000416
 d = 0.15
-y1 = 1.714 #g CO2 per g algae
-y2 = 0.1695 #g HCO3 as CO2 per g algae
+y1 = 2.128 #1.714 (old algae eqn) #g CO2 per g algae
+y2 = 0.3395 #0.1695 (old algae eqn) #g HCO3 as CO2 per g algae
 Kh = calc_Kh(T,S)*(den/1000) #mol/L/atm
 K1 = calc_K1(T, S)*(den/1000) #mol/L
 pK1 = - np.log10(K1)
@@ -32,7 +32,7 @@ Csat = PCO2*Kh*44*1000
 
 alk0 = 2.5
 r_algae = 10
-kLa = 0.5
+kLa = 1.5
 pH = 6
 delpH = 1
 c = 1
@@ -73,19 +73,19 @@ while pH <= 8:
     plt.plot(t,Cdel)
     plt.plot(t,Closs, linestyle='--')
     plt.xlabel('time (days)')
-    plt.axis([0, 4, 0, 700])
+    plt.axis([0, 4, 0, 2000])
     c += 1
     pH += delpH
 plt.subplot(1,3,1)
 plt.ylabel('CO$_2$ (g/m$^2$)')
-plt.text(.8, 640, str('(a) pH = 6'), fontsize=10, fontweight='bold', ha='center')
+plt.text(.8, 1800, str('(a) pH = 6'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,2)
 plt.gca().axes.get_yaxis().set_visible(False)
-plt.text(.8, 640, str('(b) pH = 7'), fontsize=10, fontweight='bold', ha='center')
+plt.text(.8, 1800, str('(b) pH = 7'), fontsize=10, fontweight='bold', ha='center')
 
 plt.subplot(1,3,3)
 plt.gca().axes.get_yaxis().set_visible(False)
 plt.legend(['CO$_2$ supply', 'CO$_2$ loss'], frameon=False)
-plt.text(.8, 640, str('(c) pH = 8'), fontsize=10, fontweight='bold', ha='center')
+plt.text(.8, 1800, str('(c) pH = 8'), fontsize=10, fontweight='bold', ha='center')
 plt.show()

@@ -28,7 +28,7 @@ kd = 0 #1/day
 K = 60 #g/m2
 Ki = 13.9136 #W/m2
 
-kLa = 0.5 #1/hr
+kLa = 1.5 #1/hr
 y1 = 2.128 #1.714 (old algae eqn) #g CO2 per g algae
 y2 = 0.3395 #0.1695 (old algae eqn) #g HCO3 as CO2 per g algae
 
@@ -92,8 +92,6 @@ plt.axis([0, 3, 0, 100])
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 
-#Pavg = (X[99] - X[0])/(t[99] - t[0])
-#r_algae = Pavg
 C = ((umax*I)/(I + Ki))-kd
 X = lambda t:(X0*K)/(X0 + (K - X0)*np.exp(-(C*t)))
 #limits
