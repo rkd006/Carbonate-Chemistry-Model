@@ -143,6 +143,7 @@ print (table1)
 
 loss = loss*CO2MW
 CO2reqcum = CO2reqcum*CO2MW*1000*d
+print((loss[10000]/CO2reqcum[10000])*100)
 plt. plot(t2, CO2reqcum)
 plt.plot(t2, loss)
 plt.axis([0, 3, 0, 140])

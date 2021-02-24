@@ -86,3 +86,6 @@ plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Caq)
 plt.show()
 
+loss = (Closs[99]/Cdel[99])*100
+print (loss)
+
