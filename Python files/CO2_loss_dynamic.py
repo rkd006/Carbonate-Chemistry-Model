@@ -78,7 +78,7 @@ plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-plt.axis([0, 3, 0, 70])
+#plt.axis([0, 3, 0, 70])
 plt.show()
 
 plt.xlabel('time (days)')

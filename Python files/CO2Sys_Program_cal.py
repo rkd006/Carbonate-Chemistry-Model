@@ -15,7 +15,7 @@ T = 20 #C
 P = 0.5 #dbars
 TP = 10/10**6 #mol/kg SW
 TSi = 30/10**6 #mol/kg SW
-TA = 2350/10**6 #mol/kg SW
+TA = 1033/10**6 #mol/kg SW
 pCO2 = 415/10**6 
 
 #Output Conditions

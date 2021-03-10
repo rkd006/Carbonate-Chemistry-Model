@@ -1,6 +1,6 @@
 #author: Riley Doyle
 #date: 2/13/2021
-#file: CO2_supply
+#file: CO2_loss_sump
 #status: working
 
 from calc_Ks import *
@@ -41,24 +41,22 @@ Cco2 = ((alk0 - OH + Hw)*alpha0/(alpha1 + 2*alpha2)) #mol/m3
 Pg = 1.2 #pressure of CO2 gas (atm)
 Tg = 316 #temperature of CO2 gas (K)
 Rg = 0.000082 #universal gas constant (atm*m3/mol/K)
-Qg = 0.26 #gas flow rate (m3/day)
 He = 0.8317 #Henry's constant 
 kLg = 9.59 #mass transfer for gas-to-liquid transfer (m/day)
 Ws = 0.65 #width of sump (m)
 Ls = 1 #length of sump (m)
-W = 1.4 #width of pond/depth of sump (m)
+W = 2.5 #width of pond/depth of sump (m)
 L = 50 #length of pond (m)
-kLa = 0.5*24 #1/day
+kLa = 1.5*24 #1/day
 H = 0.15 #depth of water (m)
 V = W*L*H #volume of pond (m3)
-vb = 30 #CO2 gas bubble terminal velocity (cm/s)
+vb = 30*864 #CO2 gas bubble terminal velocity (cm/s to m/day)
 alpha6 = 0.96 #pressure correction factor
-db = 2 #diameter of CO2 gas bubble (mm)
-v = 25 #water velocity (cm/s)
+db = 2/1000 #diameter of CO2 gas bubble (mm to m)
+v = 25*864 #water velocity (cm/s to m/day)
 pi = math.pi
-alpha3 = 864 #conversion factor for cm/s to m/day
 yin = 1 #CO2 molar fraction in
-denCO2 = 2040 #density of CO2 (g/m3)
+denCO2 = V/2040 ##convert g/m2/day to m3/day using density of CO2 (g/m3)
 Csat = PCO2*Kh*44*1000 #g/m3
 y1 = 2.128 #g CO2 per g algae
 y2 = 0.3395 #g HCO3 as CO2 per g algae
@@ -75,9 +73,7 @@ C1 = ((y1 + y2)*Mc - y2*Mc*(alpha1 + 2*alpha2))/V
 C2 = Pg/(Rg*Tg)
 C3 = (Rg*Tg*He)/Pg
 C4 = (yin*Pg)/(He*Rg*Tg)
-C5 = -kLg*W*H*Ws/Qg*He
-#A1 = pi*((db/1000)**2)/(Ws*W*((vb - v)*alpha3))*((C1/denCO2)*V)
-#N1 = np.exp(C5*(1-((alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V))/(alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V) + (v*alpha3)*Ws*W)))*((pi*((db/1000)**2)/(Ws*W*((vb - v)*alpha3))*(((C1 + (k2 *Caq) - k3)/denCO2)*V))/(pi*(((db/1000)**3)/6)*(1-((alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V))/(alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V) + (v*alpha3)*Ws*W))))))
+C5 = -kLg*W*H*Ws/He
 
 #solve ODEs
 def supply(x,t):
@@ -85,9 +81,9 @@ def supply(x,t):
     Cdel = x[1]
     Closs = x[2]
     Caq = x[3]
-    dCsupdt = C1 + (k2 *Caq) - k3
-    dCdeldt =  (1/V)*(((C1 + (k2 *Caq) - k3)/denCO2)*V)*C2*(yin - C3*((Caq/44) + (C4 - (Caq/44))*np.exp(C5*(1-((alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V))/(alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V) + (v*alpha3)*Ws*W)))*((pi*((db/1000)**2)/(Ws*W*((vb - v)*alpha3))*(((C1 + (k2 *Caq) - k3)/denCO2)*V))/(pi*(((db/1000)**3)/6)*(1-((alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V))/(alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V) + (v*alpha3)*Ws*W))))))))*44  #1.3824*(Csat - Csup)
-    dClossdt = ((k2 *Caq) - k3) + ((C1 + (k2 *Caq) - k3) - (1/V)*(((C1 + (k2 *Caq) - k3)/denCO2)*V)*C2*(yin - C3*((Caq/44) + (C4 - (Caq/44))*np.exp(C5*(1-((alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V))/(alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V) + (v*alpha3)*Ws*W)))*((pi*((db/1000)**2)/(Ws*W*((vb - v)*alpha3))*(((C1 + (k2 *Caq) - k3)/denCO2)*V))/(pi*(((db/1000)**3)/6)*(1-((alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V))/(alpha6*(((C1 + (k2 *Caq) - k3)/denCO2)*V) + (v*alpha3)*Ws*W))))))))*44)
+    dCsupdt = C1 + ((k2 *Caq) - k3)
+    dCdeldt = (1/V)*((dCsupdt*denCO2)*C2*(yin - (C3*((Caq/44) + (C4 - (Caq/44))*np.exp(C5*(dCsupdt*denCO2)*(1-((alpha6*(dCsupdt*denCO2))/(alpha6*(dCsupdt*denCO2) + (v)*Ws*W)))*((pi*((db)**2)/(Ws*W*((vb - v)))*(dCsupdt*denCO2))/(pi*(((db)**3)/6)*(1-((alpha6*(dCsupdt*denCO2))/(alpha6*(dCsupdt*denCO2) + (v)*Ws*W))))))))))*44
+    dClossdt = ((k2 *Caq) - k3) + (dCsupdt - dCdeldt)
     dCaqdt = -k1
     return [dCsupdt, dCdeldt, dClossdt, dCaqdt]
 
@@ -99,25 +95,26 @@ Caq0 = Cco2*44 #g/m3
 
 x0 = [Csup0, Cdel0, Closs0, Caq0]
 t = np.linspace(0,3,100) 
-
 x = odeint(supply, x0, t)
 
-Csup = x[:,0]*H
+Csup = x[:,0]*H #supply to sustain algae growth and losses to atmosphere
 Cdel = x[:,1]*H
 Caq = x[:,3]*H
 Closs = x[:,2]*H
+Csupreq = Csup + (Csup - Cdel) #supply to sustain algae growth and both losses from atmosphere and sump
 
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
-plt.plot(t, Csup)
+plt.plot(t, Csupreq)
 plt.plot(t, Closs)
-plt.legend(['CO$_2$ supplied', 'CO$_2$ losses'], frameon=False)
+plt.legend(['CO$_2$ supply required', 'CO$_2$ losses'], frameon=False)
 #plt.axis([0, 3, 0, 70])
 plt.show()
 
 plt.plot(t,Caq)
 plt.show()
 #determine loss (percent)
-loss = (Closs[99]/Cdel[99])*100
+loss = (Closs[99]/Csupreq[99])*100
 print (loss)
+
 
