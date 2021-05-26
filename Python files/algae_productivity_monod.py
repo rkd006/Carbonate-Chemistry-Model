@@ -6,11 +6,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
-import scipy.integrate as integrate
 
 d = 0.15 #m
 kd = 0 #1/day #not added yet
-K = 60 #g/m2
+K = 135 #g/m2
 umax = 3.2424 #1/day
 Ki = 13.9136 #W/m2
 Iin = 100 #W/m2
@@ -34,18 +33,9 @@ for p in Isteps:
     for i in n:
         P[i] = X[i]/t[i]
         
-    C = ((umax*p)/(p + Ki))-kd
-    X = lambda t:(X0*K)/(X0 + (K - X0)*np.exp(-(C*t)))
-    #limits
-    a = 0
-    b = 3  
-    integral = integrate.quad(X, a, b)
-    meanP = (1/(b - a))*integral[0]
-    print(meanP)
-        
     plt.plot(t, P)
     plt.xlabel('time (days)')
     plt.ylabel('Productivity (g m$^{-2}$ day$^{-1}$)')
     plt.legend(['I = 100 W/m$^{2}$', 'I = 200 W/m$^{2}$', 'I = 300 W/m$^{2}$', 'I = 400 W/m$^{2}$'], frameon=False)
-    plt.axis([0.3, 3, 0, 25])
+    plt.axis([0.3, 3, 0, 45])
 plt.show()

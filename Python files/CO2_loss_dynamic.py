@@ -22,7 +22,7 @@ den = calc_density(S, t, p) #(kg/m3)
 PCO2 = 0.000416 #atm
 d = 0.15 #m
 
-kLa = 1.5 #1/hr
+kLa = 0.5 #1/hr
 y1 = 2.128 #1.714 (old algae eqn) #g CO2 per g algae
 y2 = 0.3395 #0.1695 (old algae eqn) #g HCO3 as CO2 per g algae
 
@@ -78,14 +78,11 @@ plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Cdel)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-#plt.axis([0, 3, 0, 70])
+plt.axis([0, 3, 0, 70])
 plt.show()
 
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
 plt.plot(t,Caq)
 plt.show()
-
-loss = (Closs[99]/Cdel[99])*100
-print (loss)
 

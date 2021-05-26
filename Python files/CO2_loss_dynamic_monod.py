@@ -24,12 +24,12 @@ d = 0.15 #m
 umax = 3.2424 #1/day
 I = 100 #W/m2
 kd = 0 #1/day
-K = 60 #g/m2
+K = 200 #g/m2
 Ki = 13.9136 #W/m2
 
-kLa = 1.5 #1/hr
-y1 = 2.128 #1.714 (old algae eqn) #g CO2 per g algae
-y2 = 0.3395 #0.1695 (old algae eqn) #g HCO3 as CO2 per g algae
+kLa = 3 #1/hr
+y1 = 1.714 #g CO2 per g algae
+y2 = 0.1695 #g HCO3 as CO2 per g algae
 
 Kh = calc_Kh(T,S)*(den/1000) #mol/L/atm
 K1 = calc_K1(T, S)*(den/1000) #mol/L
@@ -70,7 +70,7 @@ while pH <= 8:
     Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
     Cin0 = 0
     Closs0 = 0 
-    X0 = 0.1
+    X0 = 0.04
     P0 = 0
     x0 = [X0, P0, Caq0, Cin0, Closs0]
     t = np.linspace(0,3,100)
@@ -86,7 +86,6 @@ while pH <= 8:
     plt.ylabel('CO$_2$ (g/m$^2$)')
     plt.plot(t,Cdel)
     plt.plot(t, Closs)
-    plt.axis([0, 3, 0, 140])
     plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
     plt.show()
     pH += 1

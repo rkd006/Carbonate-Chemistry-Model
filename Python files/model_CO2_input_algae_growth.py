@@ -13,7 +13,6 @@ import numpy as np
 from pandas import *
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
-import scipy.integrate as integrate
 
 #Stiochiometric ratios
 CO2coef = 452
@@ -43,24 +42,24 @@ CO2sat = Kh*PCO2 #mol/L
 y1 = CO2coef/algaecoef #mol/mol
 y2 = HCO3coef/algaecoef #mol/mol
 d = 0.15 #m
-kLa = 1.5 #1/hr 
+kLa = 0.5 #1/hr 
 kLa = kLa*d*24 #m/day
 
-#s#solving for algae growth
+#solving for algae growth
 umax = 3.2424 #1/day
 I = 100 #W/m2
 kd = 0 #1/day
-K = 60 #g/m2
+K = 350 #g/m3
 Ki = 13.9136 #W/m2
 def algaegrowth(x,t):
     X = x[0]
     dXdt = (((umax*I)/(I + Ki))-kd)*(1-(X/K))*X
     return [dXdt]
-X0 = 0.1 #g/m2
+X0 = 0.1
 x0 = [X0]
 t = np.linspace(0,3,10000) 
 x = odeint(algaegrowth, x0, t)
-X = (x[:,0])/algaeMW/1000/d #mol/L
+X = (x[:,0])/algaeMW/1000 #mol/L
 
 def algaegrowth2(x,t):
     X2 = x2[0]
@@ -70,16 +69,7 @@ X20 = 0.1
 x20 = [X20]
 t2 = np.linspace(0, 3+(3/(10000-1)), 10000+1)  
 x2 = odeint(algaegrowth, x20, t2)
-X2 = (x2[:,0])/algaeMW/1000/d #mol/L
-
-C = ((umax*I)/(I + Ki))-kd
-Q = lambda t:(X0*K)/(X0 + (K - X0)*np.exp(-(C*t)))
-#limits
-a = 0
-b = 3  
-integral = integrate.quad(Q, a, b)
-meanP = (1/(b - a))*integral[0]
-print (meanP)
+X2 = (x2[:,0])/algaeMW/1000 #mol/L
 
 #initial conditions
 CO2aq = np.zeros(len(X)+1)
@@ -110,24 +100,21 @@ additionalCO2 = Kh*0.0002 #mol/L
 
 #Calculations
 i = 0
-m = 0
 for p in X:
-    if H[i] < 10**-8.2 or m == 1:
+    if H[i] < 10**-8.2:
         step = X2[i+1] - X[i]
         CO2aq[i+1] = CO2aq[i] + additionalCO2
         loss[i+1] = kLa*((CO2aq[i+1] - CO2sat)*1000)*(t2[i+1])
         loss[i+1] = np.clip(loss[i+1],loss[i], 1000)
+        CO2del[i+1] = additionalCO2
         CO2req[i+1] = additionalCO2 + ((loss[i+1] - loss[i])/d/1000)
         CO2reqcum[i+1] = sum(CO2req)
-        CO2aq[i+1] = CO2aq[i+1] - (y1)*(step) 
+        CO2delcum[i+1] = sum(CO2del)
+        CO2aq[i+1] = CO2aq[i+1] - (y1)*(step)# - ((loss[i+1] - loss[i])/d/1000)
         HCO3[i+1] = HCO3[i] + ((y2)*((step)))
         H[i+1] = (K1*CO2aq[i+1])/HCO3[i+1]
         pH[i+1] = -np.log10(H[i+1])
         i = i + 1
-        if H[i] < 10**-7.9:
-                m = 1
-        else:
-                m = 0
     else:
         step = X2[i+1] - X[i]
         CO2aq[i+1] = CO2aq[i] - ((y1)*(step))
@@ -136,23 +123,23 @@ for p in X:
         pH[i+1] = -np.log10(H[i+1])
         loss[i+1] = loss[i]
         CO2reqcum[i+1] = sum(CO2req)
+        CO2delcum[i+1] = sum(CO2del)
         i = i + 1
 data = {'CO2 (M)': CO2aq, 'HCO3 (M)': HCO3, 'pH': pH}
 table1 = pandas.DataFrame(data=data)
 print (table1)
 
 loss = loss*CO2MW
-CO2reqcum = CO2reqcum*CO2MW*1000*d
-print((loss[10000]/CO2reqcum[10000])*100)
+CO2reqcum = CO2reqcum*CO2MW*d*1000
+CO2delcum = CO2delcum*CO2MW*d*1000
 plt. plot(t2, CO2reqcum)
 plt.plot(t2, loss)
-plt.axis([0, 3, 0, 140])
 plt.xlabel('time (days)')
-plt.ylabel('CO$_2$ (g/m$^2$)')
+plt.ylabel('cummulative CO$_2$ (g/m$^2$)')
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
 plt.show()
 
-X = X*algaeMW*1000*d
+X = X*algaeMW*d*1000
 plt.plot(t, X)
 plt.xlabel('time (days)')
 plt.ylabel('biomass concentration (g/m$^2$)')

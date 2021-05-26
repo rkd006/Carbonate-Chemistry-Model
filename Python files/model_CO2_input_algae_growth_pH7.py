@@ -59,7 +59,7 @@ X0 = 0.1
 x0 = [X0]
 t = np.linspace(0,3,10000) 
 x = odeint(algaegrowth, x0, t)
-X = (x[:,0])/algaeMW/1000/d #mol/L
+X = (x[:,0])/algaeMW/1000 #mol/L
 
 def algaegrowth2(x,t):
     X2 = x2[0]
@@ -69,7 +69,7 @@ X20 = 0.1
 x20 = [X20]
 t2 = np.linspace(0, 3+(3/(10000-1)), 10000+1)  
 x2 = odeint(algaegrowth, x20, t2)
-X2 = (x2[:,0])/algaeMW/1000/d #mol/L
+X2 = (x2[:,0])/algaeMW/1000 #mol/L
 
 #initial conditions
 CO2aq = np.zeros(len(X)+1)

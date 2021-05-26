@@ -77,8 +77,8 @@ for a in Tsteps:
     PCO2 = 0.000416
     d = 0.15
     kLa = 0.5*(1.024**((Tc)-20))
-    y1 = 2.128 #1.714 (old algae eqn) #g CO2 per g algae
-    y2 = 0.3395 #0.1695 (old algae eqn) #g HCO3 as CO2 per g algae
+    y1 = 1.714 #g CO2 per g algae
+    y2 = 0.1695 #g HCO3 as CO2 per g algae
     Kh = calc_Kh(a,S)*(den/1000) #mol/L/atm
     K1 = calc_K1(a, S)*(den/1000) #mol/L
     pK1 = - np.log10(K1)

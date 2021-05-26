@@ -46,14 +46,14 @@ CO2sat = Kh*PCO2*den/1000 #mol/L
 y1 = CO2coef/algaecoef #mol/mol
 y2 = HCO3coef/algaecoef #mol/mol
 d = 0.15 #m
-kLa = 1.5 #1/hr 
+kLa = 0.5 #1/hr 
 kLa = kLa*d*24 #m/day
 
 #solving for algae growth
 umax = 3.2424 #1/day
 I = 100 #W/m2
 kd = 0 #1/day
-K = 60 #g/m2
+K = 350 #g/m3
 Ki = 13.9136 #W/m2
 def algaegrowth(x,t):
     X = x[0]
@@ -63,7 +63,7 @@ X0 = 0.1
 x0 = [X0]
 t = np.linspace(0,3,10000) 
 x = odeint(algaegrowth, x0, t)
-X = (x[:,0])/algaeMW/1000/d #mol/L
+X = (x[:,0])/algaeMW/1000 #mol/L
 
 def algaegrowth2(x,t):
     X2 = x2[0]
@@ -73,7 +73,7 @@ X20 = 0.1
 x20 = [X20]
 t2 = np.linspace(0, 3+(3/(10000-1)), 10000+1)  
 x2 = odeint(algaegrowth, x20, t2)
-X2 = (x2[:,0])/algaeMW/1000/d #mol/L
+X2 = (x2[:,0])/algaeMW/1000 #mol/L
 
 #initial conditions
 CO2aq = np.zeros(len(X)+1)
@@ -101,10 +101,10 @@ additionalCO2 = Kh*0.0002 #mol/L
 i = 0
 m = 0
 for p in X:
-    if H[i] < 10**-8.2 or m == 1:
+    if H[i] < 10**-8.2: #or m == 1:
             step = X2[i+1] - X[i]
             CO2aq[i+1] = CO2aq[i] + additionalCO2
-            CO2aq[i+1] = CO2aq[i+1] - (y1)*(step)
+            CO2aq[i+1] = CO2aq[i+1] - (y1)*(step) #- ((loss[i+1] - loss[i])/d/1000)
             HCO3[i+1] = HCO3[i] + ((y2)*((step)))
             H[i+1] = (K1*CO2aq[i+1])/HCO3[i+1]
             loss[i+1] = kLa*((CO2aq[i+1] - CO2sat)*1000)*(t2[i+1])
@@ -115,10 +115,10 @@ for p in X:
             CO2delcum[i+1] = sum(CO2del)
             pH[i+1] = -np.log10(H[i+1])
             i = i + 1
-            if H[i] < 10**-7.9:
-                m = 1
-            else:
-                m = 0
+            #if H[i] < 10**-7.9:
+               # m = 1
+            #else:
+               # m = 0
     else:
         step = X2[i+1] - X[i]
         CO2aq[i+1] = CO2aq[i] - ((y1)*(step))
@@ -139,7 +139,7 @@ CO2delcum = CO2delcum*CO2MW*d*1000
 plt. plot(t2, CO2reqcum)
 plt.plot(t2, loss)
 plt.xlabel('time (days)')
-plt.ylabel('CO$_2$ (g/m$^2$)')
+plt.ylabel('cummulative CO$_2$ (g/m$^2$)')
 plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
 plt.show()
 

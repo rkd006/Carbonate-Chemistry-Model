@@ -85,41 +85,38 @@ C5 = -kLg*W*H*Ws/He
 def sump_kinetics(x,t):
     X = x[0]
     P = x[1]
-    Caq = x[2]
-    Cdel = x[3]
-    Closs = x[4]
+    Caq = x[5]
+    Cin = x[2]
     dXdt = (((umax*I)/(I + Ki))-kd)*(1-(X/K))*X
     dPdt = dXdt
-    dCaqdt = -k1*P
-    dCsupdt = ((k2 *Caq) - k3) + (k4*P - k5*P)
+    dCsupdt = (k4*P - k5*P) + (k2 *Caq) - k3
     dCdeldt = (1/A)*((dCsupdt*denCO2)*C2*(yin - (C3*((Caq/44) + (C4 - (Caq/44))*np.exp(C5*(dCsupdt*denCO2)*(1-((alpha6*(dCsupdt*denCO2))/(alpha6*(dCsupdt*denCO2) + (v)*Ws*W)))*((pi*((db)**2)/(Ws*W*((vb - v)))*(dCsupdt*denCO2))/(pi*(((db)**3)/6)*(1-((alpha6*(dCsupdt*denCO2))/(alpha6*(dCsupdt*denCO2) + (v)*Ws*W))))))))))*44
     dClossdt = (k2 *Caq) - k3 + (dCsupdt - dCdeldt)
-    return [dXdt, dPdt, dCaqdt, dCsupdt, dCdeldt, dClossdt]
-        
+    dCaqdt = -k1*P #- (dClossdt) + dCdeldt
+    return [dXdt, dPdt, dCsupdt, dCdeldt, dClossdt, dCaqdt]
+
 Caq0 = ((alk0 - OH + Hw)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
 Cin0 = 0
 Cdel0 = 0 
 Closs0 = 0 
 X0 = 0.1
 P0 = 0
-x0 = [X0, P0, Caq0, Cin0, Cdel0, Closs0]
+x0 = [X0, P0, Cin0, Cdel0, Closs0, Caq0]
 t = np.linspace(0,3,100)
 x = odeint(sump_kinetics, x0, t)
 
 X = x[:,0]
 P = x[:, 1]
-Caq = x[:,2]
-Cin = x[:,3]
-Cdel = x[:,4]
-Closs = x[:,5]
-Csupreq = Cin + (Cin - Cdel)
+Caq = x[:,5]
+Cin = x[:,2]
+Cdel = x[:,3]
+Closs = x[:,4]
 
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
-plt.plot(t, Csupreq)
-#plt.plot(t, Cdel)
+plt.plot(t, Cin)
 plt.plot(t, Closs)
-plt.axis([0, 3, 0, 100])
+#plt.axis([0, 3, 0, 100])
 plt.legend(['CO$_2$ supply required', 'CO$_2$ losses'], frameon=False)
 plt.show()
 
@@ -128,4 +125,3 @@ plt.show()
 #determine loss (percent)
 loss = (Closs[99]/Cin[99])*100
 print (loss)
-

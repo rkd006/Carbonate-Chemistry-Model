@@ -69,7 +69,7 @@ Mc = r_algae*W*L #(g/day)
 k1 = (alpha0/(alpha1 + 2*alpha2)*y2*Mc)/V
 k2 = kLa
 k3 = kLa*Csat
-C1 = ((y1 + y2)*Mc - y2*Mc*(alpha1 + 2*alpha2))/V 
+C1 = ((y1 + y2)*Mc - y2*Mc*(alpha1 + 2*alpha2))/V  
 C2 = Pg/(Rg*Tg)
 C3 = (Rg*Tg*He)/Pg
 C4 = (yin*Pg)/(He*Rg*Tg)
@@ -82,7 +82,7 @@ def supply(x,t):
     Closs = x[2]
     Caq = x[3]
     dCsupdt = C1 + ((k2 *Caq) - k3)
-    dCdeldt = (1/V)*((dCsupdt*denCO2)*C2*(yin - (C3*((Caq/44) + (C4 - (Caq/44))*np.exp(C5*(dCsupdt*denCO2)*(1-((alpha6*(dCsupdt*denCO2))/(alpha6*(dCsupdt*denCO2) + (v)*Ws*W)))*((pi*((db)**2)/(Ws*W*((vb - v)))*(dCsupdt*denCO2))/(pi*(((db)**3)/6)*(1-((alpha6*(dCsupdt*denCO2))/(alpha6*(dCsupdt*denCO2) + (v)*Ws*W))))))))))*44
+    dCdeldt =  (1/V)*((dCsupdt*denCO2)*C2*(yin - (C3*((Caq/44) + (C4 - (Caq/44))*np.exp(C5*(dCsupdt*denCO2)*(1-((alpha6*(dCsupdt*denCO2))/(alpha6*(dCsupdt*denCO2) + (v)*Ws*W)))*((pi*((db)**2)/(Ws*W*((vb - v)))*(dCsupdt*denCO2))/(pi*(((db)**3)/6)*(1-((alpha6*(dCsupdt*denCO2))/(alpha6*(dCsupdt*denCO2) + (v)*Ws*W))))))))))*44
     dClossdt = ((k2 *Caq) - k3) + (dCsupdt - dCdeldt)
     dCaqdt = -k1
     return [dCsupdt, dCdeldt, dClossdt, dCaqdt]
@@ -97,15 +97,14 @@ x0 = [Csup0, Cdel0, Closs0, Caq0]
 t = np.linspace(0,3,100) 
 x = odeint(supply, x0, t)
 
-Csup = x[:,0]*H #supply to sustain algae growth and losses to atmosphere
+Csup = x[:,0]*H 
 Cdel = x[:,1]*H
 Caq = x[:,3]*H
 Closs = x[:,2]*H
-Csupreq = Csup + (Csup - Cdel) #supply to sustain algae growth and both losses from atmosphere and sump
 
 plt.xlabel('time (days)')
 plt.ylabel('CO$_2$ (g/m$^2$)')
-plt.plot(t, Csupreq)
+plt.plot(t,Csup)
 plt.plot(t, Closs)
 plt.legend(['CO$_2$ supply required', 'CO$_2$ losses'], frameon=False)
 #plt.axis([0, 3, 0, 70])
@@ -114,7 +113,5 @@ plt.show()
 plt.plot(t,Caq)
 plt.show()
 #determine loss (percent)
-loss = (Closs[99]/Csupreq[99])*100
+loss = (Closs[99]/Csup[99])*100
 print (loss)
-
-

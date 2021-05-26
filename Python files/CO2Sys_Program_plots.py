@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from CO2Sys_functions import *
 from constants import *
-from CO2Sys_Program_TApCO2 import *
+from CO2Sys_Program import *
 
 #Input Conditions
 S = 35 #g/kg
@@ -28,7 +28,7 @@ TC = np.zeros([100,1])
 pH = np.zeros([100,1])
 i = 0
 while pCO2 <= 1:
-    CO2Sys = CO2Sys_Program_TApCO2(T, S, P, TP, TSi, TA, pCO2, Tout, Pout)
+    CO2Sys = CO2Sys_Program(T, S, P, TP, TSi, TA, pCO2, Tout, Pout)
     TC[i] = (CO2Sys[39])*10**6
     pH[i] = (CO2Sys[51])
     pCO2 = pCO2 + delpCO2
@@ -42,7 +42,7 @@ TC2 = np.zeros([100,1])
 pH2 = np.zeros([100,1])
 i = 0
 while pCO2 <= 1:
-    CO2Sys = CO2Sys_Program_TApCO2(T, S, P, TP, TSi, TA, pCO2, Tout, Pout)
+    CO2Sys = CO2Sys_Program(T, S, P, TP, TSi, TA, pCO2, Tout, Pout)
     TC2[i] = (CO2Sys[39])*10**6
     pH2[i] = (CO2Sys[51])
     pCO2 = pCO2 + delpCO2
