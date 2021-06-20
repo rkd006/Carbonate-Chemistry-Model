@@ -3,6 +3,10 @@
 #file = CO2_loss_script_CO2Sys
 #status = working
 
+#clear all
+from IPython import get_ipython
+get_ipython().magic('reset -sf')
+
 import numpy as np
 import matplotlib.pyplot as plt
 from calc_Ks import *

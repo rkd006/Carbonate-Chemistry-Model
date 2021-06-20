@@ -3,6 +3,10 @@
 #file: specific_growth_rate
 #status: WORKING
 
+#clear all
+from IPython import get_ipython
+get_ipython().magic('reset -sf')
+
 import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt

@@ -3,6 +3,9 @@
 #file: CO2_loss_dynamic_CO2Sys
 #status: WORKING
 
+from IPython import get_ipython
+get_ipython().magic('reset -sf')
+
 from calc_Ks import *
 from CO2Sys_functions import *
 from constants import *
@@ -43,7 +46,7 @@ Pout = 0.5
 CO2Sys = CO2Sys_Program_pHTA(T, S, P, TP, TSi, TA, Tout, Pout, pH)
 K1 = CO2Sys[0]
 K2 = CO2Sys[2]
-Caq = (CO2Sys[49])*(den)
+Caq0 = (CO2Sys[49])*(den)
 pK1 = - np.log10(K1)
 pK2 = - np.log10(K2)
 
@@ -70,7 +73,7 @@ def rates(x,t):
     return [dCaqdt, dCdeldt, dClossdt]
 
 
-Caq0 = Caq*44
+Caq0 = Caq0*44
 Cin0 = 0
 Closs0 = 0 
 

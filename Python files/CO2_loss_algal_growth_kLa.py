@@ -3,6 +3,10 @@
 #file: CO2_loss_algal_growth_kLa
 #status: WORKING
 
+#clear all
+from IPython import get_ipython
+get_ipython().magic('reset -sf')
+
 from calc_Ks import *
 from calc_alphas import *
 from calc_density import *

@@ -3,6 +3,10 @@
 #file: subplot_algal_growth_range
 #status: working 
 
+#clear all
+from IPython import get_ipython
+get_ipython().magic('reset -sf')
+
 from calc_Ks import *
 from calc_alphas import *
 from calc_density import *

@@ -3,6 +3,10 @@
 #file: plot_carbonates
 #status: working
 
+#clear all
+from IPython import get_ipython
+get_ipython().magic('reset -sf')
+
 import matplotlib.pyplot as plt
 import numpy
 import math

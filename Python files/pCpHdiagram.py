@@ -3,6 +3,10 @@
 #file: pCpHdiagram
 #status: working
 
+#clear all
+from IPython import get_ipython
+get_ipython().magic('reset -sf')
+
 import numpy as np
 from calc_density import *
 from calc_Ks import *

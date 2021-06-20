@@ -1,54 +1,25 @@
 #author: Riley Doyle
-#date: 8/8/20
-#file: CO2_loss_dynamic_monod
+#date: 6/20/21
+#file: inputpCO2_CO2loss
 #status: WORKING
 
-#monod model
-
-#clear all
-from IPython import get_ipython
-get_ipython().magic('reset -sf')
-
-#get functions
 from calc_Ks import *
 from calc_alphas import *
 from calc_density import *
+from CO2Sys_functions import *
+from constants import *
+from CO2Sys_Program_TApCO2 import *
 import numpy as np
 from scipy.integrate import odeint
-import matplotlib.pyplot as plt
 
-#input conditions
-T = 20 + 273.15 #kelvins
-S = 35 #g/kg
-Tc = 20
-P = 10 #(dbar)
-t = Tc*1.00024
-p = P/10
-den = calc_density(S, t, p) #(kg/m3)
-PCO2 = 0.000416 #atm
-d = 0.15 #m
-umax = 3.2424 #1/day
-I = 100 #W/m2
-kd = 0 #1/day
-K = 200 #g/m2
-Ki = 13.9136 #W/m2
-
-kLa = 3 #1/hr
-y1 = 1.714 #g CO2 per g algae
-y2 = 0.1695 #g HCO3 as CO2 per g algae
-
-Kh = calc_Kh(T,S)*(den/1000) #mol/L/atm
-K1 = calc_K1(T, S)*(den/1000) #mol/L
-pK1 = - np.log10(K1)
-K2 = calc_K2(T, S)*(den/1000) #mol/L
-pK2 = - np.log10(K2)
-
-Csat = PCO2*Kh*44*1000 #g/m3
-alk0 = 2.5 #eq/m3
-pH = 6
-
-#calculate
-while pH <= 8:
+def inputpCO2_CO2loss(Tc, S, P, TP, TSi, TA, pCO2, Tout, Pout, den, kLa, d, y1, y2, Csat, umax, I, kd, K, Ki):
+    CO2Sys = CO2Sys_Program_TApCO2(Tc, S, P, TP, TSi, TA, pCO2, Tout, Pout)
+    K1 = CO2Sys[0]
+    K2 = CO2Sys[2]
+    Caqout = (CO2Sys[49])*(den)
+    pK1 = - np.log10(K1)
+    pK2 = - np.log10(K2)
+    pH = CO2Sys[51]
     alpha0 = calc_alpha0(pH, pK1, pK2)
     alpha1 = calc_alpha1(pH, pK1, pK2)
     alpha2 = calc_alpha2(pH, pK1, pK2)
@@ -75,7 +46,7 @@ while pH <= 8:
         dClossdt = (k2 *Caq) - k3
         return [dXdt, dPdt, dCaqdt, dCdeldt, dClossdt]
             
-    Caq0 = ((alk0 - OH + H)*alpha0/(alpha1 + 2*alpha2))*44 #g/m3
+    Caq0 = Caqout*44 #g/m3
     Cin0 = 0
     Closs0 = 0 
     X0 = 0.04
@@ -89,13 +60,4 @@ while pH <= 8:
     Caq = x[:,2]
     Cdel = x[:,3]
     Closs = x[:,4]
-
-    plt.xlabel('time (days)')
-    plt.ylabel('CO$_2$ (g/m$^2$)')
-    plt.plot(t,Cdel)
-    plt.plot(t, Closs)
-    plt.legend(['CO$_2$ supply required', 'CO$_2$ loss to atmosphere'], frameon=False)
-    plt.show()
-    pH += 1
-
-
+    return [t, X, P, Caq, Cdel, Closs]

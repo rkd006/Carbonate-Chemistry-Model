@@ -3,6 +3,10 @@
 #file: algae_productivity_monod
 #status: WORKING
 
+#clear all
+from IPython import get_ipython
+get_ipython().magic('reset -sf')
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
